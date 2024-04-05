@@ -8,10 +8,20 @@ body {
 /* header */
 header {
   display: flex;
-  height: 104px;
   justify-content: center;
+}
+#header-flex {
+  display: flex;
+  height: 104px;
+  justify-content: space-around;
+  width: 592px;
   align-items: center;
+}
+#header-bottom {
   border-bottom: 1px solid black;
+}
+.none {
+  visibility: hidden;
 }
 
 #header-text {
@@ -19,8 +29,8 @@ header {
 }
 
 #header-profile {
-  position: relative;
-  left: 6%;
+  /* position: relative;
+  left: 6%; */
   width: 36px;
 
   height: 36px;
@@ -122,16 +132,4 @@ hr {
 a {
   text-decoration: none;
   color: black;
-}
-
-@media screen and (max-width: 1000px) {
-  /* 1000px 미만의 화면에서 사용할 스타일 */
-  #header-profile {
-    position: relative;
-    left: 13%;
-    width: 36px;
-    height: 36px;
-    border-radius: 100%;
-    background-color: gray;
-  }
 }
