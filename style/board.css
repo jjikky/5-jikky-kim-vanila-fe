@@ -125,8 +125,9 @@ button {
   font-size: 15px;
 }
 
-hr {
-  color: #00000029;
+.line {
+  width: 100%;
+  border: 1px solid #00000029;
 }
 
 a {
