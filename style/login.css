@@ -47,8 +47,8 @@ form {
 #login-box > form > input {
   height: 28px;
   border-radius: 4px;
-  margin-top: 8px;
-  margin-bottom: 5px;
+  margin-top: 6px;
+  margin-bottom: 2px;
 }
 
 #login-box > form > button {
