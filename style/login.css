@@ -19,6 +19,7 @@ header {
 
 /* login */
 .login-label {
+  margin-top: 8px;
   font-weight: 700;
   font-size: 15px;
 }
@@ -39,18 +40,19 @@ header {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
   width: 392px;
-  height: 198px;
 }
 
 #login-box > form > input {
   height: 28px;
   border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 5px;
 }
 
 #login-box > form > button {
-  margin-top: 2vh;
+  margin-top: 16px;
   background-color: #aca0eb;
   color: white;
   height: 33px;
@@ -63,10 +65,16 @@ form {
 /* register */
 #register-text {
   text-align: center;
+  font-size: 14px;
   margin: 10px;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+.helper-text {
+  color: red;
+  font-size: 12px;
 }
