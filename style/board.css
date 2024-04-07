@@ -1,41 +1,5 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f4f5f7;
-  text-align: center;
-}
-
-/* header */
-header {
-  display: flex;
-  justify-content: center;
-}
-#header-flex {
-  display: flex;
-  height: 104px;
-  justify-content: space-around;
-  width: 592px;
-  align-items: center;
-}
-#header-bottom {
-  border-bottom: 1px solid black;
-}
 .none {
   visibility: hidden;
-}
-
-#header-text {
-  font-size: 32px;
-}
-
-#header-profile {
-  /* position: relative;
-  left: 6%; */
-  width: 36px;
-
-  height: 36px;
-  border-radius: 100%;
-  background-color: gray;
 }
 
 /* section */
