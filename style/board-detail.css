@@ -1,0 +1,156 @@
+.none {
+  visibility: hidden;
+}
+
+/* section */
+
+section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+
+#board {
+  width: var(--main-width);
+  text-align: left;
+}
+
+/* 제목 */
+#board-title {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* 게시물 상단 */
+#board-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.board-header-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary);
+  border-radius: 100%;
+}
+
+.creator {
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.date {
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.board-header-item button,
+.comment-item button {
+  font-size: 15px;
+  border: 1px solid var(--color-secondary);
+  background-color: white;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+/* 본문 */
+#content {
+  margin: 24px;
+}
+
+#board-image {
+  /* width: var(--main-width); */
+  height: 306px;
+  background-color: var(--color-primary);
+}
+
+#board-text {
+  margin: 20px 0;
+  font-size: 15px;
+  line-height: 21.15px;
+}
+
+#view-co-btn {
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#view-co-btn > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 116px;
+  height: 77px;
+}
+
+.num {
+  font-size: 20px;
+}
+
+form {
+  margin: 20px 0;
+  height: 169px;
+  background-color: white;
+  border-radius: 16px;
+}
+
+input {
+  width: 550px;
+  padding-bottom: 56px;
+  margin: 20px;
+  border: none;
+}
+
+#btn-wrapper {
+  text-align: end;
+  width: 100%;
+}
+#comment-btn {
+  color: white;
+  background-color: var(--color-secondary);
+  border: none;
+  width: 138px;
+  height: 39px;
+  border-radius: 16px;
+  margin: 8px 8px 0 0;
+}
+
+#comment-wrap {
+  margin-top: 24px;
+}
+
+.comments {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+}
+
+.comment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-content {
+  margin-left: 54px;
+  font-size: 15px;
+}
