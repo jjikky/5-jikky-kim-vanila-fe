@@ -1,53 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta property="og:title" content="Login" />
-        <meta property="og:description" content="로그인 페이지" />
-        <meta
-            name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-        />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>login</title>
-        <link
-            rel="preload"
-            href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
-            as="font"
-            type="font/woff"
-            crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="./style/login.css" />
-        <link rel="stylesheet" href="./style/index.css" />
-    </head>
-    <body>
-        <header>
-            <div id="header-flex">
-                <div id="header-text">아무 말 대잔치</div>
-            </div>
-        </header>
-        <section>
-            <div id="login-text">로그인</div>
-            <div id="login-box">
-                <form>
-                    <label for="email" class="login-label"
-                        ><div>이메일</div>
-                        <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" />
-                    </label>
-                    <label for="password" class="login-label"
-                        ><div>비밀번호</div>
-                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" />
-                    </label>
+  <head>
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="Login" />
+    <meta property="og:description" content="로그인 페이지" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>login</title>
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
+      as="font"
+      type="font/woff"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style/login.css" />
+    <link rel="stylesheet" href="./style/index.css" />
+  </head>
+  <body>
+    <header>
+      <div id="header-flex">
+        <div id="header-text">아무 말 대잔치</div>
+      </div>
+    </header>
+    <section>
+      <div id="login-text">로그인</div>
+      <div id="login-box">
+        <form>
+          <label for="email" class="login-label"
+            ><div>이메일</div>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="이메일을 입력하세요"
+            />
+          </label>
+          <label for="password" class="login-label"
+            ><div>비밀번호</div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="비밀번호를 입력하세요"
+            />
+          </label>
 
-                    <div class="helper-text">* helper text</div>
-                    <!-- <button type="submit">로그인</button> -->
-                    <!-- TODO : 기능 구현 후 이부분 삭제 -->
-                    <button type="submit"><a href="board.html">로그인</a></button>
-                </form>
-            </div>
-            <div id="register-text">
-                <a href="/register.html">회원가입</a>
-            </div>
-        </section>
-    </body>
+          <div class="helper-text">* helper text</div>
+          <!-- <button type="submit">로그인</button> -->
+          <!-- TODO : 기능 구현 후 이부분 삭제 -->
+          <button type="submit"><a href="board.html">로그인</a></button>
+        </form>
+      </div>
+      <div id="register-text">
+        <a href="/register.html">회원가입</a>
+      </div>
+    </section>
+  </body>
 </html>
