@@ -68,13 +68,8 @@ header {
 /*user nav*/
 
 #user-nav {
-    display: none;
     flex-direction: column;
-    position: relative;
     width: 140px;
-    top: -20px;
-    margin-bottom: -111px;
-    left: 625px;
 }
 #user-nav a {
     padding: 8px 12px;
@@ -90,4 +85,24 @@ header {
     text-align: left;
     color: red;
     font-size: 12px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1; /*다른 요소들보다 앞에 배치*/
+}
+
+.dropdown-content a {
+    display: flex;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
 }
