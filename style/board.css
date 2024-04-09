@@ -1,95 +1,95 @@
 .none {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 /* section */
 
 section {
-  text-align: center;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 80px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
 }
 
 #board-wrapper {
-  width: 592px;
+    width: 592px;
 }
 
 #board-info {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .board-info-text {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 /* 버튼 */
 button {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  background-color: var(--color-secondary);
-  color: white;
-  width: 138px;
-  height: 39px;
-  font-size: 16px;
-  border-radius: 16px;
-  border: 0;
-  padding: 0;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    background-color: var(--color-secondary);
+    color: white;
+    width: 138px;
+    height: 39px;
+    font-size: 16px;
+    border-radius: 16px;
+    border: 0;
+    padding: 0;
 }
 
 #btn-wrapper {
-  text-align: right;
+    text-align: right;
 }
 
 .board-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 /* 게시글 */
 .board {
-  background-color: white;
-  border-radius: 0px 8px 8px 8px;
+    background-color: white;
+    border-radius: 0px 8px 8px 8px;
 }
 .board-title {
-  text-align: left;
-  font-weight: 700;
-  font-size: 24px;
-  margin: 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 12px;
 }
 
 .board-mid {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 12px;
 }
 .board-mid-l {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 .board-creator {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
 }
 .avatar {
-  width: 36px;
-  height: 36px;
-  background-color: var(--color-primary);
-  border-radius: 100%;
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-primary);
+    border-radius: 100%;
 }
 
 .creator {
-  font-weight: 700px;
-  font-size: 15px;
+    font-weight: 700px;
+    font-size: 15px;
 }
 
 a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
