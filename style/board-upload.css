@@ -47,7 +47,11 @@ input {
   font-size: 15px;
   line-height: var(---line-height);
   margin: 20px 10px;
-  padding-bottom: 240px;
+  width: 100%;
+  height: 231px;
+  border: none;
+  background-color: #f4f5f7;
+  resize: none;
 }
 
 .label-text {
