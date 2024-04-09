@@ -45,9 +45,6 @@ input {
 button > a {
     color: white;
 }
-#login-box > form > button:hover {
-    background-color: #7f6aee;
-}
 
 /* register */
 #register-text {

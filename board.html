@@ -41,7 +41,7 @@
                     <div class="board-info-text">아무 말 대잔치 <strong>게시판</strong> 입니다.</div>
                 </div>
                 <div id="btn-wrapper">
-                    <a href="./board-upload.html"><button>게시물 작성</button></a>
+                    <a href="./board-upload.html"><button id="go-upload">게시물 작성</button></a>
                 </div>
                 <div class="board-list">
                     <a href="board-detail.html" class="board">
@@ -168,6 +168,14 @@
                 } else {
                     userNav.style.display = 'flex';
                 }
+            });
+
+            const goUploadBtn = document.getElementById('go-upload');
+            goUploadBtn.addEventListener('mouseover', () => {
+                goUploadBtn.style.backgroundColor = '#7F6AEE';
+            });
+            goUploadBtn.addEventListener('mouseleave', () => {
+                goUploadBtn.style.backgroundColor = '#ACA0EB';
             });
         </script>
     </body>
