@@ -27,7 +27,7 @@
                 </div>
                 <div class="board-header-item">
                     <button>수정</button>
-                    <button>삭제</button>
+                    <button id="del-modal-btn">삭제</button>
                 </div>
             </div>
             <div class="line"></div>
@@ -38,8 +38,8 @@
                     <br>자연도 아름다운 이야기입니다. 우리 주변의 자연은 끝없는 아름다움과 신비로움을 담고 있습니다. 산, 바다, 숲, 하늘 등 모든 것이 우리를 놀라게 만들고 감동시킵니다. 자연은 우리의 생명과 안정을 지키며 우리에게 힘을 주는 곳입니다.
                     <br>마지막으로, 지식을 향한 탐구는 항상 흥미로운 여정입니다. 우리는 끝없는 지식의 바다에서 배우고 발견할 수 있으며, 이것이 우리를 더 깊이 이해하고 세상을 더 넓게 보게 해줍니다.
                     <br>그런 의미에서, 삶은 놀라움과 경이로움으로 가득 차 있습니다. 새로운 경험을 즐기고 항상 앞으로 나아가는 것이 중요하다고 생각합니다.
-                <br></div>
-                <div id="view-co-btn">
+                    <br></div>
+                    <div id="view-co-btn">
                         <div>
                             <div class="num">123</div>
                             <div>
@@ -52,8 +52,8 @@
                                 댓글
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
             <div class="line"></div>
             <form>
                 <input type="text" name="comment" id="comment" placeholder="댓글을 남겨주세요!">
@@ -79,7 +79,7 @@
                     
                     <div class="comment-item">
                         <button>수정</button>
-                        <button>삭제</button>
+                        <button id="del-comment-modal-btn">삭제</button>
                         <!-- TODO : 게시글, 댓글 삭제 팝업 구현 -->
                     </div>
                 </div>
@@ -110,7 +110,61 @@
             </div>
         </div>
     </div>
-    </section>
-
+</section>
+<div id="del-modal">
+    <div class="del-modal-body">
+        <div class="modal-title">게시글을 삭제하시겠습니까?</div>
+        <div class="modal-message">삭제한 내용은 복구 할 수 없습니다. </div >
+        <div class="modal-sel-btn">
+            <button id="del-x"  class="btn-cancel">취소</button>
+            <button id="del-o" class="btn-ok">확인</button>
+        </div>
+    </div>
+</div>
+<div id="del-comment-modal">
+    <div class="del-modal-body2" id="del-modal-body2">
+        <div class="modal-title">댓글을 삭제하시겠습니까?</div>
+        <div class="modal-message">삭제한 내용은 복구 할 수 없습니다. </div >
+        <div class="modal-sel-btn">
+            <button id="del-comment-x"  class="btn-cancel">취소</button>
+            <button id="del-comment-o" class="btn-ok">확인</button>
+        </div>
+    </div>
+</div>
+<script>
+    const body = document.querySelector('body')
+    // 게시글 삭제 모달
+        const modal = document.querySelector('#del-modal');
+        const delModalBtn=document.querySelector('#del-modal-btn');
+        delModalBtn.addEventListener("click", ()=>{
+            modal.style.display="flex";
+        });
+        
+        const delModalXBtn=document.querySelector('#del-x');
+        delModalXBtn.addEventListener("click", ()=>{
+            modal.style.display="none";
+        });
+        const delModalOBtn=document.querySelector('#del-o');
+        delModalOBtn.addEventListener("click", ()=>{
+            modal.style.display="none";
+        });
+    // 댓글 삭제 모달
+        const commentModal = document.querySelector('#del-comment-modal');
+        const delCommentModalBtn=document.querySelector('#del-comment-modal-btn');
+        delCommentModalBtn.addEventListener("click", ()=>{
+            commentModal.style.display="flex";
+        });
+        
+        const delCommentModalXBtn=document.querySelector('#del-comment-x');
+        delCommentModalXBtn.addEventListener("click", ()=>{
+            commentModal.style.display="none";
+        });
+        const delCommentModalOBtn=document.querySelector('#del-comment-o');
+        delCommentModalOBtn.addEventListener("click", ()=>{
+            commentModal.style.display="none";
+        });
+        
+        
+    </script>
 </body>
 </html>
