@@ -2,12 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta property="og:title" content="User Information Update" />
+        <meta property="og:description" content="회원 정보 수정 페이지" />
         <meta
             name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
         />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>update</title>
+        <link
+            rel="preload"
+            href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
+            as="font"
+            type="font/woff"
+            crossorigin="anonymous"
+        />
         <link rel="stylesheet" href="./style/user-update.css" />
         <link rel="stylesheet" href="./style/index.css" />
     </head>
@@ -104,7 +113,7 @@
                 modal.style.display = 'none';
             });
             const wdModalOBtn = document.querySelector('#wd-o');
-            delModalOBtn.addEventListener('click', () => {
+            wdModalOBtn.addEventListener('click', () => {
                 modal.style.display = 'none';
             });
         </script>
