@@ -30,10 +30,15 @@
             <div id="login-text">로그인</div>
             <div id="login-box">
                 <form>
-                    <div class="login-label">이메일</div>
-                    <input type="text" placeholder="이메일을 입력하세요" />
-                    <div class="login-label">비밀번호</div>
-                    <input type="text" placeholder="비밀번호를 입력하세요" />
+                    <label for="email" class="login-label"
+                        ><div>이메일</div>
+                        <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" />
+                    </label>
+                    <label for="password" class="login-label"
+                        ><div>비밀번호</div>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" />
+                    </label>
+
                     <div class="helper-text">* helper text</div>
                     <!-- <button type="submit">로그인</button> -->
                     <!-- TODO : 기능 구현 후 이부분 삭제 -->
