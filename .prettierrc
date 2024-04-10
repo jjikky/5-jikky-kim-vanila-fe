@@ -2,8 +2,8 @@
 	"tabWidth": 4,
 	"printWidth": 120,
 	"semi": true,
-	"useTabs": true,
-	"trailingComma": "all",
+	"useTabs": false,
+	"trailingComma": "es5",
 	"singleQuote": true,
 	"jsxSingleQuote": true,
 	"endOfLine": "auto"
