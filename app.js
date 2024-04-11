@@ -24,12 +24,9 @@ app.get('/user/update', (req, res) => {
     res.render('user-update');
 });
 app.get('/board', (req, res) => {
-    // TODO : 더미 넣기
     res.render('board');
 });
 app.get('/board/:id', (req, res) => {
-    // TODO : ID에 맞는 데이터 전달
-    const id = req.params.id;
     res.render('board-detail');
 });
 
