@@ -23,6 +23,11 @@ app.get('/register', (req, res) => {
 app.get('/user/update', (req, res) => {
     res.render('user-update');
 });
+
+app.get('/user/password', (req, res) => {
+    res.render('password-update');
+});
+
 app.get('/board', (req, res) => {
     res.render('board');
 });
