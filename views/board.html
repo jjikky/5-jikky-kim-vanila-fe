@@ -51,129 +51,26 @@
                     <a href="http://localhost:3000/board/create"><button id="go-upload">게시물 작성</button></a>
                 </div>
                 <div class="board-list">
-                    <a href="http://localhost:3000/board/1" class="board">
+                    <!-- js로 더미 데이터 받아서 동적 생성 -->
+                    <!-- <a href="http://localhost:3000/board/1" class="board">
                         <div class="board-title">제목 1</div>
                         <div class="board-mid">
                             <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
+                                <div class="count-like">좋아요 0</div>
+                                <div class="count-comment">댓글 0</div>
+                                <div class="count-view">조회수 0</div>
                             </div>
-                            <div>2021-01-01 00:00:00</div>
+                            <div class="created-at">2021-01-01 00:00:00</div>
                         </div>
                         <div class="line"></div>
                         <div class="board-creator">
                             <div class="avatar"></div>
                             <div class="creator">더미 작성자 1</div>
                         </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
-                    <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
-                                <div>좋아요 0</div>
-                                <div>댓글 0</div>
-                                <div>조회수 0</div>
-                            </div>
-                            <div>2021-01-01 00:00:00</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="board-creator">
-                            <div class="avatar"></div>
-                            <div class="creator">더미 작성자 1</div>
-                        </div>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </section>
-        <script>
-            const goUploadBtn = document.getElementById('go-upload');
-            goUploadBtn.addEventListener('mouseover', () => {
-                goUploadBtn.style.backgroundColor = '#7F6AEE';
-            });
-            goUploadBtn.addEventListener('mouseleave', () => {
-                goUploadBtn.style.backgroundColor = '#ACA0EB';
-            });
-        </script>
+        <script src="http://localhost:3000/script/board.js"></script>
     </body>
 </html>
