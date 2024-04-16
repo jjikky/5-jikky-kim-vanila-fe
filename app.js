@@ -31,15 +31,15 @@ app.get('/user/password', (req, res) => {
 app.get('/board', (req, res) => {
     res.render('board');
 });
-app.get('/board/:id', (req, res) => {
-    res.render('board-detail');
-});
 
 app.get('/board/create', (req, res) => {
     res.render('board-create');
 });
 app.get('/board/update', (req, res) => {
     res.render('board-update');
+});
+app.get('/board/:id', (req, res) => {
+    res.render('board-detail');
 });
 
 app.all('*', (req, res) => {
