@@ -33,7 +33,7 @@
             <div id="register-box">
                 <form>
                     <div class="register-label">프로필 사진</div>
-                    <div class="helper-text">* helper text</div>
+                    <div id="profile-helper" class="helper-text">*프로필 사진을 추가해주세요.</div>
                     <div class="image-box">
                         <label id="image-input" for="profile">
                             <div id="add-icon">+</div>
@@ -43,41 +43,34 @@
                     <div class="image-box">
                         <img id="preview" />
                     </div>
-
-                    <input type="file" id="profile" onchange="readURL(this);" />
-                    <div class="register-label">이메일*</div>
-                    <input type="text" placeholder="이메일을 입력하세요" />
-                    <div class="helper-text">* helper text</div>
-                    <div class="register-label">비밀번호*</div>
-                    <input type="password" placeholder="비밀번호를 입력하세요" />
-                    <div class="helper-text">* helper text</div>
-                    <div class="register-label">비밀번호 확인*</div>
-                    <input type="password" placeholder="비밀번호를 입력하세요" />
-                    <div class="helper-text">* helper text</div>
-                    <div class="register-label">닉네임*</div>
-                    <input type="text" placeholder="비밀번호를 입력하세요" />
-                    <div class="helper-text">* helper text</div>
-                    <button type="submit">회원가입</button>
+                    <input type="file" id="profile" />
+                    <label for="email" class="register-label">
+                        <div>이메일*</div>
+                        <input id="email" type="text" placeholder="이메일을 입력하세요" />
+                        <div id="email-helper" class="helper-text">*이메일을 입력해주세요.</div>
+                    </label>
+                    <label for="password" class="register-label">
+                        <div>비밀번호*</div>
+                        <input id="password" type="password" placeholder="비밀번호를 입력하세요" />
+                        <div id="password-helper" class="helper-text">*비밀번호을 입력해주세요.</div>
+                    </label>
+                    <label for="password2" class="register-label">
+                        <div>비밀번호 확인*</div>
+                        <input id="password2" type="password" placeholder="비밀번호를 입력하세요" />
+                        <div id="password-helper2" class="helper-text">*비밀번호을 한 번 더 입력해주세요.</div>
+                    </label>
+                    <label for="nickname" class="register-label">
+                        <div>닉네임*</div>
+                        <input id="nickname" type="text" placeholder="닉네임을 입력하세요" />
+                        <div id="nickname-helper" class="helper-text">*닉네임을 입력해주세요.</div>
+                    </label>
+                    <button type="button">회원가입</button>
                 </form>
             </div>
             <div id="go-login">
                 <a href="http://localhost:3000/login">로그인하러 가기</a>
             </div>
         </section>
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById('preview').src = e.target.result;
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                    document.getElementById('image-input').style.display = 'none';
-                    document.getElementById('preview').style.display = 'block';
-                } else {
-                    document.getElementById('preview').src = '';
-                }
-            }
-        </script>
+        <script type="text/javascript" src="http://localhost:3000/script/register.js"></script>
     </body>
 </html>
