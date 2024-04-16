@@ -42,10 +42,25 @@ function validatePassword(password) {
     return true;
 }
 
-function clickLoginBtn(e) {
+async function clickLoginBtn(e) {
     e.preventDefault();
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    // TODO : 서버로 비밀번호 검증 요청
-    window.location.href = 'http://localhost:3000/board';
+    const user = await getUserList();
+    let findUser = user.find((user) => user.email === email && user.password === password);
+    if (findUser === undefined) {
+        return alert('아이디 또는 비밀번호가 잘못되었습니다.');
+    }
+    return (window.location.href = 'http://localhost:3000/board');
+    // TODO : api 구현 후 서버로 비밀번호 검증 요청
+}
+
+async function getUserList() {
+    try {
+        const response = await fetch('http://localhost:3000/data/users.json');
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.log(error);
+    }
 }
