@@ -52,7 +52,7 @@
                         <div class="date">2021-01-01 00:00:00</div>
                     </div>
                     <div class="board-header-item">
-                        <button onclick="goUpdate()">수정</button>
+                        <button id="update-event-btn">수정</button>
                         <button id="del-modal-btn">삭제</button>
                     </div>
                 </div>
@@ -130,73 +130,30 @@
                 </div>
             </div>
         </section>
-        <div id="del-modal">
-            <div class="del-modal-body">
-                <div class="modal-title">게시글을 삭제하시겠습니까?</div>
-                <div class="modal-message">삭제한 내용은 복구 할 수 없습니다.</div>
-                <div class="modal-sel-btn">
-                    <button id="del-x" class="btn-cancel">취소</button>
-                    <button id="del-o" class="btn-ok">확인</button>
+        <div id="overlay1">
+            <div id="del-modal">
+                <div class="del-modal-body">
+                    <div class="modal-title">게시글을 삭제하시겠습니까?</div>
+                    <div class="modal-message">삭제한 내용은 복구 할 수 없습니다.</div>
+                    <div class="modal-sel-btn">
+                        <button id="del-x" class="btn-cancel">취소</button>
+                        <button id="del-o" class="btn-ok">확인</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="del-comment-modal">
-            <div class="del-modal-body2" id="del-modal-body2">
-                <div class="modal-title">댓글을 삭제하시겠습니까?</div>
-                <div class="modal-message">삭제한 내용은 복구 할 수 없습니다.</div>
-                <div class="modal-sel-btn">
-                    <button id="del-comment-x" class="btn-cancel">취소</button>
-                    <button id="del-comment-o" class="btn-ok">확인</button>
+        <div id="overlay2">
+            <div id="del-comment-modal">
+                <div class="del-modal-body2" id="del-modal-body2">
+                    <div class="modal-title">댓글을 삭제하시겠습니까?</div>
+                    <div class="modal-message">삭제한 내용은 복구 할 수 없습니다.</div>
+                    <div class="modal-sel-btn">
+                        <button id="del-comment-x" class="btn-cancel">취소</button>
+                        <button id="del-comment-o" class="btn-ok">확인</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <script>
-            const goUpdate = () => {
-                window.location.href = 'http://localhost:3000/board/update';
-            };
-
-            // floating menu
-            userNav = document.getElementById('user-nav');
-            profileBtn = document.getElementById('profile-btn');
-            profileBtn.addEventListener('click', () => {
-                if (userNav.style.display == 'flex') {
-                    userNav.style.display = 'none';
-                } else {
-                    userNav.style.display = 'flex';
-                }
-            });
-
-            const body = document.querySelector('body');
-            // 게시글 삭제 모달
-            const modal = document.querySelector('#del-modal');
-            const delModalBtn = document.querySelector('#del-modal-btn');
-            delModalBtn.addEventListener('click', () => {
-                modal.style.display = 'flex';
-            });
-
-            const delModalXBtn = document.querySelector('#del-x');
-            delModalXBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-            const delModalOBtn = document.querySelector('#del-o');
-            delModalOBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-            // 댓글 삭제 모달
-            const commentModal = document.querySelector('#del-comment-modal');
-            const delCommentModalBtn = document.querySelector('#del-comment-modal-btn');
-            delCommentModalBtn.addEventListener('click', () => {
-                commentModal.style.display = 'flex';
-            });
-
-            const delCommentModalXBtn = document.querySelector('#del-comment-x');
-            delCommentModalXBtn.addEventListener('click', () => {
-                commentModal.style.display = 'none';
-            });
-            const delCommentModalOBtn = document.querySelector('#del-comment-o');
-            delCommentModalOBtn.addEventListener('click', () => {
-                commentModal.style.display = 'none';
-            });
-        </script>
+        <script src="http://localhost:3000/script/board-detail.js"></script>
     </body>
 </html>
