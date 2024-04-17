@@ -47,7 +47,7 @@
                 <div id="board-title">제목 1</div>
                 <div id="board-header">
                     <div class="board-header-item">
-                        <div id="avatar" class="avatar"></div>
+                        <img id="avatar" class="avatar" alt="profile image"></img>
                         <div id="creator" class="creator">더미 작성자 1</div>
                         <div id="board-created-at" class="date">2021-01-01 00:00:00</div>
                     </div>
@@ -92,8 +92,9 @@
                 </form>
                 <!-- 댓글 UI  -->
                 <div id="comment-wrap">
-                    <div class="comments">
-                        <div>
+                    <!-- NOTE : JS로 동적 생성 중 : 아래는 예시 구조로 남겨줌 -->
+                    <!-- <div class="comments">
+                        <div class="comment-box">
                             <div class="comment-item">
                                 <div class="avatar"></div>
                                 <div class="creator comment-creator">더미 작성자 1</div>
@@ -104,11 +105,11 @@
 
                         <div class="comment-item">
                             <button>수정</button>
-                            <button id="del-comment-modal-btn">삭제</button>
+                            <button class="del-comment-modal-btn">삭제</button>
                         </div>
                     </div>
                     <div class="comments">
-                        <div>
+                        <div class="comment-box">
                             <div class="comment-item">
                                 <div class="avatar"></div>
                                 <div class="creator comment-creator">더미 작성자 1</div>
@@ -116,9 +117,14 @@
                             </div>
                             <div class="comment-content">댓글 내용</div>
                         </div>
+
+                        <div class="comment-item">
+                            <button>수정</button>
+                            <button class="del-comment-modal-btn">삭제</button>
+                        </div>
                     </div>
                     <div class="comments">
-                        <div>
+                        <div class="comment-box">
                             <div class="comment-item">
                                 <div class="avatar"></div>
                                 <div class="creator comment-creator">더미 작성자 1</div>
@@ -126,7 +132,7 @@
                             </div>
                             <div class="comment-content">댓글 내용</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
