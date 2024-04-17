@@ -75,8 +75,8 @@ insertData();
 
 const comment_textarea = document.getElementById('comment');
 const comment_btn = document.getElementById('comment-btn');
-comment_textarea.addEventListener('input', (e) => {
-    let input_comment = e.target.value;
+comment_textarea.addEventListener('input', (event) => {
+    let input_comment = event.target.value;
     if (input_comment === '') {
         return (comment_btn.style.backgroundColor = '#ACA0EB');
     }

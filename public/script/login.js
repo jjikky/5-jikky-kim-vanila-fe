@@ -6,9 +6,9 @@ const loginBtn = document.getElementById('login-btn');
 loginBtn.addEventListener('click', clickLoginBtn);
 
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-email.addEventListener('input', (e) => {
+email.addEventListener('input', (event) => {
     // 유효 x
-    if (validateEmail(e.target.value) && validatePassword(document.getElementById('password').value)) {
+    if (validateEmail(event.target.value) && validatePassword(document.getElementById('password').value)) {
         loginHelper.innerHTML = '';
         loginBtn.style.backgroundColor = '#7F6AEE';
     } else {
@@ -16,9 +16,9 @@ email.addEventListener('input', (e) => {
         loginBtn.style.backgroundColor = '#ACA0EB';
     }
 });
-password.addEventListener('input', (e) => {
+password.addEventListener('input', (event) => {
     // 유효 x
-    if (validatePassword(e.target.value) && validateEmail(document.getElementById('email').value)) {
+    if (validatePassword(event.target.value) && validateEmail(document.getElementById('email').value)) {
         loginHelper.innerHTML = '';
         loginBtn.style.backgroundColor = '#7F6AEE';
     } else {
@@ -42,8 +42,8 @@ function validatePassword(password) {
     return true;
 }
 
-async function clickLoginBtn(e) {
-    e.preventDefault();
+async function clickLoginBtn(event) {
+    event.preventDefault();
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     const user = await getUserList();
