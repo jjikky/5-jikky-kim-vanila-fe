@@ -18,9 +18,6 @@ profileBtn.addEventListener('click', () => {
 
 // 뒤로 가기
 const backIcon = document.getElementById('back-icon');
-backIcon.addEventListener('click', () => {
-    history.back();
-});
-backIcon.style.cursor = 'pointer';
+backIconClick(backIcon);
 
 // TODO : api 구현 후 update 요청

@@ -33,3 +33,26 @@ function formatCount(count) {
         return count.toString();
     }
 }
+
+// 뒤로가기
+function backIconClick(el) {
+    el.addEventListener('click', () => {
+        history.back();
+    });
+    el.style.cursor = 'pointer';
+}
+
+// 모달
+function openModal(modalName, overlayName) {
+    const modal = document.querySelector(modalName);
+    modal.style.display = 'flex';
+    document.querySelector(overlayName).style.display = 'flex';
+    document.querySelector('body').style.overflow = 'hidden';
+}
+
+function closeModal(modalName, overlayName) {
+    const modal = document.querySelector(modalName);
+    modal.style.display = 'none';
+    document.querySelector(overlayName).style.display = 'none';
+    document.querySelector('body').style.overflow = 'auto';
+}

@@ -39,20 +39,6 @@ delCommentModalOBtn.addEventListener('click', () => {
     closeModal('#del-comment-modal', '#overlay2');
 });
 
-function openModal(modalName, overlayName) {
-    const modal = document.querySelector(modalName);
-    modal.style.display = 'flex';
-    document.querySelector(overlayName).style.display = 'flex';
-    document.querySelector('body').style.overflow = 'hidden';
-}
-
-function closeModal(modalName, overlayName) {
-    const modal = document.querySelector(modalName);
-    modal.style.display = 'none';
-    document.querySelector(overlayName).style.display = 'none';
-    document.querySelector('body').style.overflow = 'auto';
-}
-
 // 데이터 삽입
 async function insertData() {
     const boards = await getBoardList();
