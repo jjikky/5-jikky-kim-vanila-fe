@@ -53,6 +53,7 @@ async function insertData() {
         commentContentDiv.textContent = comment.content;
 
         // TODO : 댓글 수정, 삭제 - 댓글 creator id가 login user id와 같을 때만 보이게
+        // TODO : api 서버 구현 후 update, delete 요청
         let buttonDiv = document.createElement('div');
         buttonDiv.classList.add('comment-item');
 
@@ -71,6 +72,7 @@ async function insertData() {
             closeModal('#del-comment-modal', '#overlay2');
         });
 
+        // 요소 관계 설정
         commentsWrap.appendChild(comments);
 
         comments.appendChild(commentBoxDiv);
@@ -87,22 +89,6 @@ async function insertData() {
     });
 }
 insertData();
-
-// 댓글 삭제 모달
-// let delCommentModalBtns = document.querySelectorAll('.del-comment-modal-btn');
-// let delCommentModalBtns = document.getElementsByClassName('del-comment-modal-btn');
-
-// for (let i = 0; i < delCommentModalBtns.length; i++) {
-//     delCommentModalBtns[i].addEventListener('click', () => openModal('#del-comment-modal', '#overlay2'));
-
-//     let delCommentModalXBtn = document.querySelector('#del-comment-x');
-//     let delCommentModalOBtn = document.querySelector('#del-comment-o');
-//     delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
-//     delCommentModalOBtn.addEventListener('click', () => {
-//         // TODO : api 서버 구현 후 delete 요청
-//         closeModal('#del-comment-modal', '#overlay2');
-//     });
-// }
 
 // 댓글 등록 버튼 활성화 제어
 const comment_textarea = document.getElementById('comment');
