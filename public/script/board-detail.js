@@ -1,3 +1,6 @@
+// ['','board','1']
+const board_id = window.location.pathname.split('/')[2];
+
 const updateBtn = document.getElementById('update-event-btn');
 
 updateBtn.addEventListener('click', () => {
@@ -42,7 +45,7 @@ delCommentModalOBtn.addEventListener('click', () => {
 // 데이터 삽입
 async function insertData() {
     const boards = await getBoardList();
-    const board = boards.find((board) => board.board_id == 1);
+    const board = boards.find((board) => board.board_id == board_id);
 
     // 게시글 본문
     const boardTitle = document.getElementById('board-title');
