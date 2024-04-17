@@ -1,5 +1,7 @@
 // 더미 데이터 수
 const DATA_SIZE = 8;
+// 제목 길이 제한
+const TITLE_MAX_LENGTH = 25;
 
 // 더미데이터 이용, board list layout 동적 생성
 const boardList = document.getElementsByClassName('board-list')[0];
@@ -67,9 +69,8 @@ async function insertData() {
     const boardCreatedAt = document.getElementsByClassName('created-at');
     const boardCreator = document.getElementsByClassName('creator');
 
-    const titleShowMaxLength = 25;
     boards.forEach((board, index) => {
-        if (board.title.length > titleShowMaxLength) board.title = board.title.substring(0, titleShowMaxLength);
+        if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
         boardTitles[index].innerHTML = board.title;
         boardLikes[index].innerHTML = `좋아요 ${formatCount(board.count.like)}`;
         boardComment[index].innerHTML = `댓글 ${formatCount(board.count.comment)}`;
@@ -79,28 +80,6 @@ async function insertData() {
     });
 }
 insertData();
-
-// 더미 게시글 목록 가져오는 함수
-async function getBoardList() {
-    try {
-        const response = await fetch('http://localhost:3000/data/boards.json');
-        const userData = await response.json();
-        return userData;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// 조회수,댓글,좋아요 수 등 형식 변환
-function formatCount(count) {
-    if (count >= 1000000) {
-        return (count / 1000000).toFixed(1) + 'm';
-    } else if (count >= 1000) {
-        return (count / 1000).toFixed(0) + 'k';
-    } else {
-        return count.toString();
-    }
-}
 
 // 게시물 작성 버튼 hover
 const goUploadBtn = document.getElementById('go-upload');

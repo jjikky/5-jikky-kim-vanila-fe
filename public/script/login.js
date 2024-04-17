@@ -54,13 +54,3 @@ async function clickLoginBtn(e) {
     return (window.location.href = 'http://localhost:3000/board');
     // TODO : api 구현 후 서버로 비밀번호 검증 요청
 }
-
-async function getUserList() {
-    try {
-        const response = await fetch('http://localhost:3000/data/users.json');
-        const userData = await response.json();
-        return userData;
-    } catch (error) {
-        console.log(error);
-    }
-}
