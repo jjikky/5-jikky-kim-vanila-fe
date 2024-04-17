@@ -1,7 +1,6 @@
 // boadrList 생성하고 데이터 넣기
 async function insertData() {
     const boards = await getBoardList();
-
     // 더미데이터 이용, board list layout 동적 생성
     const boardList = document.getElementsByClassName('board-list')[0];
     for (let i = 0; i < boards.length; i++) {
@@ -14,47 +13,51 @@ async function insertData() {
         a.appendChild(div);
 
         // board-mid
-        const div1 = document.createElement('div');
-        div1.className = 'board-mid';
-        a.appendChild(div1);
+        const divMid = document.createElement('div');
+        divMid.className = 'board-mid';
+        a.appendChild(divMid);
 
-        const div2 = document.createElement('div');
-        div2.className = 'board-mid-l';
-        div1.appendChild(div2);
+        const divMidL = document.createElement('div');
+        divMidL.className = 'board-mid-l';
+        divMid.appendChild(divMidL);
 
-        const div3 = document.createElement('div');
-        div3.className = 'count-like';
-        div2.appendChild(div3);
+        const divLike = document.createElement('div');
+        divLike.className = 'count-like';
+        divMidL.appendChild(divLike);
 
-        const div4 = document.createElement('div');
-        div4.className = 'count-comment';
-        div2.appendChild(div4);
+        const divComment = document.createElement('div');
+        divComment.className = 'count-comment';
+        divMidL.appendChild(divComment);
 
-        const div5 = document.createElement('div');
-        div5.className = 'count-view';
-        div2.appendChild(div5);
+        const divView = document.createElement('div');
+        divView.className = 'count-view';
+        divMidL.appendChild(divView);
 
         const div_created_at = document.createElement('div');
         div_created_at.className = 'created-at';
-        div1.appendChild(div_created_at);
+        divMid.appendChild(div_created_at);
 
         // line
-        const div6 = document.createElement('div');
-        div6.className = 'line';
-        a.appendChild(div6);
+        const divLine = document.createElement('div');
+        divLine.className = 'line';
+        a.appendChild(divLine);
 
         // board-creator
-        const div7 = document.createElement('div');
-        div7.className = 'board-creator';
-        a.appendChild(div7);
+        const divCreatorBox = document.createElement('div');
+        divCreatorBox.className = 'board-creator';
+        a.appendChild(divCreatorBox);
 
-        const div8 = document.createElement('div');
-        div8.className = 'avatar';
-        div7.appendChild(div8);
+        const divAvatar = document.createElement('div');
+        divAvatar.className = 'avatar';
+        divCreatorBox.appendChild(divAvatar);
 
-        const div9 = document.createElement('div');
-        div9.className = 'creator';
-        div7.appendChild(div9);
+        const divCreator = document.createElement('div');
+        divCreator.className = 'creator';
+        divCreatorBox.appendChild(divCreator);
+
+        const divCreatorImg = document.createElement('img');
+        divCreatorImg.className = 'creator-img';
+        divAvatar.appendChild(divCreatorImg);
     }
 
     // 데이터 넣기
@@ -65,6 +68,7 @@ async function insertData() {
     const boardView = document.getElementsByClassName('count-view');
     const boardCreatedAt = document.getElementsByClassName('created-at');
     const boardCreator = document.getElementsByClassName('creator');
+    const boardCreatorImg = document.getElementsByClassName('creator-img');
 
     boards.forEach((board, index) => {
         boardA[index].href = `http://localhost:3000/board/${board.board_id}`;
@@ -75,6 +79,7 @@ async function insertData() {
         boardView[index].innerHTML = `조회수 ${formatCount(board.count.view)}`;
         boardCreatedAt[index].innerHTML = board.created_at;
         boardCreator[index].innerHTML = board.creator.nickname;
+        boardCreatorImg[index].setAttribute('src', board.creator.avatar);
     });
 }
 insertData();
