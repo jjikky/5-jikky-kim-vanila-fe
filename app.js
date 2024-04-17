@@ -33,7 +33,7 @@ app.get('/board', (req, res) => {
 });
 
 app.get('/board/create', (req, res) => {
-    res.render('board-create');
+    res.render('board-upload');
 });
 app.get('/board/update', (req, res) => {
     res.render('board-update');
