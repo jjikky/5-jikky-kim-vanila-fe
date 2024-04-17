@@ -12,14 +12,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "더미작성자1",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "좋은 내용입니다."
@@ -28,7 +28,7 @@
                 "creator": {
                     "user_id": 2,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -37,7 +37,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -57,14 +57,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -73,7 +73,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -82,7 +82,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -102,14 +102,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -118,7 +118,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -127,7 +127,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -147,14 +147,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -163,7 +163,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -172,7 +172,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -192,14 +192,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -208,7 +208,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -217,7 +217,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -237,14 +237,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -253,7 +253,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -262,7 +262,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -282,14 +282,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -298,7 +298,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -307,7 +307,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -327,14 +327,14 @@
         "creator": {
             "user_id": 1,
             "nickname": "jikky",
-            "avatar": "http://ex/img/avatar.jpg"
+            "avatar": "http://localhost:3000/img/avatar.jpg"
         },
         "comments": [
             {
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -343,7 +343,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
@@ -352,7 +352,7 @@
                 "creator": {
                     "user_id": 1,
                     "nickname": "jikky",
-                    "avatar": "http://ex/img/avatar.jpg"
+                    "avatar": "http://localhost:3000/img/avatar.jpg"
                 },
                 "created_at": "2021-01-01 00:00:00",
                 "content": "댓글 내용1"
