@@ -44,20 +44,26 @@
         <section>
             <div id="upload">
                 <div id="page-title">게시글 작성</div>
-                <form>
+                <form id="upload-form">
                     <label for="title"
                         ><div class="label-text">제목*</div>
                         <div class="line"></div>
-                        <input id="title" type="text" maxlength="26" placeholder="제목을 입력해주세요. (최대 26글자)" />
+                        <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            maxlength="26"
+                            placeholder="제목을 입력해주세요. (최대 26글자)"
+                        />
                         <div class="line"></div>
                     </label>
                     <label for="content"
                         ><div class="label-text">내용*</div>
                         <div class="line"></div>
-                        <textarea id="content" type="text" placeholder="내용을 입력해주세요."></textarea>
+                        <textarea id="content" name="content" type="text" placeholder="내용을 입력해주세요."></textarea>
                         <div class="line"></div>
                     </label>
-                    <div class="helper-text">* helper text</div>
+                    <div class="helper-text"></div>
                     <label for="img" id="img-text" class="label-text">이미지</label>
                     <div id="img-label-wrap">
                         <label for="img" id="img-label"> 파일 선택 </label>
@@ -66,22 +72,13 @@
 
                     <input id="img" type="file" accept="image/*" />
                     <div id="btn-wrap">
-                        <button type="submit">완료</button>
+                        <button id="upload-btn" type="submit">완료</button>
                     </div>
                 </form>
             </div>
         </section>
 
-        <script>
-            userNav = document.getElementById('user-nav');
-            profileBtn = document.getElementById('profile-btn');
-            profileBtn.addEventListener('click', () => {
-                if (userNav.style.display == 'flex') {
-                    userNav.style.display = 'none';
-                } else {
-                    userNav.style.display = 'flex';
-                }
-            });
-        </script>
+        <script src="http://localhost:3000/script/utils.js"></script>
+        <script src="http://localhost:3000/script/board-upload.js"></script>
     </body>
 </html>
