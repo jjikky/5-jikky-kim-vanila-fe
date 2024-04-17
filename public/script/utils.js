@@ -1,3 +1,6 @@
+// 제목 길이 제한
+const TITLE_MAX_LENGTH = 26;
+
 // 더미 게시글 목록 가져오는 함수
 async function getBoardList() {
     try {

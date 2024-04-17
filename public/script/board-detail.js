@@ -70,8 +70,6 @@ async function insertData() {
     const commentCreatedAt = document.getElementsByClassName('comment-created-at');
     const commentContent = document.getElementsByClassName('comment-content');
 
-    // 제목 길이 제한
-    const TITLE_MAX_LENGTH = 25;
     //  25글자 까지만 보이게
     if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
     boardTitle.innerHTML = board.title;

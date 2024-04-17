@@ -1,7 +1,5 @@
 // 더미 데이터 수
 const DATA_SIZE = 8;
-// 제목 길이 제한
-const TITLE_MAX_LENGTH = 25;
 
 // 더미데이터 이용, board list layout 동적 생성
 const boardList = document.getElementsByClassName('board-list')[0];
