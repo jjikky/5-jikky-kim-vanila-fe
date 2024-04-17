@@ -70,7 +70,7 @@ section {
     background-color: var(--color-primary);
 }
 
-#board-text {
+#board-content {
     margin: 20px 0;
     font-size: 15px;
     line-height: 21.15px;
@@ -107,11 +107,15 @@ form {
     border-radius: 16px;
 }
 
-input {
+#comment {
+    font-size: 15px;
+    line-height: var(---line-height);
+    margin: 20px 10px;
     width: 550px;
-    padding-bottom: 56px;
     margin: 20px;
+    height: 66px;
     border: none;
+    resize: none;
 }
 
 #btn-wrapper {

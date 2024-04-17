@@ -52,3 +52,49 @@ function closeModal(modalName, overlayName) {
     document.querySelector(overlayName).style.display = 'none';
     document.querySelector('body').style.overflow = 'auto';
 }
+
+// 데이터 삽입
+async function insertData() {
+    const boards = await getBoardList();
+    const board = boards.find((board) => board.board_id == 1);
+
+    // 게시글 본문
+    const boardTitle = document.getElementById('board-title');
+    const boardComment = document.getElementById('count-comment');
+    const boardView = document.getElementById('count-view');
+    const boardCreatedAt = document.getElementById('board-created-at');
+    const boardCreator = document.getElementById('creator');
+    const boardContent = document.getElementById('board-content');
+    // 게시글 댓글
+    const commentCreator = document.getElementsByClassName('comment-creator');
+    const commentCreatedAt = document.getElementsByClassName('comment-created-at');
+    const commentContent = document.getElementsByClassName('comment-content');
+
+    // 제목 길이 제한
+    const TITLE_MAX_LENGTH = 25;
+    //  25글자 까지만 보이게
+    if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
+    boardTitle.innerHTML = board.title;
+    boardComment.innerHTML = formatCount(board.count.comment);
+    boardView.innerHTML = formatCount(board.count.view);
+    boardCreatedAt.innerHTML = board.created_at;
+    boardCreator.innerHTML = board.creator.nickname;
+    boardContent.innerHTML = board.content;
+
+    board.comments.forEach((comment, index) => {
+        commentCreator[index].innerHTML = comment.creator.nickname;
+        commentCreatedAt[index].innerHTML = comment.created_at;
+        commentContent[index].innerHTML = comment.content;
+    });
+}
+insertData();
+
+const comment_textarea = document.getElementById('comment');
+const comment_btn = document.getElementById('comment-btn');
+comment_textarea.addEventListener('input', (e) => {
+    let input_comment = e.target.value;
+    if (input_comment === '') {
+        return (comment_btn.style.backgroundColor = '#ACA0EB');
+    }
+    comment_btn.style.backgroundColor = '#7F6AEE';
+});

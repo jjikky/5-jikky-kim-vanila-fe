@@ -47,9 +47,9 @@
                 <div id="board-title">제목 1</div>
                 <div id="board-header">
                     <div class="board-header-item">
-                        <div class="avatar"></div>
-                        <div class="creator">더미 작성자 1</div>
-                        <div class="date">2021-01-01 00:00:00</div>
+                        <div id="avatar" class="avatar"></div>
+                        <div id="creator" class="creator">더미 작성자 1</div>
+                        <div id="board-created-at" class="date">2021-01-01 00:00:00</div>
                     </div>
                     <div class="board-header-item">
                         <button id="update-event-btn">수정</button>
@@ -59,7 +59,7 @@
                 <div class="line"></div>
                 <div id="content">
                     <div id="board-image"></div>
-                    <div id="board-text">
+                    <div id="board-content">
                         무엇을 얘기할까요? 아무말이라면, 삶은 항상 놀라운 모험이라고 생각합니다. 우리는 매일 새로운
                         경험을 하고 배우며 성장합니다. 때로는 어려움과 도전이 있지만, 그것들이 우리를 더 강하고 지혜롭게
                         만듭니다. 또한 우리는 주변의 사람들과 연결되며 사랑과 지지를 받습니다. 그래서 우리의 삶은
@@ -73,31 +73,31 @@
                     </div>
                     <div id="view-co-btn">
                         <div>
-                            <div class="num">123</div>
+                            <div id="count-view" class="num">123</div>
                             <div>조회수</div>
                         </div>
                         <div>
-                            <div class="num">123</div>
+                            <div id="count-comment" class="num">123</div>
                             <div>댓글</div>
                         </div>
                     </div>
                 </div>
                 <div class="line"></div>
                 <form>
-                    <input type="text" name="comment" id="comment" placeholder="댓글을 남겨주세요!" />
+                    <textarea type="text" name="comment" id="comment" placeholder="댓글을 남겨주세요!"></textarea>
                     <div class="line"></div>
                     <div id="btn-wrapper">
                         <button type="submit" id="comment-btn">댓글 등록</button>
                     </div>
                 </form>
-                <!-- 댓글 UI 수정 -->
+                <!-- 댓글 UI  -->
                 <div id="comment-wrap">
                     <div class="comments">
                         <div>
                             <div class="comment-item">
                                 <div class="avatar"></div>
-                                <div class="creator">더미 작성자 1</div>
-                                <div class="date">2021-01-01 00:00:00</div>
+                                <div class="creator comment-creator">더미 작성자 1</div>
+                                <div class="date comment-created-at">2021-01-01 00:00:00</div>
                             </div>
                             <div class="comment-content">댓글 내용</div>
                         </div>
@@ -111,8 +111,8 @@
                         <div>
                             <div class="comment-item">
                                 <div class="avatar"></div>
-                                <div class="creator">더미 작성자 1</div>
-                                <div class="date">2021-01-01 00:00:00</div>
+                                <div class="creator comment-creator">더미 작성자 1</div>
+                                <div class="date comment-created-at">2021-01-01 00:00:00</div>
                             </div>
                             <div class="comment-content">댓글 내용</div>
                         </div>
@@ -121,8 +121,8 @@
                         <div>
                             <div class="comment-item">
                                 <div class="avatar"></div>
-                                <div class="creator">더미 작성자 1</div>
-                                <div class="date">2021-01-01 00:00:00</div>
+                                <div class="creator comment-creator">더미 작성자 1</div>
+                                <div class="date comment-created-at">2021-01-01 00:00:00</div>
                             </div>
                             <div class="comment-content">댓글 내용</div>
                         </div>
@@ -154,6 +154,7 @@
                 </div>
             </div>
         </div>
+        <script src="http://localhost:3000/script/utils.js"></script>
         <script src="http://localhost:3000/script/board-detail.js"></script>
     </body>
 </html>
