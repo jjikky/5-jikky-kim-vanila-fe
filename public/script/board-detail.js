@@ -37,7 +37,8 @@ async function insertData() {
         let commentItemDiv = document.createElement('div');
         commentItemDiv.classList.add('comment-item');
 
-        let commentAvatarDiv = document.createElement('div');
+        let commentAvatarDiv = document.createElement('img');
+        commentAvatarDiv.setAttribute('src', comment.creator.avatar);
         commentAvatarDiv.classList.add('avatar');
 
         let commentCreatorDiv = document.createElement('div');
