@@ -4,6 +4,7 @@
     --main-width: 592px;
     --color-primary: #d9d9d9;
     --color-secondary: #aca0eb;
+    --color-active: #7f6aee;
     --line-height: 21.15px;
 }
 
@@ -109,4 +110,8 @@ header {
 
 .dropdown:hover .dropdown-content {
     display: flex;
+}
+
+.active {
+    background-color: var(--color-active) !important;
 }

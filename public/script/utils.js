@@ -56,3 +56,13 @@ function closeModal(modalName, overlayName) {
     document.querySelector(overlayName).style.display = 'none';
     document.querySelector('body').style.overflow = 'auto';
 }
+
+// 버튼 활성화, 비활성화
+function activeButton(className) {
+    let button = document.getElementById(className);
+    button.classList.add('active');
+}
+function disableButton(className) {
+    let button = document.getElementById(className);
+    button.classList.remove('active');
+}
