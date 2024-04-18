@@ -6,19 +6,12 @@ const passwordHelper = document.getElementById('password-helper');
 const loginBtn = document.getElementById('login-btn');
 loginBtn.addEventListener('click', clickLoginBtn);
 
-const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-
-let isComplete = {
-    email: 0,
-    password: 0,
-};
-
 email.addEventListener('input', (event) => {
     disableButton('login-btn');
-    if (validateEmail(event.target.value)) {
+    let input = event.target.value;
+    if (validateEmail(input)) {
         emailHelper.innerHTML = '';
-        if (validatePassword(document.getElementById('password').value)) {
+        if (validatePassword(password.value)) {
             return activeButton('login-btn');
         }
         return;
@@ -26,11 +19,11 @@ email.addEventListener('input', (event) => {
     emailHelper.innerHTML = '*올바른 이메일 주소 형식을 입력해주세요. (예:example@example.com)';
 });
 password.addEventListener('input', (event) => {
+    let input = event.target.value;
     disableButton('login-btn');
-    if (validatePassword(event.target.value)) {
-        // activeButton('login-btn');
+    if (validatePassword(input)) {
         passwordHelper.innerHTML = '';
-        if (validateEmail(document.getElementById('email').value)) {
+        if (validateEmail(email.value)) {
             return activeButton('login-btn');
         }
         return;
@@ -38,22 +31,6 @@ password.addEventListener('input', (event) => {
     passwordHelper.innerHTML =
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
 });
-
-// 이메일 유효성 검증
-function validateEmail(email) {
-    // 빈 값 검사
-    if (email === '') return false;
-    // 이메일 형식 검사
-    if (emailPattern.test(email) === false || email.length < 5) return false;
-    return true;
-}
-
-// 비밀번호 유효성 검증
-function validatePassword(password) {
-    if (password === '') return false;
-    if (passwordPattern.test(password) === false) return false;
-    return true;
-}
 
 async function clickLoginBtn(event) {
     event.preventDefault();

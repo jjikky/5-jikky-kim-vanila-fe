@@ -9,20 +9,17 @@ const nicknameHelper = document.getElementById('nickname-helper');
 const fileInput = document.getElementById('profile');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
-const password2 = document.getElementById('password2');
+const passwordCheck = document.getElementById('password-check');
 const nickname = document.getElementById('nickname');
 
-const loginButton = document.getElementById('register-button');
-
-const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const registerButton = document.getElementById('register-button');
 
 // 입력 완료 확인
 let isComplete = {
     profile: 0,
     email: 0,
     password: 0,
-    password2: 0,
+    passwordCheck: 0,
     nickname: 0,
 };
 
@@ -53,10 +50,11 @@ fileInput.addEventListener('change', function (event) {
 });
 
 email.addEventListener('change', async (event) => {
+    let input = event.target.value;
     isComplete.email = 0;
     isButtonActive();
-    if (validateEmail(event.target.value)) {
-        if (await isExistEmail(event.target.value)) {
+    if (validateEmail(input)) {
+        if (await isExistEmail(input)) {
             return (emailHelper.innerHTML = '*중복된 이메일 입니다.');
         }
         isComplete.email = 1;
@@ -69,15 +67,6 @@ email.addEventListener('input', () => {
     emailHelper.innerHTML = '*이메일을 입력해주세요.';
 });
 
-// 이메일 유효성 검증
-function validateEmail(email) {
-    // 빈 값 검사
-    if (email === '') return false;
-    // 이메일 형식 검사
-    if (emailPattern.test(email) === false || email.length < 5) return false;
-    return true;
-}
-
 async function isExistEmail(email) {
     const response = await fetch('http://localhost:3000/data/users.json');
     const userData = await response.json();
@@ -89,20 +78,21 @@ async function isExistEmail(email) {
     return true;
 }
 password.addEventListener('change', (event) => {
+    let input = event.target.value;
     isComplete.password = 0;
     isButtonActive();
     // 빈 값 확인
-    if (event.target.value === '') return (passwordHelper.innerHTML = '*비밀번호을 입력해주세요.');
+    if (input === '') return (passwordHelper.innerHTML = '*비밀번호을 입력해주세요.');
     // 유효성 검사
-    if (validatePassword(event.target.value)) {
+    if (validatePassword(input)) {
         // 비밀번호 확인과 비교
-        if (event.target.value !== document.getElementById('password2').value) {
+        if (input !== passwordCheck.value) {
             passwordHelper.innerHTML = '비밀번호가 다릅니다.';
             passwordHelper2.innerHTML = '비밀번호가 다릅니다.';
             return;
         }
         isComplete.password = 1;
-        isComplete.password2 = 1;
+        isComplete.passwordCheck = 1;
         isButtonActive();
         return (passwordHelper.innerHTML = '');
     }
@@ -110,75 +100,52 @@ password.addEventListener('change', (event) => {
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
 });
 
-// 비밀번호 유효성 검증
-function validatePassword(password) {
-    if (passwordPattern.test(password) === false) return false;
-    return true;
-}
-
-password2.addEventListener('change', (event) => {
-    isComplete.password2 = 0;
+passwordCheck.addEventListener('change', (event) => {
+    isComplete.passwordCheck = 0;
     isButtonActive();
     // 빈 값 확인
     if (event.target.value === '') return (passwordHelper2.innerHTML = '*비밀번호을 한번 더 입력해주세요.');
-    if (event.target.value !== document.getElementById('password').value) {
+    if (event.target.value !== password.value) {
         passwordHelper.innerHTML = '비밀번호가 다릅니다.';
         passwordHelper2.innerHTML = '비밀번호가 다릅니다.';
         return 0;
     }
     isComplete.password = 1;
-    isComplete.password2 = 1;
+    isComplete.passwordCheck = 1;
     passwordHelper.innerHTML = '';
     passwordHelper2.innerHTML = '';
     isButtonActive();
 });
 
 nickname.addEventListener('change', async (event) => {
+    let input = event.target.value;
     isComplete.nickname = 0;
     isButtonActive();
     // 빈 값 확인
-    if (event.target.value === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
+    if (input === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
     // 유효성 검사 - 띄워쓰기
-    if (validateNickname(event.target.value) == 'spaceError') {
+    if (validateNickname(input) == 'spaceError') {
         return (nicknameHelper.innerHTML = '*띄워쓰기를 없애주세요.');
         // 유효성 검사 - 글자수
-    } else if (validateNickname(event.target.value) == 'lengthError') {
+    } else if (validateNickname(input) == 'lengthError') {
         return (nicknameHelper.innerHTML = '*닉네임은 최대 10자까지 작성 가능합니다.');
     }
     //  닉네임 중복 검사
-    if (await isExistNickname(event.target.value)) {
+    if (await isExistNickname(input)) {
         return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
     }
     isComplete.nickname = 1;
     isButtonActive();
     return (nicknameHelper.innerHTML = '');
 });
-async function isExistNickname(nickname) {
-    const response = await fetch('http://localhost:3000/data/users.json');
-    const userData = await response.json();
-
-    let findUser = userData.find((user) => user.nickname === nickname);
-    if (findUser === undefined) {
-        return false;
-    }
-    return true;
-}
-
-function validateNickname(nickname) {
-    // 띄어쓰기가 없는지 확인
-    if (nickname.indexOf(' ') !== -1) return 'spaceError';
-    // 길이가 10글자 이하인지 확인
-    if (nickname.length > 10) return 'lengthError';
-    return true;
-}
-
 // 서식 완성되면 버튼 활성화
 function isButtonActive() {
     // TODO : api 구현 후 회원가입 요청으로 변경
     let sumIsComplete = Object.values(isComplete).reduce((a, b) => a + b);
     if (sumIsComplete == 5) {
-        loginButton.style.backgroundColor = '#7F6AEE';
-        loginButton.addEventListener('click', () => (location.href = 'http://localhost:3000/board'));
+        activeButton('register-button');
+        registerButton.addEventListener('click', () => (location.href = 'http://localhost:3000/board'));
+        return;
     }
-    loginButton.style.backgroundColor = '#ACA0EB';
+    disableButton('register-button');
 }

@@ -28,40 +28,12 @@ wdModalOBtn.addEventListener('click', () => {
 
 const nickname = document.getElementById('nickname');
 const nicknameHelper = document.getElementById('nickname-helper');
-nickname.addEventListener('change', async (event) => {
-    // 빈 값 확인
-    if (event.target.value === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
-    // 유효성 검사 - 띄워쓰기
-    if (validateNickname(event.target.value) == 'spaceError') {
-        return (nicknameHelper.innerHTML = '*띄워쓰기를 없애주세요.');
-        // 유효성 검사 - 글자수
-    } else if (validateNickname(event.target.value) == 'lengthError') {
-        return (nicknameHelper.innerHTML = '*닉네임은 최대 10자까지 작성 가능합니다.');
-    }
-    //  닉네임 중복 검사
-    if (await isExistNickname(event.target.value)) {
-        return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
-    }
-    return (nicknameHelper.innerHTML = '');
+nickname.addEventListener('change', (event) => {
+    disableButton('update-btn');
+    let input = event.target.value;
+    console.log(input);
+    if (input !== '') activeButton('update-btn');
 });
-async function isExistNickname(nickname) {
-    const response = await fetch('http://localhost:3000/data/users.json');
-    const userData = await response.json();
-
-    let findUser = userData.find((user) => user.nickname === nickname);
-    if (findUser === undefined) {
-        return false;
-    }
-    return true;
-}
-
-function validateNickname(nickname) {
-    // 띄어쓰기가 없는지 확인
-    if (nickname.indexOf(' ') !== -1) return 'spaceError';
-    // 길이가 10글자 이하인지 확인
-    if (nickname.length > 10) return 'lengthError';
-    return true;
-}
 
 // 프로필 사진 변경
 const fileInput = document.getElementById('profile');
@@ -88,12 +60,26 @@ fileInput.addEventListener('change', function (event) {
 
 const updateBtn = document.getElementById('update-btn');
 const toastMessage = document.getElementById('toast_message');
-updateBtn.addEventListener('click', (event) => {
+updateBtn.addEventListener('click', async (event) => {
     event.preventDefault();
+    let input = nickname.value;
+    if (input === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
+    // 유효성 검사 - 띄워쓰기
+    if (validateNickname(input) == 'spaceError') {
+        return (nicknameHelper.innerHTML = '*띄워쓰기를 없애주세요.');
+        // 유효성 검사 - 글자수
+    } else if (validateNickname(input) == 'lengthError') {
+        return (nicknameHelper.innerHTML = '*닉네임은 최대 10자까지 작성 가능합니다.');
+    }
+    //  닉네임 중복 검사
+    if (await isExistNickname(input)) {
+        return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
+    }
     toastMessage.classList.add('active');
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);
+    return (nicknameHelper.innerHTML = '');
 });
 
 finishBtn = document.getElementById('finish-btn');
