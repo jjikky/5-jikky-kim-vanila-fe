@@ -4,34 +4,34 @@
         "email": "user1@example.com",
         "password": "Password1!",
         "nickname": "user1",
-        "profile_image": "avartar.jpg"
+        "avatar": "http://localhost:3000/img/avatar.jpg"
     },
     {
         "user_id": 2,
         "email": "user2@example.com",
         "password": "Password2!",
         "nickname": "user2",
-        "profile_image": "avartar.jpg"
+        "avatar": "http://localhost:3000/img/avatar.jpg"
     },
     {
         "user_id": 3,
         "email": "user3@example.com",
         "password": "Password3!",
         "nickname": "user3",
-        "profile_image": "avartar.jpg"
+        "avatar": "http://localhost:3000/img/avatar.jpg"
     },
     {
         "user_id": 4,
         "email": "user4@example.com",
         "password": "Password4!",
         "nickname": "user4",
-        "profile_image": "avartar.jpg"
+        "avatar": "http://localhost:3000/img/avatar.jpg"
     },
     {
         "user_id": 5,
         "email": "user5@example.com",
         "password": "Password5!",
         "nickname": "user5",
-        "profile_image": "avartar.jpg"
+        "avatar": "http://localhost:3000/img/avatar.jpg"
     }
 ]
