@@ -59,7 +59,7 @@ fileInput.addEventListener('change', function (event) {
 });
 
 const updateBtn = document.getElementById('update-btn');
-const toastMessage = document.getElementById('toast_message');
+const toastMessage = document.getElementById('toast-message');
 updateBtn.addEventListener('click', async (event) => {
     event.preventDefault();
     let input = nickname.value;
