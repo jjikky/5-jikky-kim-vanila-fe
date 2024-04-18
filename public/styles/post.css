@@ -8,15 +8,15 @@ section {
     margin-bottom: 80px;
 }
 
-#board-wrapper {
+#post-wrapper {
     width: 592px;
 }
 
-#board-info {
+#post-info {
     margin-top: 20px;
 }
 
-.board-info-text {
+.post-info-text {
     font-size: 24px;
 }
 
@@ -38,36 +38,36 @@ button {
     text-align: right;
 }
 
-.board-list {
+.post-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
 /* 게시글 */
-.board {
+.post {
     background-color: white;
     border-radius: 0px 8px 8px 8px;
 }
-.board-title {
+.post-title {
     text-align: left;
     font-weight: 700;
     font-size: 24px;
     margin: 12px;
 }
 
-.board-mid {
+.post-mid {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
     margin: 12px;
 }
-.board-mid-l {
+.post-mid-l {
     display: flex;
     gap: 12px;
 }
 
-.board-creator {
+.post-creator {
     display: flex;
     align-items: center;
     gap: 12px;

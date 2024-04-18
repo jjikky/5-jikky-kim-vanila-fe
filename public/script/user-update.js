@@ -85,5 +85,5 @@ updateBtn.addEventListener('click', async (event) => {
 finishBtn = document.getElementById('finish-btn');
 finishBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    location.href = 'http://localhost:3000/board';
+    location.href = 'http://localhost:3000/post';
 });

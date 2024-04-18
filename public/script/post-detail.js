@@ -1,35 +1,35 @@
-// ['','board','1']
-const board_id = window.location.pathname.split('/')[2];
+// ['','post','1']
+const post_id = window.location.pathname.split('/')[2];
 
 // 데이터 삽입
 async function insertData() {
-    const boards = await getBoardList();
-    const board = boards.find((board) => board.board_id == board_id);
+    const posts = await getPostList();
+    const post = posts.find((post) => post.post_id == post_id);
 
     // 게시글 본문
-    const boardTitle = document.getElementById('board-title');
-    const boardImage = document.getElementById('board-image');
-    const boardComment = document.getElementById('count-comment');
-    const boardView = document.getElementById('count-view');
-    const boardCreatedAt = document.getElementById('board-created-at');
-    const boardCreator = document.getElementById('creator');
-    const boardCreatorImg = document.getElementById('avatar');
-    const boardContent = document.getElementById('board-content');
+    const postTitle = document.getElementById('post-title');
+    const postImage = document.getElementById('post-image');
+    const postComment = document.getElementById('count-comment');
+    const postView = document.getElementById('count-view');
+    const postCreatedAt = document.getElementById('post-created-at');
+    const postCreator = document.getElementById('creator');
+    const postCreatorImg = document.getElementById('avatar');
+    const postContent = document.getElementById('post-content');
 
     //  25글자 까지만 보이게
-    if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
-    boardTitle.innerHTML = board.title;
-    boardImage.setAttribute('src', board.board_image);
-    boardComment.innerHTML = formatCount(board.count.comment);
-    boardView.innerHTML = formatCount(board.count.view);
-    boardCreatedAt.innerHTML = board.created_at;
-    boardCreator.innerHTML = board.creator.nickname;
-    boardCreatorImg.setAttribute('src', board.creator.avatar);
-    boardContent.innerHTML = board.content;
+    if (post.title.length > TITLE_MAX_LENGTH) post.title = post.title.substring(0, TITLE_MAX_LENGTH);
+    postTitle.innerHTML = post.title;
+    postImage.setAttribute('src', post.post_image);
+    postComment.innerHTML = formatCount(post.count.comment);
+    postView.innerHTML = formatCount(post.count.view);
+    postCreatedAt.innerHTML = post.created_at;
+    postCreator.innerHTML = post.creator.nickname;
+    postCreatorImg.setAttribute('src', post.creator.avatar);
+    postContent.innerHTML = post.content;
 
     // 댓글 생성
     let commentsWrap = document.getElementById('comment-wrap');
-    board.comments.forEach((comment) => {
+    post.comments.forEach((comment) => {
         let comments = document.createElement('div');
         comments.classList.add('comments');
 
@@ -107,7 +107,7 @@ comment_textarea.addEventListener('input', (event) => {
 const updateBtn = document.getElementById('update-event-btn');
 
 updateBtn.addEventListener('click', () => {
-    window.location.href = `http://localhost:3000/board/${board_id}/update`;
+    window.location.href = `http://localhost:3000/post/${post_id}/update`;
 });
 
 // floating menu

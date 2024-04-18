@@ -2,11 +2,11 @@
 const TITLE_MAX_LENGTH = 26;
 
 // 더미 게시글 목록 가져오는 함수
-async function getBoardList() {
+async function getPostList() {
     try {
-        const response = await fetch('http://localhost:3000/data/boards.json');
-        const boardData = await response.json();
-        return boardData;
+        const response = await fetch('http://localhost:3000/data/posts.json');
+        const postData = await response.json();
+        return postData;
     } catch (error) {
         console.log(error);
     }

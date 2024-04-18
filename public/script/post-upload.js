@@ -30,7 +30,7 @@ uploadBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (uploadForm.title.value.length > 0 && uploadForm.content.value.length) {
         alert('작성 완료!');
-        location.href = 'http://localhost:3000/board';
+        location.href = 'http://localhost:3000/post';
     } else {
         const helperText = document.getElementsByClassName('helper-text');
         helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';

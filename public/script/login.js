@@ -41,6 +41,6 @@ async function clickLoginBtn(event) {
     if (findUser === undefined) {
         return alert('아이디 또는 비밀번호가 잘못되었습니다.');
     }
-    return (window.location.href = 'http://localhost:3000/board');
+    return (window.location.href = 'http://localhost:3000/post');
     // TODO : api 구현 후 서버로 비밀번호 검증 요청
 }

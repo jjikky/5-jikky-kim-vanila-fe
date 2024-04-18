@@ -27,13 +27,13 @@ window.addEventListener('scroll', () => {
 async function insertData() {
     isFetching = true;
 
-    const response = await getBoardList();
-    const boards = response.slice(numOfData * (currentPage - 1), numOfData * currentPage);
+    const response = await getPostList();
+    const posts = response.slice(numOfData * (currentPage - 1), numOfData * currentPage);
 
     isFetching = false;
 
     // 더이상 가져올 데이터 없음
-    if (boards.length === 0) {
+    if (posts.length === 0) {
         hasMore = false;
         // toast로 안내
         toastMessage.innerHTML = '더 이상 불러올 게시물이 없습니다.';
@@ -44,24 +44,24 @@ async function insertData() {
         return;
     }
 
-    // 더미데이터 이용, board list layout 동적 생성
-    const boardList = document.getElementsByClassName('board-list')[0];
-    for (let i = 0; i < boards.length; i++) {
+    // 더미데이터 이용, post list layout 동적 생성
+    const postList = document.getElementsByClassName('post-list')[0];
+    for (let i = 0; i < posts.length; i++) {
         const a = document.createElement('a');
-        a.className = 'board';
-        boardList.appendChild(a);
+        a.className = 'post';
+        postList.appendChild(a);
 
         const div = document.createElement('div');
-        div.className = 'board-title';
+        div.className = 'post-title';
         a.appendChild(div);
 
-        // board-mid
+        // post-mid
         const divMid = document.createElement('div');
-        divMid.className = 'board-mid';
+        divMid.className = 'post-mid';
         a.appendChild(divMid);
 
         const divMidL = document.createElement('div');
-        divMidL.className = 'board-mid-l';
+        divMidL.className = 'post-mid-l';
         divMid.appendChild(divMidL);
 
         const divLike = document.createElement('div');
@@ -85,9 +85,9 @@ async function insertData() {
         divLine.className = 'line';
         a.appendChild(divLine);
 
-        // board-creator
+        // post-creator
         const divCreatorBox = document.createElement('div');
-        divCreatorBox.className = 'board-creator';
+        divCreatorBox.className = 'post-creator';
         a.appendChild(divCreatorBox);
 
         const divAvatar = document.createElement('div');
@@ -104,26 +104,26 @@ async function insertData() {
     }
 
     // 데이터 넣기
-    const boardA = document.getElementsByClassName('board');
-    const boardTitles = document.getElementsByClassName('board-title');
-    const boardLikes = document.getElementsByClassName('count-like');
-    const boardComment = document.getElementsByClassName('count-comment');
-    const boardView = document.getElementsByClassName('count-view');
-    const boardCreatedAt = document.getElementsByClassName('created-at');
-    const boardCreator = document.getElementsByClassName('creator');
-    const boardCreatorImg = document.getElementsByClassName('creator-img');
+    const postA = document.getElementsByClassName('post');
+    const postTitles = document.getElementsByClassName('post-title');
+    const postLikes = document.getElementsByClassName('count-like');
+    const postComment = document.getElementsByClassName('count-comment');
+    const postView = document.getElementsByClassName('count-view');
+    const postCreatedAt = document.getElementsByClassName('created-at');
+    const postCreator = document.getElementsByClassName('creator');
+    const postCreatorImg = document.getElementsByClassName('creator-img');
 
-    boards.forEach((board, index) => {
+    posts.forEach((post, index) => {
         let nowIndex = numOfData * (currentPage - 1) + index;
-        boardA[nowIndex].href = `http://localhost:3000/board/${board.board_id}`;
-        if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
-        boardTitles[nowIndex].innerHTML = board.title;
-        boardLikes[nowIndex].innerHTML = `좋아요 ${formatCount(board.count.like)}`;
-        boardComment[nowIndex].innerHTML = `댓글 ${formatCount(board.count.comment)}`;
-        boardView[nowIndex].innerHTML = `조회수 ${formatCount(board.count.view)}`;
-        boardCreatedAt[nowIndex].innerHTML = board.created_at;
-        boardCreator[nowIndex].innerHTML = board.creator.nickname;
-        boardCreatorImg[nowIndex].setAttribute('src', board.creator.avatar);
+        postA[nowIndex].href = `http://localhost:3000/post/${post.post_id}`;
+        if (post.title.length > TITLE_MAX_LENGTH) post.title = post.title.substring(0, TITLE_MAX_LENGTH);
+        postTitles[nowIndex].innerHTML = post.title;
+        postLikes[nowIndex].innerHTML = `좋아요 ${formatCount(post.count.like)}`;
+        postComment[nowIndex].innerHTML = `댓글 ${formatCount(post.count.comment)}`;
+        postView[nowIndex].innerHTML = `조회수 ${formatCount(post.count.view)}`;
+        postCreatedAt[nowIndex].innerHTML = post.created_at;
+        postCreator[nowIndex].innerHTML = post.creator.nickname;
+        postCreatorImg[nowIndex].setAttribute('src', post.creator.avatar);
     });
 
     currentPage++;

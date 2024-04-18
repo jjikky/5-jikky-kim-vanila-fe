@@ -18,13 +18,13 @@
             type="font/woff"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="http://localhost:3000/styles/board-detail.css" />
+        <link rel="stylesheet" href="http://localhost:3000/styles/post-detail.css" />
         <link rel="stylesheet" href="http://localhost:3000/styles/index.css" />
     </head>
     <body>
         <header>
             <div id="header-flex">
-                <div id="back-icon"><a href="http://localhost:3000/board"><</a></div>
+                <div id="back-icon"><a href="http://localhost:3000/post"><</a></div>
                 <div id="header-text">아무 말 대잔치</div>
                 <div class="dropdown">
                     <img
@@ -43,23 +43,23 @@
         </header>
 
         <section>
-            <div id="board">
-                <div id="board-title">제목 1</div>
-                <div id="board-header">
-                    <div class="board-header-item">
+            <div id="post">
+                <div id="post-title">제목 1</div>
+                <div id="post-header">
+                    <div class="post-header-item">
                         <img id="avatar" class="avatar" alt="profile image"></img>
                         <div id="creator" class="creator">더미 작성자 1</div>
-                        <div id="board-created-at" class="date">2021-01-01 00:00:00</div>
+                        <div id="post-created-at" class="date">2021-01-01 00:00:00</div>
                     </div>
-                    <div class="board-header-item">
+                    <div class="post-header-item">
                         <button id="update-event-btn">수정</button>
                         <button id="del-modal-btn">삭제</button>
                     </div>
                 </div>
                 <div class="line"></div>
                 <div id="content">
-                    <img id="board-image" alt="게시글 사진"></img>
-                    <div id="board-content">
+                    <img id="post-image" alt="게시글 사진"></img>
+                    <div id="post-content">
                         무엇을 얘기할까요? 아무말이라면, 삶은 항상 놀라운 모험이라고 생각합니다. 우리는 매일 새로운
                         경험을 하고 배우며 성장합니다. 때로는 어려움과 도전이 있지만, 그것들이 우리를 더 강하고 지혜롭게
                         만듭니다. 또한 우리는 주변의 사람들과 연결되며 사랑과 지지를 받습니다. 그래서 우리의 삶은
@@ -161,6 +161,6 @@
             </div>
         </div>
         <script src="http://localhost:3000/script/utils.js"></script>
-        <script src="http://localhost:3000/script/board-detail.js"></script>
+        <script src="http://localhost:3000/script/post-detail.js"></script>
     </body>
 </html>

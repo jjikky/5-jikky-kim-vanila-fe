@@ -1,4 +1,4 @@
-const board_id = window.location.pathname.split('/')[2];
+const post_id = window.location.pathname.split('/')[2];
 const updateBtn = document.getElementById('update-btn');
 
 // user menu
@@ -24,17 +24,17 @@ const updateHelper = document.getElementById('update-helper');
 const preview = document.getElementById('preview');
 const existImage = document.getElementById('exist-image');
 
-const boards = getBoardList();
-boards.then((data) => {
-    let board = data.find((board) => board.board_id == board_id);
-    title.value = board.title;
-    content.innerHTML = board.content;
+const posts = getPostList();
+posts.then((data) => {
+    let post = data.find((post) => post.post_id == post_id);
+    title.value = post.title;
+    content.innerHTML = post.content;
 
     // 기존 파일 이미지 삽입
-    preview.setAttribute('src', board.board_image);
+    preview.setAttribute('src', post.post_image);
 
     // 기존 파일명 삽입
-    let splitSrc = board.board_image.split('/');
+    let splitSrc = post.post_image.split('/');
     existImage.innerHTML = splitSrc[splitSrc.length - 1];
 });
 
@@ -84,7 +84,7 @@ content.addEventListener('input', (event) => {
 
 updateBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    location.href = `http://localhost:3000/board/${board_id}`;
+    location.href = `http://localhost:3000/post/${post_id}`;
 });
 
 // TODO : api 구현 후 update 요청

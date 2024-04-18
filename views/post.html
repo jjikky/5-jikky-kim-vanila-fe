@@ -17,7 +17,7 @@
             type="font/woff"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="http://localhost:3000/styles/board.css" />
+        <link rel="stylesheet" href="http://localhost:3000/styles/post.css" />
         <link rel="stylesheet" href="http://localhost:3000/styles/index.css" />
     </head>
     <body>
@@ -42,20 +42,20 @@
         </header>
 
         <section>
-            <div id="board-wrapper">
-                <div id="board-info">
-                    <div class="board-info-text">안녕하세요,</div>
-                    <div class="board-info-text">아무 말 대잔치 <strong>게시판</strong> 입니다.</div>
+            <div id="post-wrapper">
+                <div id="post-info">
+                    <div class="post-info-text">안녕하세요,</div>
+                    <div class="post-info-text">아무 말 대잔치 <strong>게시판</strong> 입니다.</div>
                 </div>
                 <div id="btn-wrapper">
-                    <a href="http://localhost:3000/board/create"><button id="go-upload">게시물 작성</button></a>
+                    <a href="http://localhost:3000/post/create"><button id="go-upload">게시물 작성</button></a>
                 </div>
-                <div class="board-list">
+                <div class="post-list">
                     <!-- js로 더미 데이터 받아서 동적 생성 -->
-                    <!-- <a href="http://localhost:3000/board/1" class="board">
-                        <div class="board-title">제목 1</div>
-                        <div class="board-mid">
-                            <div class="board-mid-l">
+                    <!-- <a href="http://localhost:3000/post/1" class="post">
+                        <div class="post-title">제목 1</div>
+                        <div class="post-mid">
+                            <div class="post-mid-l">
                                 <div class="count-like">좋아요 0</div>
                                 <div class="count-comment">댓글 0</div>
                                 <div class="count-view">조회수 0</div>
@@ -63,7 +63,7 @@
                             <div class="created-at">2021-01-01 00:00:00</div>
                         </div>
                         <div class="line"></div>
-                        <div class="board-creator">
+                        <div class="post-creator">
                             <div class="avatar"></div>
                             <div class="creator">더미 작성자 1</div>
                         </div>
@@ -76,6 +76,6 @@
             </div>
         </section>
         <script src="http://localhost:3000/script/utils.js"></script>
-        <script src="http://localhost:3000/script/board.js"></script>
+        <script src="http://localhost:3000/script/post.js"></script>
     </body>
 </html>

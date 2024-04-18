@@ -28,18 +28,18 @@ app.get('/user/password', (req, res) => {
     res.render('password-update');
 });
 
-app.get('/board', (req, res) => {
-    res.render('board');
+app.get('/post', (req, res) => {
+    res.render('post');
 });
 
-app.get('/board/create', (req, res) => {
-    res.render('board-upload');
+app.get('/post/create', (req, res) => {
+    res.render('post-upload');
 });
-app.get('/board/:id/update', (req, res) => {
-    res.render('board-update');
+app.get('/post/:id/update', (req, res) => {
+    res.render('post-update');
 });
-app.get('/board/:id', (req, res) => {
-    res.render('board-detail');
+app.get('/post/:id', (req, res) => {
+    res.render('post-detail');
 });
 
 app.all('*', (req, res) => {
