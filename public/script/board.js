@@ -1,6 +1,49 @@
+const toastMessage = document.getElementById('toast-message');
+
+// 무한스크롤 변수
+let currentPage = 1;
+let numOfData = 5;
+let isFetching = false;
+let hasMore = true;
+let timer = 0;
+window.addEventListener('scroll', () => {
+    if (isFetching || !hasMore) return;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 10) {
+        // 디바운싱
+        clearTimeout(timer);
+
+        loading.start();
+        // NOTE : 애니매이션 보여주려고 1초 지연 결어 놓음. 필요시 삭제
+        timer = setTimeout(() => {
+            insertData();
+            console.log('insert');
+            loading.end();
+        }, 500);
+    }
+});
+
 // boadrList 생성하고 데이터 넣기
 async function insertData() {
-    const boards = await getBoardList();
+    isFetching = true;
+
+    const response = await getBoardList();
+    const boards = response.slice(numOfData * (currentPage - 1), numOfData * currentPage);
+
+    isFetching = false;
+
+    // 더이상 가져올 데이터 없음
+    if (boards.length === 0) {
+        hasMore = false;
+        // toast로 안내
+        toastMessage.innerHTML = '더 이상 불러올 게시물이 없습니다.';
+        toastMessage.classList.add('active');
+        setTimeout(function () {
+            toastMessage.classList.remove('active');
+        }, 1000);
+        return;
+    }
+
     // 더미데이터 이용, board list layout 동적 생성
     const boardList = document.getElementsByClassName('board-list')[0];
     for (let i = 0; i < boards.length; i++) {
@@ -71,16 +114,19 @@ async function insertData() {
     const boardCreatorImg = document.getElementsByClassName('creator-img');
 
     boards.forEach((board, index) => {
-        boardA[index].href = `http://localhost:3000/board/${board.board_id}`;
+        let nowIndex = numOfData * (currentPage - 1) + index;
+        boardA[nowIndex].href = `http://localhost:3000/board/${board.board_id}`;
         if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
-        boardTitles[index].innerHTML = board.title;
-        boardLikes[index].innerHTML = `좋아요 ${formatCount(board.count.like)}`;
-        boardComment[index].innerHTML = `댓글 ${formatCount(board.count.comment)}`;
-        boardView[index].innerHTML = `조회수 ${formatCount(board.count.view)}`;
-        boardCreatedAt[index].innerHTML = board.created_at;
-        boardCreator[index].innerHTML = board.creator.nickname;
-        boardCreatorImg[index].setAttribute('src', board.creator.avatar);
+        boardTitles[nowIndex].innerHTML = board.title;
+        boardLikes[nowIndex].innerHTML = `좋아요 ${formatCount(board.count.like)}`;
+        boardComment[nowIndex].innerHTML = `댓글 ${formatCount(board.count.comment)}`;
+        boardView[nowIndex].innerHTML = `조회수 ${formatCount(board.count.view)}`;
+        boardCreatedAt[nowIndex].innerHTML = board.created_at;
+        boardCreator[nowIndex].innerHTML = board.creator.nickname;
+        boardCreatorImg[nowIndex].setAttribute('src', board.creator.avatar);
     });
+
+    currentPage++;
 }
 insertData();
 
@@ -92,3 +138,16 @@ goUploadBtn.addEventListener('mouseover', () => {
 goUploadBtn.addEventListener('mouseleave', () => {
     goUploadBtn.style.backgroundColor = '#ACA0EB';
 });
+
+const loading = {
+    start: () => {
+        // @로딩 시작
+        const loading = document.querySelector('#loading');
+        loading.style.display = 'block';
+    },
+    end: () => {
+        // @로딩 종료
+        const loading = document.querySelector('#loading');
+        loading.style.display = 'none';
+    },
+};
