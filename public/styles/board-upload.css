@@ -96,3 +96,7 @@ input {
     padding: 2px;
     background-color: var(--color-primary);
 }
+
+.image-box #preview {
+    width: var(--main-width);
+}

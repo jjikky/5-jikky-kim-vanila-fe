@@ -48,13 +48,7 @@
                     <label for="title"
                         ><div class="label-text">제목*</div>
                         <div class="line"></div>
-                        <input
-                            id="title"
-                            type="text"
-                            maxlength="26"
-                            placeholder="제목을 입력해주세요. (최대 26글자)"
-                            value="제목 1"
-                        />
+                        <input id="title" type="text" maxlength="26" placeholder="제목을 입력해주세요. (최대 26글자)" />
                         <div class="line"></div>
                     </label>
                     <label for="content"
@@ -63,11 +57,14 @@
                         <textarea id="content" type="text"></textarea>
                         <div class="line"></div>
                     </label>
-                    <div class="helper-text">* helper text</div>
+                    <div id="update-helper" class="helper-text"></div>
                     <label for="img" id="img-text" class="label-text">이미지</label>
                     <div id="img-label-wrap">
                         <label for="img" id="img-label"> 파일 선택 </label>
-                        <div>기존 파일 명</div>
+                        <div id="exist-image">기존 파일 명</div>
+                    </div>
+                    <div class="image-box">
+                        <img id="preview" />
                     </div>
 
                     <input id="img" type="file" accept="image/*" />

@@ -8,6 +8,7 @@ async function insertData() {
 
     // 게시글 본문
     const boardTitle = document.getElementById('board-title');
+    const boardImage = document.getElementById('board-image');
     const boardComment = document.getElementById('count-comment');
     const boardView = document.getElementById('count-view');
     const boardCreatedAt = document.getElementById('board-created-at');
@@ -18,6 +19,7 @@ async function insertData() {
     //  25글자 까지만 보이게
     if (board.title.length > TITLE_MAX_LENGTH) board.title = board.title.substring(0, TITLE_MAX_LENGTH);
     boardTitle.innerHTML = board.title;
+    boardImage.setAttribute('src', board.board_image);
     boardComment.innerHTML = formatCount(board.count.comment);
     boardView.innerHTML = formatCount(board.count.view);
     boardCreatedAt.innerHTML = board.created_at;
@@ -105,7 +107,7 @@ comment_textarea.addEventListener('input', (event) => {
 const updateBtn = document.getElementById('update-event-btn');
 
 updateBtn.addEventListener('click', () => {
-    window.location.href = 'http://localhost:3000/board/update';
+    window.location.href = `http://localhost:3000/board/${board_id}/update`;
 });
 
 // floating menu

@@ -1,9 +1,5 @@
-const CONTENT_TEXT = `무엇을 얘기할까요? 아무말이라면, 삶은 항상 놀라운 모험이라고 생각합니다. 우리는 매일 새로운 경험을 하고 배우며 성장합니다. 때로는 어려움과 도전이 있지만, 그것들이 우리를 더 강하고 지혜롭게 만듭니다. 또한 우리는 주변의 사람들과 연결되며 사랑과 지지를 받습니다. 그래서 우리의 삶은 소중하고 의미가 있습니다.
-자연도 아름다운 이야기입니다. 우리 주변의 자연은 끝없는 아름다움과 신비로움을 담고 있습니다. 산, 바다, 숲, 하늘 등 모든 것이 우리를 놀라게 만들고 감동시킵니다. 자연은 우리의 생명과 안정을 지키며 우리에게 힘을 주는 곳입니다.
-마지막으로, 지식을 향한 탐구는 항상 흥미로운 여정입니다. 우리는 끝없는 지식의 바다에서 배우고 발견할 수 있으며, 이것이 우리를 더 깊이 이해하고 세상을 더 넓게 보게 해줍니다.
-그런 의미에서, 삶은 놀라움과 경이로움으로 가득 차 있습니다. 새로운 경험을 즐기고 항상 앞으로 나아가는 것이 중요하다고 생각합니다.`;
-
-document.getElementById('content').innerHTML = CONTENT_TEXT;
+const board_id = window.location.pathname.split('/')[2];
+const updateBtn = document.getElementById('update-btn');
 
 // user menu
 userNav = document.getElementById('user-nav');
@@ -19,5 +15,76 @@ profileBtn.addEventListener('click', () => {
 // 뒤로 가기
 const backIcon = document.getElementById('back-icon');
 backIconClick(backIcon);
+
+const title = document.getElementById('title');
+const content = document.getElementById('content');
+const updateHelper = document.getElementById('update-helper');
+
+// 이미지 미리보기
+const preview = document.getElementById('preview');
+const existImage = document.getElementById('exist-image');
+
+const boards = getBoardList();
+boards.then((data) => {
+    let board = data.find((board) => board.board_id == board_id);
+    title.value = board.title;
+    content.innerHTML = board.content;
+
+    // 기존 파일 이미지 삽입
+    preview.setAttribute('src', board.board_image);
+
+    // 기존 파일명 삽입
+    let splitSrc = board.board_image.split('/');
+    existImage.innerHTML = splitSrc[splitSrc.length - 1];
+});
+
+const fileInput = document.getElementById('img');
+
+// 이미지 선택하면 profile layout에 보여주기
+fileInput.addEventListener('change', function (event) {
+    if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            document.getElementById('preview').src = event.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+        document.getElementById('preview').style.display = 'block';
+
+        existImage.innerHTML = event.target.files[0].name;
+
+        // preview에 input click 연결
+        document.getElementById('preview').addEventListener('click', function () {
+            fileInput.click();
+        });
+    } else {
+        document.getElementById('preview').src = '';
+    }
+});
+
+title.addEventListener('input', (event) => {
+    disableButton('update-btn');
+    let input = event.target.value;
+    if (input === '' || content.value === '') {
+        return (updateHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
+    }
+    updateHelper.innerHTML = '';
+    activeButton('update-btn');
+});
+
+content.addEventListener('input', (event) => {
+    disableButton('update-btn');
+    let input = event.target.value;
+    if (input === '' || title.value === '') {
+        return (updateHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
+    }
+    updateHelper.innerHTML = '';
+    activeButton('update-btn');
+});
+
+updateBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    location.href = `http://localhost:3000/board/${board_id}`;
+});
 
 // TODO : api 구현 후 update 요청

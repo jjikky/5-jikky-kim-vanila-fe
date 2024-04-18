@@ -7,6 +7,9 @@ profileBtn.addEventListener('click', () => {
         userNav.style.display = 'flex';
     }
 });
+const title = document.getElementById('title');
+const content = document.getElementById('content');
+const uploadHelper = document.getElementById('upload-helper');
 
 const uploadBtn = document.getElementById('upload-btn');
 const uploadForm = document.getElementById('upload-form');
@@ -32,4 +35,47 @@ uploadBtn.addEventListener('click', (event) => {
         const helperText = document.getElementsByClassName('helper-text');
         helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
     }
+});
+
+const preview = document.getElementById('preview');
+const fileInput = document.getElementById('img');
+
+// 이미지 선택하면 profile layout에 보여주기
+fileInput.addEventListener('change', function (event) {
+    if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            document.getElementById('preview').src = event.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+        document.getElementById('image-input').style.display = 'none';
+        document.getElementById('preview').style.display = 'block';
+
+        // preview에 input click 연결
+        document.getElementById('preview').addEventListener('click', function () {
+            fileInput.click();
+        });
+    } else {
+        document.getElementById('preview').src = '';
+    }
+});
+
+title.addEventListener('input', (event) => {
+    disableButton('upload-btn');
+    let input = event.target.value;
+    if (input === '' || content.value === '') {
+        return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
+    }
+    uploadHelper.innerHTML = '';
+    activeButton('upload-btn');
+});
+
+content.addEventListener('input', (event) => {
+    disableButton('upload-btn');
+    let input = event.target.value;
+    if (input === '' || title.value === '') {
+        return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
+    }
+    uploadHelper.innerHTML = '';
+    activeButton('upload-btn');
 });
