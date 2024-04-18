@@ -58,8 +58,8 @@ function closeModal(modalName, overlayName) {
 }
 
 // 버튼 활성화, 비활성화
-function activeButton(className) {
-    let button = document.getElementById(className);
+function activeButton(id) {
+    let button = document.getElementById(id);
     button.classList.add('active');
 }
 function disableButton(className) {

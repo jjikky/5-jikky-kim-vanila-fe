@@ -35,7 +35,7 @@ app.get('/board', (req, res) => {
 app.get('/board/create', (req, res) => {
     res.render('board-upload');
 });
-app.get('/board/update', (req, res) => {
+app.get('/board/:id/update', (req, res) => {
     res.render('board-update');
 });
 app.get('/board/:id', (req, res) => {
