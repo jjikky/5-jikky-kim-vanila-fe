@@ -21,7 +21,9 @@ password.addEventListener('change', (event) => {
             return;
         }
         activeButton('update-password-btn');
-        return (passwordHelper.innerHTML = '');
+        passwordHelper.innerHTML = '';
+        passwordHelper2.innerHTML = '';
+        return;
     }
     passwordHelper.innerHTML =
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
@@ -36,10 +38,12 @@ passwordCheck.addEventListener('change', (event) => {
         if (input !== password.value) {
             passwordHelper.innerHTML = '비밀번호가 다릅니다.';
             passwordHelper2.innerHTML = '비밀번호가 다릅니다.';
-            return 0;
+            return;
         }
         activeButton('update-password-btn');
-        return (passwordHelper.innerHTML = '');
+        passwordHelper.innerHTML = '';
+        passwordHelper2.innerHTML = '';
+        return;
     }
 
     passwordHelper2.innerHTML =

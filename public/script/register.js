@@ -144,7 +144,7 @@ function isButtonActive() {
     let sumIsComplete = Object.values(isComplete).reduce((a, b) => a + b);
     if (sumIsComplete == 5) {
         activeButton('register-button');
-        registerButton.addEventListener('click', () => (location.href = 'http://localhost:3000/board'));
+        registerButton.addEventListener('click', () => (location.href = 'http://localhost:3000/login'));
         return;
     }
     disableButton('register-button');
