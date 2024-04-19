@@ -36,11 +36,10 @@ async function clickLoginBtn(event) {
     event.preventDefault();
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    const user = await getUserList();
-    let findUser = user.find((user) => user.email === email && user.password === password);
-    if (findUser === undefined) {
-        return alert('아이디 또는 비밀번호가 잘못되었습니다.');
-    }
-    return (window.location.href = 'http://localhost:3000/post');
-    // TODO : api 구현 후 서버로 비밀번호 검증 요청
+    const response = await login(email, password);
+    console.log(response);
+    if (response.message === 'login success') return (location.href = 'http://localhost:3000/post');
+    // 로그인 실패
+    alert('아이디 또는 비밀번호가 잘못되었습니다.');
+    location.href = 'http://localhost:3000/login';
 }

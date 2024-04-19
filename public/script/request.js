@@ -13,6 +13,19 @@ async function register(formData) {
     }
 }
 
+async function login(email, password) {
+    try {
+        const response = await fetch(`${SERVER_URL}/users/login`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+        });
+        return await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function isExistEmail(email) {
     try {
         const response = await fetch(`${SERVER_URL}/users/email/check?email=${email}`);
