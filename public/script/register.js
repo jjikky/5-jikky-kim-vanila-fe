@@ -6,6 +6,7 @@ const passwordHelper2 = document.getElementById('password-helper2');
 const nicknameHelper = document.getElementById('nickname-helper');
 
 // input field
+const registerForm = document.getElementById('register-form');
 const fileInput = document.getElementById('profile');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
@@ -67,16 +68,18 @@ email.addEventListener('input', () => {
     emailHelper.innerHTML = '*이메일을 입력해주세요.';
 });
 
-async function isExistEmail(email) {
-    const response = await fetch('http://localhost:3000/data/users.json');
-    const userData = await response.json();
+// NOTE : 서버에서 처리
+// async function isExistEmail(email) {
+//     const response = await fetch('http://localhost:3000/data/users.json');
+//     const userData = await response.json();
 
-    let findUser = userData.find((user) => user.email === email);
-    if (findUser === undefined) {
-        return false;
-    }
-    return true;
-}
+//     let findUser = userData.find((user) => user.email === email);
+//     if (findUser === undefined) {
+//         return false;
+//     }
+//     return true;
+// }
+
 password.addEventListener('change', (event) => {
     let input = event.target.value;
     isComplete.password = 0;
@@ -138,13 +141,21 @@ nickname.addEventListener('change', async (event) => {
     isButtonActive();
     return (nicknameHelper.innerHTML = '');
 });
+
 // 서식 완성되면 버튼 활성화
 function isButtonActive() {
     // TODO : api 구현 후 회원가입 요청으로 변경
     let sumIsComplete = Object.values(isComplete).reduce((a, b) => a + b);
     if (sumIsComplete == 5) {
         activeButton('register-button');
-        registerButton.addEventListener('click', () => (location.href = 'http://localhost:3000/login'));
+        registerButton.addEventListener('click', () => {
+            const formData = new FormData(registerForm);
+            formData.append('email', email.value);
+            formData.append('nickname', nickname.value);
+            formData.append('password', password.value);
+            register(formData);
+            location.href = 'http://localhost:3000/login';
+        });
         return;
     }
     disableButton('register-button');

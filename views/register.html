@@ -31,7 +31,7 @@
         <section>
             <div id="register-text">회원가입</div>
             <div id="register-box">
-                <form>
+                <form id="register-form">
                     <div class="register-label">프로필 사진</div>
                     <div id="profile-helper" class="helper-text">*프로필 사진을 추가해주세요.</div>
                     <div class="image-box">
@@ -43,7 +43,7 @@
                     <div class="image-box">
                         <img id="preview" />
                     </div>
-                    <input type="file" id="profile" />
+                    <input type="file" name="avatar" id="profile" />
                     <label for="email" class="register-label">
                         <div>이메일*</div>
                         <input id="email" type="text" placeholder="이메일을 입력하세요" />
@@ -72,6 +72,7 @@
             </div>
         </section>
         <script type="text/javascript" src="http://localhost:3000/script/utils.js"></script>
+        <script type="text/javascript" src="http://localhost:3000/script/request.js"></script>
         <script type="text/javascript" src="http://localhost:3000/script/validation.js"></script>
         <script type="text/javascript" src="http://localhost:3000/script/register.js"></script>
     </body>
