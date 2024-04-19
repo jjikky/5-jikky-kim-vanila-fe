@@ -10,7 +10,14 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.use(morgan('dev'));
-app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", 'http://localhost:5000'],
+        },
+    })
+);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
