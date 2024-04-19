@@ -1,8 +1,8 @@
 const toastMessage = document.getElementById('toast-message');
 
 // 무한스크롤 변수
-let currentPage = 1;
-let numOfData = 5;
+let page = 1;
+let limit = 5;
 let isFetching = false;
 let hasMore = true;
 let timer = 0;
@@ -17,7 +17,6 @@ window.addEventListener('scroll', () => {
         // NOTE : 애니매이션 보여주려고 1초 지연 결어 놓음. 필요시 삭제
         timer = setTimeout(() => {
             insertData();
-            console.log('insert');
             loading.end();
         }, 500);
     }
@@ -27,8 +26,8 @@ window.addEventListener('scroll', () => {
 async function insertData() {
     isFetching = true;
 
-    const response = await getPostList();
-    const posts = response.slice(numOfData * (currentPage - 1), numOfData * currentPage);
+    const response = await getAllPost(page, limit);
+    const posts = response.posts;
 
     isFetching = false;
 
@@ -114,7 +113,7 @@ async function insertData() {
     const postCreatorImg = document.getElementsByClassName('creator-img');
 
     posts.forEach((post, index) => {
-        let nowIndex = numOfData * (currentPage - 1) + index;
+        let nowIndex = limit * (page - 1) + index;
         postA[nowIndex].href = `http://localhost:3000/post/${post.post_id}`;
         if (post.title.length > TITLE_MAX_LENGTH) post.title = post.title.substring(0, TITLE_MAX_LENGTH);
         postTitles[nowIndex].innerHTML = post.title;
@@ -126,7 +125,7 @@ async function insertData() {
         postCreatorImg[nowIndex].setAttribute('src', post.creator.avatar);
     });
 
-    currentPage++;
+    page++;
 }
 insertData();
 

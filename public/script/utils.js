@@ -1,16 +1,16 @@
 // 제목 길이 제한
 const TITLE_MAX_LENGTH = 26;
 
-// 더미 게시글 목록 가져오는 함수
-async function getPostList() {
-    try {
-        const response = await fetch('http://localhost:3000/data/posts.json');
-        const postData = await response.json();
-        return postData;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// // 더미 게시글 목록 가져오는 함수
+// async function getPostList() {
+//     try {
+//         const response = await fetch('http://localhost:3000/data/posts.json');
+//         const postData = await response.json();
+//         return postData;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 // 더미 유저 목록 반환
 async function getUserList() {

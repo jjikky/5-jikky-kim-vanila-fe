@@ -1,5 +1,6 @@
 const SERVER_URL = 'http://localhost:5000';
 
+// USER
 async function register(formData) {
     try {
         const response = await fetch(`${SERVER_URL}/users/register`, {
@@ -42,6 +43,17 @@ async function isExistNickname(nickname) {
         const postData = await response.json();
         console.log(postData.isExist);
         return postData.isExist;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// POST
+async function getAllPost(page, limit) {
+    try {
+        const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`);
+        const postData = await response.json();
+        return postData;
     } catch (error) {
         console.log(error);
     }
