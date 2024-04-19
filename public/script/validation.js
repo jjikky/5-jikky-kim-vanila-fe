@@ -22,14 +22,14 @@ function validateNickname(nickname) {
     return true;
 }
 
-// 닉네임 중복 검증
-async function isExistNickname(nickname) {
-    const response = await fetch('http://localhost:3000/data/users.json');
-    const userData = await response.json();
+// 닉네임 중복 검증 : 서버에서 처리
+// async function isExistNickname(nickname) {
+//     const response = await fetch('http://localhost:3000/data/users.json');
+//     const userData = await response.json();
 
-    let findUser = userData.find((user) => user.nickname === nickname);
-    if (findUser === undefined) {
-        return false;
-    }
-    return true;
-}
+//     let findUser = userData.find((user) => user.nickname === nickname);
+//     if (findUser === undefined) {
+//         return false;
+//     }
+//     return true;
+// }
