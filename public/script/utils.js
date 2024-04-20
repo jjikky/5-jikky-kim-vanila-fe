@@ -1,26 +1,18 @@
 // 제목 길이 제한
 const TITLE_MAX_LENGTH = 26;
 
-// // 더미 게시글 목록 가져오는 함수
-// async function getPostList() {
-//     try {
-//         const response = await fetch('http://localhost:3000/data/posts.json');
-//         const postData = await response.json();
-//         return postData;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+// home navigation
+const home = document.getElementById('header-text');
+home.addEventListener('click', () => {
+    window.location.href = 'http://localhost:3000/post';
+});
 
-// 더미 유저 목록 반환
-async function getUserList() {
-    try {
-        const response = await fetch('http://localhost:3000/data/users.json');
-        const userData = await response.json();
-        return userData;
-    } catch (error) {
-        console.log(error);
-    }
+// 뒤로가기
+function backIconClick(el) {
+    el.addEventListener('click', () => {
+        history.back();
+    });
+    el.style.cursor = 'pointer';
 }
 
 // 조회수,댓글,좋아요 수 등 형식 변환
@@ -32,14 +24,6 @@ function formatCount(count) {
     } else {
         return count.toString();
     }
-}
-
-// 뒤로가기
-function backIconClick(el) {
-    el.addEventListener('click', () => {
-        history.back();
-    });
-    el.style.cursor = 'pointer';
 }
 
 // 모달
@@ -69,5 +53,16 @@ function disableButton(className) {
 
 function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
     window.location.href = 'http://localhost:3000/login';
+}
+
+async function insertHeaderAvatar(user_avatar) {
+    const profileBtn = document.getElementById('profile-btn');
+    profileBtn.setAttribute('src', user_avatar);
+}
+
+async function insertFormAvatar(user_avatar) {
+    const avatarImg = document.getElementById('avatar');
+    avatarImg.setAttribute('src', user_avatar);
 }

@@ -1,3 +1,10 @@
+async function fetchUser() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+}
+fetchUser();
+
 userNav = document.getElementById('user-nav');
 profileBtn = document.getElementById('profile-btn');
 profileBtn.addEventListener('click', () => {
@@ -48,7 +55,7 @@ fileInput.addEventListener('change', function (event) {
             document.getElementById('preview').src = event.target.result;
         };
         reader.readAsDataURL(event.target.files[0]);
-        document.getElementById('image-input').style.display = 'none';
+        // document.getElementById('image-input').style.display = 'none';
         document.getElementById('preview').style.display = 'block';
 
         // preview에 input click 연결

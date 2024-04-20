@@ -1,3 +1,11 @@
+async function fetchUserData() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+    insertFormAvatar(user.avatar);
+}
+fetchUserData();
+
 // user menu
 userNav = document.getElementById('user-nav');
 profileBtn = document.getElementById('profile-btn');

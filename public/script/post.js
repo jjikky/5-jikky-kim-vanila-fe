@@ -22,6 +22,13 @@ window.addEventListener('scroll', () => {
     }
 });
 
+async function fetchUserData() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+}
+fetchUserData();
+
 // boadrList 생성하고 데이터 넣기
 async function insertData() {
     isFetching = true;
@@ -128,7 +135,6 @@ async function insertData() {
     page++;
 }
 insertData();
-
 // 게시물 작성 버튼 hover
 const goUploadBtn = document.getElementById('go-upload');
 goUploadBtn.addEventListener('mouseover', () => {

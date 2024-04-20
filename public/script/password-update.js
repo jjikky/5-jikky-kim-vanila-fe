@@ -7,6 +7,13 @@ const passwordCheck = document.getElementById('password-check');
 const updateBtn = document.getElementById('update-password-btn');
 const toastMessage = document.getElementById('toast-message');
 
+async function fetchUserData() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+}
+fetchUserData();
+
 password.addEventListener('change', (event) => {
     let input = event.target.value;
     disableButton('update-password-btn');
@@ -62,3 +69,7 @@ updateBtn.addEventListener('click', (event) => {
         toastMessage.classList.remove('active');
     }, 1000);
 });
+
+// 뒤로 가기
+const backIcon = document.getElementById('back-icon');
+backIconClick(backIcon);
