@@ -150,9 +150,6 @@ function isButtonActive() {
         activeButton('register-button');
         registerButton.addEventListener('click', () => {
             const formData = new FormData(registerForm);
-            formData.append('email', email.value);
-            formData.append('nickname', nickname.value);
-            formData.append('password', password.value);
             register(formData);
             location.href = 'http://localhost:3000/login';
         });

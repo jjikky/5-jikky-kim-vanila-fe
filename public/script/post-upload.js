@@ -37,9 +37,9 @@ uploadBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (uploadForm.title.value.length > 0 && uploadForm.content.value.length) {
         const formData = new FormData(uploadForm);
-        formData.append('title', uploadForm.title.value);
-        formData.append('content', uploadForm.content.value);
+
         const response = createPost(formData);
+        console.log(response);
         location.href = 'http://localhost:3000/post';
         return;
     }
