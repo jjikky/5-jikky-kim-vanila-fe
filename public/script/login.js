@@ -38,7 +38,11 @@ async function clickLoginBtn(event) {
     let password = document.getElementById('password').value;
     const response = await login(email, password);
     console.log(response);
-    if (response.message === 'login success') return (location.href = 'http://localhost:3000/post');
+    if (response.message === 'login success') {
+        const token = response.token;
+        localStorage.setItem('token', token);
+        return (location.href = 'http://localhost:3000/post');
+    }
     // 로그인 실패
     alert('아이디 또는 비밀번호가 잘못되었습니다.');
     location.href = 'http://localhost:3000/login';

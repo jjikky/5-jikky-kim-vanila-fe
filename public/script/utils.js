@@ -66,3 +66,8 @@ function disableButton(className) {
     let button = document.getElementById(className);
     button.classList.remove('active');
 }
+
+function logout() {
+    localStorage.removeItem('token');
+    window.location.href = 'http://localhost:3000/login';
+}

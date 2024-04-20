@@ -150,3 +150,8 @@ const loading = {
         loading.style.display = 'none';
     },
 };
+
+const logoutBtn = document.getElementById('logout-btn');
+logoutBtn.addEventListener('click', () => {
+    logout();
+});

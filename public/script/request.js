@@ -51,7 +51,14 @@ async function isExistNickname(nickname) {
 // POST
 async function getAllPost(page, limit) {
     try {
-        const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`);
+        const token = localStorage.getItem('token');
+        if (!token) return (location.href = 'http://localhost:3000/login');
+        const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         const postData = await response.json();
         return postData;
     } catch (error) {
