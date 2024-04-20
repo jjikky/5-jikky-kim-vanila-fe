@@ -84,25 +84,6 @@ async function insertData() {
         commentContentDiv.classList.add('comment-content');
         commentContentDiv.textContent = comment.content;
 
-        // TODO : 댓글 수정, 삭제 - 댓글 creator id가 login user id와 같을 때만 보이게
-        // TODO : api 서버 구현 후 update, delete 요청
-        let buttonDiv = document.createElement('div');
-        buttonDiv.classList.add('comment-item');
-        let editButton = document.createElement('button');
-        editButton.textContent = '수정';
-
-        let deleteButton = document.createElement('button');
-        deleteButton.textContent = '삭제';
-        deleteButton.classList.add = 'del-comment-modal-btn';
-        deleteButton.addEventListener('click', () => openModal('#del-comment-modal', '#overlay2'));
-        let delCommentModalXBtn = document.querySelector('#del-comment-x');
-        let delCommentModalOBtn = document.querySelector('#del-comment-o');
-        delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
-        delCommentModalOBtn.addEventListener('click', () => {
-            // TODO : api 서버 구현 후 delete 요청
-            closeModal('#del-comment-modal', '#overlay2');
-        });
-
         // 요소 관계 설정
         commentsWrap.appendChild(comments);
 
@@ -114,9 +95,33 @@ async function insertData() {
         commentItemDiv.appendChild(commentContentDiv);
         commentBoxDiv.appendChild(commentContentDiv);
 
-        comments.appendChild(buttonDiv);
-        buttonDiv.appendChild(editButton);
-        buttonDiv.appendChild(deleteButton);
+        // TODO : api 서버 구현 후 update, delete 요청
+
+        if (comment.creator.user_id === user_id) {
+            let buttonDiv = document.createElement('div');
+            buttonDiv.classList.add('comment-item');
+            let editButton = document.createElement('button');
+            editButton.textContent = '수정';
+            // 댓글 수정 클릭시
+            // 텍스트 입력 창에 기존 텍스트 내용이 보여지고, 댓글 등록 버튼이 댓글 수정 버튼으로 바뀜
+            // 댓글 수정 할 시, 수정 버튼 누른 댓글 내용 변경 되고, 댓글 등록창 원상 복구
+
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = '삭제';
+            deleteButton.classList.add = 'del-comment-modal-btn';
+            deleteButton.addEventListener('click', () => openModal('#del-comment-modal', '#overlay2'));
+            let delCommentModalXBtn = document.querySelector('#del-comment-x');
+            let delCommentModalOBtn = document.querySelector('#del-comment-o');
+            delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
+            delCommentModalOBtn.addEventListener('click', () => {
+                // TODO : api 서버 구현 후 delete 요청
+                closeModal('#del-comment-modal', '#overlay2');
+            });
+
+            comments.appendChild(buttonDiv);
+            buttonDiv.appendChild(editButton);
+            buttonDiv.appendChild(deleteButton);
+        }
     });
 
     // 게시글 수정 삭제 event
