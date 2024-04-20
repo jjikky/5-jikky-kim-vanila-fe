@@ -11,14 +11,17 @@ app.set('view engine', 'html');
 
 app.use(morgan('dev'));
 app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
-            connectSrc: ["'self'", 'http://localhost:5000'],
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                connectSrc: ["'self'", 'http://localhost:5000'],
+                imgSrc: ["'self'", 'http://localhost:5000', 'data:'],
+            },
         },
+        crossOriginResourcePolicy: false,
     })
 );
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', (req, res) => {
