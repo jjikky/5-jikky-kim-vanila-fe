@@ -36,12 +36,15 @@ uploadForm.content.addEventListener('input', (event) => {
 uploadBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (uploadForm.title.value.length > 0 && uploadForm.content.value.length) {
-        alert('작성 완료!');
+        const formData = new FormData(uploadForm);
+        formData.append('title', uploadForm.title.value);
+        formData.append('content', uploadForm.content.value);
+        const response = createPost(formData);
         location.href = 'http://localhost:3000/post';
-    } else {
-        const helperText = document.getElementsByClassName('helper-text');
-        helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
+        return;
     }
+    const helperText = document.getElementsByClassName('helper-text');
+    helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
 });
 
 const preview = document.getElementById('preview');

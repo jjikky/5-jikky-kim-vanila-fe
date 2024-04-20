@@ -7,8 +7,8 @@ async function register(formData) {
             method: 'POST',
             body: formData,
         });
-        const postData = await response.json();
-        return postData;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -30,9 +30,9 @@ async function login(email, password) {
 async function isExistEmail(email) {
     try {
         const response = await fetch(`${SERVER_URL}/users/email/check?email=${email}`);
-        const postData = await response.json();
-        console.log(postData.isExist);
-        return postData.isExist;
+        const data = await response.json();
+        console.log(data.isExist);
+        return data.isExist;
     } catch (error) {
         console.log(error);
     }
@@ -40,9 +40,9 @@ async function isExistEmail(email) {
 async function isExistNickname(nickname) {
     try {
         const response = await fetch(`${SERVER_URL}/users/nickname/check?nickname=${nickname}`);
-        const postData = await response.json();
-        console.log(postData.isExist);
-        return postData.isExist;
+        const data = await response.json();
+        console.log(data.isExist);
+        return data.isExist;
     } catch (error) {
         console.log(error);
     }
@@ -59,8 +59,8 @@ async function getAllPost(page, limit) {
                 Authorization: `Bearer ${token}`,
             },
         });
-        const postData = await response.json();
-        return postData;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -75,8 +75,8 @@ async function getSinglePost(post_id) {
                 Authorization: `Bearer ${token}`,
             },
         });
-        const postData = await response.json();
-        return postData;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -86,8 +86,26 @@ async function getSingleUser() {
     try {
         const user_id = localStorage.getItem('user_id');
         const response = await fetch(`${SERVER_URL}/users/${user_id}`);
-        const postData = await response.json();
-        return postData;
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function createPost(formData) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) return (location.href = 'http://localhost:3000/login');
+        const response = await fetch(`${SERVER_URL}/posts`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.log(error);
     }
