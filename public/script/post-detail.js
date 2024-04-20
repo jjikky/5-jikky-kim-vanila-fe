@@ -1,10 +1,19 @@
 // ['','post','1']
 const post_id = window.location.pathname.split('/')[2];
+const user_id = localStorage.getItem('user_id') * 1;
+
+async function fetchUser() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+    insertFormAvatar(user.avatar);
+}
+fetchUser();
 
 // 데이터 삽입
 async function insertData() {
-    const posts = await getPostList();
-    const post = posts.find((post) => post.post_id == post_id);
+    const response = await getSinglePost(post_id);
+    const post = response.post;
 
     // 게시글 본문
     const postTitle = document.getElementById('post-title');
@@ -15,6 +24,26 @@ async function insertData() {
     const postCreator = document.getElementById('creator');
     const postCreatorImg = document.getElementById('avatar');
     const postContent = document.getElementById('post-content');
+
+    // 게시글 수정 삭제 버튼 검증 후 동적 생성
+    if (post.creator.user_id === user_id) {
+        const postHeader = document.getElementById('post-header');
+        const postHeaderItem = document.createElement('div');
+        postHeaderItem.classList.add('post-header-item');
+
+        const updateButton = document.createElement('button');
+        updateButton.id = 'update-event-btn';
+        updateButton.textContent = '수정';
+
+        const deleteButton = document.createElement('button');
+        deleteButton.id = 'del-modal-btn';
+        deleteButton.textContent = '삭제';
+
+        postHeaderItem.appendChild(updateButton);
+        postHeaderItem.appendChild(deleteButton);
+
+        postHeader.appendChild(postHeaderItem);
+    }
 
     //  25글자 까지만 보이게
     if (post.title.length > TITLE_MAX_LENGTH) post.title = post.title.substring(0, TITLE_MAX_LENGTH);
@@ -59,7 +88,6 @@ async function insertData() {
         // TODO : api 서버 구현 후 update, delete 요청
         let buttonDiv = document.createElement('div');
         buttonDiv.classList.add('comment-item');
-
         let editButton = document.createElement('button');
         editButton.textContent = '수정';
 
@@ -90,9 +118,29 @@ async function insertData() {
         buttonDiv.appendChild(editButton);
         buttonDiv.appendChild(deleteButton);
     });
+
+    // 게시글 수정 삭제 event
+    if (post.creator.user_id === user_id) {
+        const updateBtn = document.getElementById('update-event-btn');
+
+        updateBtn.addEventListener('click', () => {
+            window.location.href = `http://localhost:3000/post/${post_id}/update`;
+        });
+
+        // 게시글 삭제 모달
+        const delModalBtn = document.querySelector('#del-modal-btn');
+        delModalBtn.addEventListener('click', () => openModal('#del-modal', '#overlay1'));
+
+        const delModalXBtn = document.querySelector('#del-x');
+        delModalXBtn.addEventListener('click', () => closeModal('#del-modal', '#overlay1'));
+        const delModalOBtn = document.querySelector('#del-o');
+        delModalOBtn.addEventListener('click', () => {
+            // TODO : api 서버 구현 후 delete 요청
+            closeModal('#del-modal', '#overlay1');
+        });
+    }
 }
 insertData();
-
 // 댓글 등록 버튼 활성화 제어
 const comment_textarea = document.getElementById('comment');
 const comment_btn = document.getElementById('comment-btn');
@@ -104,12 +152,6 @@ comment_textarea.addEventListener('input', (event) => {
     comment_btn.style.backgroundColor = '#7F6AEE';
 });
 
-const updateBtn = document.getElementById('update-event-btn');
-
-updateBtn.addEventListener('click', () => {
-    window.location.href = `http://localhost:3000/post/${post_id}/update`;
-});
-
 // floating menu
 userNav = document.getElementById('user-nav');
 profileBtn = document.getElementById('profile-btn');
@@ -119,16 +161,4 @@ profileBtn.addEventListener('click', () => {
     } else {
         userNav.style.display = 'flex';
     }
-});
-
-// 게시글 삭제 모달
-const delModalBtn = document.querySelector('#del-modal-btn');
-delModalBtn.addEventListener('click', () => openModal('#del-modal', '#overlay1'));
-
-const delModalXBtn = document.querySelector('#del-x');
-delModalXBtn.addEventListener('click', () => closeModal('#del-modal', '#overlay1'));
-const delModalOBtn = document.querySelector('#del-o');
-delModalOBtn.addEventListener('click', () => {
-    // TODO : api 서버 구현 후 delete 요청
-    closeModal('#del-modal', '#overlay1');
 });

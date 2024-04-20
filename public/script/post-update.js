@@ -12,6 +12,13 @@ profileBtn.addEventListener('click', () => {
     }
 });
 
+async function fetchUser() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+}
+fetchUser();
+
 // 뒤로 가기
 const backIcon = document.getElementById('back-icon');
 backIconClick(backIcon);
@@ -24,19 +31,18 @@ const updateHelper = document.getElementById('update-helper');
 const preview = document.getElementById('preview');
 const existImage = document.getElementById('exist-image');
 
-const posts = getPostList();
-posts.then((data) => {
-    let post = data.find((post) => post.post_id == post_id);
+async function insertData() {
+    const response = await getSinglePost(post_id);
+    const post = response.post;
     title.value = post.title;
     content.innerHTML = post.content;
-
     // 기존 파일 이미지 삽입
     preview.setAttribute('src', post.post_image);
-
     // 기존 파일명 삽입
     let splitSrc = post.post_image.split('/');
     existImage.innerHTML = splitSrc[splitSrc.length - 1];
-});
+}
+insertData();
 
 const fileInput = document.getElementById('img');
 

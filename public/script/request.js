@@ -65,3 +65,30 @@ async function getAllPost(page, limit) {
         console.log(error);
     }
 }
+async function getSinglePost(post_id) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) return (location.href = 'http://localhost:3000/login');
+        const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const postData = await response.json();
+        return postData;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getSingleUser() {
+    try {
+        const user_id = localStorage.getItem('user_id');
+        const response = await fetch(`${SERVER_URL}/users/${user_id}`);
+        const postData = await response.json();
+        return postData;
+    } catch (error) {
+        console.log(error);
+    }
+}

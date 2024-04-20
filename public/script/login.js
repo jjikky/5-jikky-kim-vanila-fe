@@ -37,10 +37,11 @@ async function clickLoginBtn(event) {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     const response = await login(email, password);
-    console.log(response);
     if (response.message === 'login success') {
         const token = response.token;
+        const user_id = response.user.user_id;
         localStorage.setItem('token', token);
+        localStorage.setItem('user_id', user_id);
         return (location.href = 'http://localhost:3000/post');
     }
     // 로그인 실패
