@@ -204,3 +204,22 @@ async function deleteComment(post_id, comment_id) {
         console.log(error);
     }
 }
+
+async function changePassword(password) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/users/password/change`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            method: 'PATCH',
+            body: JSON.stringify({ password }),
+        });
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}

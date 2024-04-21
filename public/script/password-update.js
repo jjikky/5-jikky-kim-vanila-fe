@@ -58,17 +58,31 @@ passwordCheck.addEventListener('change', (event) => {
 });
 
 // 토스트 메세지
-updateBtn.addEventListener('click', (event) => {
+updateBtn.addEventListener('click', clickChangePasswordBtn);
+
+async function clickChangePasswordBtn(event) {
     event.preventDefault();
+    let password = document.getElementById('password').value;
+    let passwordCheck = document.getElementById('password-check').value;
     toastMessage.innerHTML =
-        validatePassword(password.value) && validatePassword(passwordCheck.value)
+        validatePassword(password) && validatePassword(passwordCheck)
             ? '수정 완료'
             : '형식에 맞춰 다시<br> 입력해주세요.';
+
+    // 비밀번호 변경
+    const response = await changePassword(password);
+    console.log(response);
+    if (response.message === 'Same As The Original Password') {
+        toastMessage.innerHTML = '원래 비밀번호와 같습니다.';
+    }
+
+    // toast 출력
     toastMessage.classList.add('active');
+
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);
-});
+}
 
 // 뒤로 가기
 const backIcon = document.getElementById('back-icon');
