@@ -119,25 +119,31 @@ async function insertData() {
             buttonDiv.classList.add('comment-item');
             let editButton = document.createElement('button');
             editButton.textContent = '수정';
-            editButton.id = `${post.post_id}_edit_${comment.comment_id}`;
             // 댓글 수정 클릭시
             // 텍스트 입력 창에 기존 텍스트 내용이 보여지고, 댓글 등록 버튼이 댓글 수정 버튼으로 바뀜
             // 댓글 수정 할 시, 수정 버튼 누른 댓글 내용 변경 되고, 댓글 등록창 원상 복구
-            // editButton.addEventListener('click', () => {
-
+            // editButton.addEventListener('click', async() => {
+            //     // 수정할 값도
+            //     const response = await updateComment(comment.comment_id);
+            //     console.log(response);
+            //     closeModal('#del-comment-modal', '#overlay2');
+            //     location.reload();
             // });
 
             let deleteButton = document.createElement('button');
-            editButton.id = `${post.post_id}_delete_${comment.comment_id}`;
             deleteButton.textContent = '삭제';
             deleteButton.classList.add = 'del-comment-modal-btn';
-            deleteButton.addEventListener('click', () => openModal('#del-comment-modal', '#overlay2'));
-            let delCommentModalXBtn = document.querySelector('#del-comment-x');
-            let delCommentModalOBtn = document.querySelector('#del-comment-o');
-            delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
-            delCommentModalOBtn.addEventListener('click', () => {
-                // TODO : api 서버 구현 후 delete 요청
-                closeModal('#del-comment-modal', '#overlay2');
+            deleteButton.addEventListener('click', () => {
+                let delCommentModalXBtn = document.querySelector('#del-comment-x');
+                let delCommentModalOBtn = document.querySelector('#del-comment-o');
+                delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
+                openModal('#del-comment-modal', '#overlay2');
+                delCommentModalOBtn.addEventListener('click', async () => {
+                    const response = await deleteComment(post_id, comment.comment_id);
+                    console.log(response);
+                    closeModal('#del-comment-modal', '#overlay2');
+                    location.reload();
+                });
             });
 
             comments.appendChild(buttonDiv);

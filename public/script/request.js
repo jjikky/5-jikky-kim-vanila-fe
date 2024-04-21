@@ -171,3 +171,19 @@ async function crearteComment(post_id, comment) {
         console.log(error);
     }
 }
+
+async function deleteComment(post_id, comment_id) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment/${comment_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
