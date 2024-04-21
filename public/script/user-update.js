@@ -39,7 +39,6 @@ const nicknameHelper = document.getElementById('nickname-helper');
 nickname.addEventListener('change', (event) => {
     disableButton('update-btn');
     let input = event.target.value;
-    console.log(input);
     if (input !== '') activeButton('update-btn');
 });
 

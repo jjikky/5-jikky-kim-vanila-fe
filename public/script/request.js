@@ -31,7 +31,6 @@ async function isExistEmail(email) {
     try {
         const response = await fetch(`${SERVER_URL}/users/email/check?email=${email}`);
         const data = await response.json();
-        console.log(data.isExist);
         return data.isExist;
     } catch (error) {
         console.log(error);
@@ -41,7 +40,6 @@ async function isExistNickname(nickname) {
     try {
         const response = await fetch(`${SERVER_URL}/users/nickname/check?nickname=${nickname}`);
         const data = await response.json();
-        console.log(data.isExist);
         return data.isExist;
     } catch (error) {
         console.log(error);
@@ -51,8 +49,7 @@ async function isExistNickname(nickname) {
 // POST
 async function getAllPost(page, limit) {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) return (location.href = 'http://localhost:3000/login');
+        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`, {
             method: 'GET',
             headers: {
@@ -60,6 +57,10 @@ async function getAllPost(page, limit) {
             },
         });
         const data = await response.json();
+        if (data.message == 'Token Expired') {
+            alert('Token Expired');
+            return (location.href = 'http://localhost:3000/login');
+        }
         return data;
     } catch (error) {
         console.log(error);
@@ -67,8 +68,7 @@ async function getAllPost(page, limit) {
 }
 async function getSinglePost(post_id) {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) return (location.href = 'http://localhost:3000/login');
+        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
             method: 'GET',
             headers: {
@@ -95,14 +95,56 @@ async function getSingleUser() {
 
 async function createPost(formData) {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) return (location.href = 'http://localhost:3000/login');
+        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
             },
             body: formData,
+        });
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// token 있는지 체크
+function isTokenExist() {
+    const token = localStorage.getItem('token');
+    if (!token) return (location.href = 'http://localhost:3000/login');
+    return token;
+}
+
+async function updatePost(post_id, formData) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function deletePost(post_id) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
         const data = await response.json();
         return data;

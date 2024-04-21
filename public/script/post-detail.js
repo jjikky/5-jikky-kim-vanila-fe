@@ -43,6 +43,23 @@ async function insertData() {
         postHeaderItem.appendChild(deleteButton);
 
         postHeader.appendChild(postHeaderItem);
+
+        // 게시글 수정 삭제 event
+        updateButton.addEventListener('click', () => {
+            window.location.href = `http://localhost:3000/post/${post_id}/update`;
+        });
+
+        // 게시글 삭제 모달
+        deleteButton.addEventListener('click', () => openModal('#del-modal', '#overlay1'));
+
+        const delModalXBtn = document.querySelector('#del-x');
+        delModalXBtn.addEventListener('click', () => closeModal('#del-modal', '#overlay1'));
+        const delModalOBtn = document.querySelector('#del-o');
+        delModalOBtn.addEventListener('click', async () => {
+            await deletePost(post_id);
+            closeModal('#del-modal', '#overlay1');
+            return (location.href = 'http://localhost:3000/post');
+        });
     }
 
     //  25글자 까지만 보이게
@@ -123,27 +140,6 @@ async function insertData() {
             buttonDiv.appendChild(deleteButton);
         }
     });
-
-    // 게시글 수정 삭제 event
-    if (post.creator.user_id === user_id) {
-        const updateBtn = document.getElementById('update-event-btn');
-
-        updateBtn.addEventListener('click', () => {
-            window.location.href = `http://localhost:3000/post/${post_id}/update`;
-        });
-
-        // 게시글 삭제 모달
-        const delModalBtn = document.querySelector('#del-modal-btn');
-        delModalBtn.addEventListener('click', () => openModal('#del-modal', '#overlay1'));
-
-        const delModalXBtn = document.querySelector('#del-x');
-        delModalXBtn.addEventListener('click', () => closeModal('#del-modal', '#overlay1'));
-        const delModalOBtn = document.querySelector('#del-o');
-        delModalOBtn.addEventListener('click', () => {
-            // TODO : api 서버 구현 후 delete 요청
-            closeModal('#del-modal', '#overlay1');
-        });
-    }
 }
 insertData();
 // 댓글 등록 버튼 활성화 제어

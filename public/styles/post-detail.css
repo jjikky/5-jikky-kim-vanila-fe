@@ -65,7 +65,7 @@ section {
 }
 
 #post-image {
-    /* width: var(--main-width); */
+    width: calc(var(--main-width) - 48px);
     height: 306px;
     background-color: var(--color-primary);
 }

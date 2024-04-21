@@ -39,17 +39,23 @@
         <section>
             <div id="update">
                 <div id="page-title">게시글 수정</div>
-                <form>
+                <form id="update-form">
                     <label for="title"
                         ><div class="label-text">제목*</div>
                         <div class="line"></div>
-                        <input id="title" type="text" maxlength="26" placeholder="제목을 입력해주세요. (최대 26글자)" />
+                        <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            maxlength="26"
+                            placeholder="제목을 입력해주세요. (최대 26글자)"
+                        />
                         <div class="line"></div>
                     </label>
                     <label for="content"
                         ><div class="label-text">내용*</div>
                         <div class="line"></div>
-                        <textarea id="content" type="text"></textarea>
+                        <textarea id="content" name="content" type="text"></textarea>
                         <div class="line"></div>
                     </label>
                     <div id="update-helper" class="helper-text"></div>
@@ -62,9 +68,9 @@
                         <img id="preview" />
                     </div>
 
-                    <input id="img" type="file" accept="image/*" />
+                    <input id="img" name="post_image" type="file" accept="image/*" />
                     <div id="btn-wrap">
-                        <button id="update-btn" type="submit">수정하기</button>
+                        <button id="update-btn" class="active" type="submit">수정하기</button>
                     </div>
                 </form>
             </div>

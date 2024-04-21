@@ -1,21 +1,10 @@
-async function fetchUser() {
-    const response = await getSingleUser();
-    user = response.user;
-    insertHeaderAvatar(user.avatar);
-}
-fetchUser();
+let userNav = document.getElementById('user-nav');
+let profileBtn = document.getElementById('profile-btn');
 
-userNav = document.getElementById('user-nav');
-profileBtn = document.getElementById('profile-btn');
-profileBtn.addEventListener('click', () => {
-    if (userNav.style.display == 'flex') {
-        userNav.style.display = 'none';
-    } else {
-        userNav.style.display = 'flex';
-    }
-});
+// TODO : 변수 중복 제거, inputs 구조분해할당해서 사용
 const title = document.getElementById('title');
 const content = document.getElementById('content');
+
 const uploadHelper = document.getElementById('upload-helper');
 
 const uploadBtn = document.getElementById('upload-btn');
@@ -24,28 +13,29 @@ const uploadForm = document.getElementById('upload-form');
 // 제목 내용 입력에 따른 버튼 활성화
 const inputs = uploadForm.querySelectorAll('input[name="title"], textarea[name="content"], input[name="post_image"]');
 
+const preview = document.getElementById('preview');
+const fileInput = document.getElementById('img');
+
+async function fetchUser() {
+    const response = await getSingleUser();
+    user = response.user;
+    insertHeaderAvatar(user.avatar);
+}
+
+fetchUser();
 inputs.forEach((input) => {
     input.addEventListener('input', () => {
         checkInputs(inputs, 'upload-btn');
     });
 });
 
-uploadBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (uploadForm.title.value.length > 0 && uploadForm.content.value.length) {
-        const formData = new FormData(uploadForm);
-
-        const response = createPost(formData);
-        console.log(response);
-        location.href = 'http://localhost:3000/post';
-        return;
+profileBtn.addEventListener('click', () => {
+    if (userNav.style.display == 'flex') {
+        userNav.style.display = 'none';
+    } else {
+        userNav.style.display = 'flex';
     }
-    const helperText = document.getElementsByClassName('helper-text');
-    helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
 });
-
-const preview = document.getElementById('preview');
-const fileInput = document.getElementById('img');
 
 // 이미지 선택하면 profile layout에 보여주기
 fileInput.addEventListener('change', function (event) {
@@ -55,7 +45,6 @@ fileInput.addEventListener('change', function (event) {
             document.getElementById('preview').src = event.target.result;
         };
         reader.readAsDataURL(event.target.files[0]);
-        // document.getElementById('image-input').style.display = 'none';
         document.getElementById('preview').style.display = 'block';
 
         // preview에 input click 연결
@@ -81,4 +70,17 @@ content.addEventListener('input', (event) => {
         return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
     }
     uploadHelper.innerHTML = '';
+});
+
+uploadBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    if (uploadForm.title.value.length && uploadForm.content.value.length && uploadForm.post_image.value.length) {
+        const formData = new FormData(uploadForm);
+
+        const response = await createPost(formData);
+        console.log(response);
+        return (location.href = 'http://localhost:3000/post');
+    }
+    const helperText = document.getElementsByClassName('helper-text');
+    helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
 });
