@@ -127,6 +127,7 @@ async function updatePost(post_id, formData) {
             method: 'PATCH',
             headers: {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
             body: formData,
         });
@@ -145,6 +146,24 @@ async function deletePost(post_id) {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function crearteComment(post_id, comment) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify({ comment }),
         });
         const data = await response.json();
         return data;
