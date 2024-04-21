@@ -127,7 +127,6 @@ async function updatePost(post_id, formData) {
             method: 'PATCH',
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
             },
             body: formData,
         });
