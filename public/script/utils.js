@@ -51,6 +51,24 @@ function disableButton(className) {
     button.classList.remove('active');
 }
 
+// 입력 필드가 모두 채워졌는지 확인하는 함수
+function checkInputs(inputs, buttonId) {
+    let isValid = true;
+
+    inputs.forEach((v) => {
+        if (!v.value) {
+            isValid = false;
+            return;
+        }
+    });
+    // 모든 입력 필드가 채워져 있으면 submit 버튼 활성화
+    if (isValid) {
+        activeButton(buttonId);
+    } else {
+        disableButton(buttonId);
+    }
+}
+
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');

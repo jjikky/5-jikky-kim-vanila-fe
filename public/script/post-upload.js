@@ -22,15 +22,12 @@ const uploadBtn = document.getElementById('upload-btn');
 const uploadForm = document.getElementById('upload-form');
 
 // 제목 내용 입력에 따른 버튼 활성화
-uploadForm.title.addEventListener('input', (event) => {
-    if (event.target.value.length > 0 && uploadForm.content.value.length > 0)
-        return (uploadBtn.style.backgroundColor = '#7F6AEE');
-    uploadBtn.style.backgroundColor = '#ACA0EB';
-});
-uploadForm.content.addEventListener('input', (event) => {
-    if (event.target.value.length > 0 && uploadForm.title.value.length > 0)
-        return (uploadBtn.style.backgroundColor = '#7F6AEE');
-    uploadBtn.style.backgroundColor = '#ACA0EB';
+const inputs = uploadForm.querySelectorAll('input[name="title"], textarea[name="content"], input[name="post_image"]');
+
+inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+        checkInputs(inputs, 'upload-btn');
+    });
 });
 
 uploadBtn.addEventListener('click', (event) => {
@@ -71,21 +68,17 @@ fileInput.addEventListener('change', function (event) {
 });
 
 title.addEventListener('input', (event) => {
-    disableButton('upload-btn');
     let input = event.target.value;
     if (input === '' || content.value === '') {
         return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
     }
     uploadHelper.innerHTML = '';
-    activeButton('upload-btn');
 });
 
 content.addEventListener('input', (event) => {
-    disableButton('upload-btn');
     let input = event.target.value;
     if (input === '' || title.value === '') {
         return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
     }
     uploadHelper.innerHTML = '';
-    activeButton('upload-btn');
 });
