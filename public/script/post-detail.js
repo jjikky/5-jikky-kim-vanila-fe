@@ -2,6 +2,10 @@
 const post_id = window.location.pathname.split('/')[2];
 const user_id = localStorage.getItem('user_id') * 1;
 
+// 댓글 등록
+const comment_textarea = document.getElementById('comment');
+const comment_btn = document.getElementById('comment-btn');
+
 async function fetchUser() {
     const response = await getSingleUser();
     user = response.user;
@@ -112,23 +116,25 @@ async function insertData() {
         commentItemDiv.appendChild(commentContentDiv);
         commentBoxDiv.appendChild(commentContentDiv);
 
-        // TODO : api 서버 구현 후 update, delete 요청
-
         if (comment.creator.user_id === user_id) {
             let buttonDiv = document.createElement('div');
             buttonDiv.classList.add('comment-item');
             let editButton = document.createElement('button');
             editButton.textContent = '수정';
-            // 댓글 수정 클릭시
-            // 텍스트 입력 창에 기존 텍스트 내용이 보여지고, 댓글 등록 버튼이 댓글 수정 버튼으로 바뀜
-            // 댓글 수정 할 시, 수정 버튼 누른 댓글 내용 변경 되고, 댓글 등록창 원상 복구
-            // editButton.addEventListener('click', async() => {
-            //     // 수정할 값도
-            //     const response = await updateComment(comment.comment_id);
-            //     console.log(response);
-            //     closeModal('#del-comment-modal', '#overlay2');
-            //     location.reload();
-            // });
+            editButton.addEventListener('click', async () => {
+                comment_textarea.value = comment.content;
+                comment_btn.innerHTML = '댓글 수정';
+                activeButton('comment-btn');
+                comment_btn.removeEventListener('click', commentButtonClickHandler);
+                comment_btn.addEventListener('click', async (event) => {
+                    event.preventDefault();
+                    let content = comment_textarea.value;
+                    const response = await updateComment(post_id, comment.comment_id, content);
+                    console.log(response);
+                    closeModal('#del-comment-modal', '#overlay2');
+                    location.reload();
+                });
+            });
 
             let deleteButton = document.createElement('button');
             deleteButton.textContent = '삭제';
@@ -138,6 +144,7 @@ async function insertData() {
                 let delCommentModalOBtn = document.querySelector('#del-comment-o');
                 delCommentModalXBtn.addEventListener('click', () => closeModal('#del-comment-modal', '#overlay2'));
                 openModal('#del-comment-modal', '#overlay2');
+
                 delCommentModalOBtn.addEventListener('click', async () => {
                     const response = await deleteComment(post_id, comment.comment_id);
                     console.log(response);
@@ -154,23 +161,23 @@ async function insertData() {
 }
 insertData();
 // 댓글 등록 버튼 활성화 제어
-const comment_textarea = document.getElementById('comment');
-const comment_btn = document.getElementById('comment-btn');
 comment_textarea.addEventListener('input', (event) => {
     let input_comment = event.target.value;
-    if (input_comment === '') {
-        return (comment_btn.style.backgroundColor = '#ACA0EB');
+    if (input_comment !== '') {
+        return activeButton('comment-btn');
     }
-    comment_btn.style.backgroundColor = '#7F6AEE';
+    disableButton('comment-btn');
 });
 
-comment_btn.addEventListener('click', async (event) => {
+async function commentButtonClickHandler(event) {
     event.preventDefault();
     let comment = comment_textarea.value;
     const response = await crearteComment(post_id, comment);
     console.log(response);
     location.reload();
-});
+}
+
+comment_btn.addEventListener('click', commentButtonClickHandler);
 
 // floating menu
 userNav = document.getElementById('user-nav');
