@@ -223,3 +223,20 @@ async function changePassword(password) {
         console.log(error);
     }
 }
+
+async function updateUser(formData) {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            method: 'PATCH',
+            body: formData,
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}

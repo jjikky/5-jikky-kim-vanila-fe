@@ -1,14 +1,34 @@
+const userNav = document.getElementById('user-nav');
+const profileBtn = document.getElementById('profile-btn');
+
+const nickname = document.getElementById('nickname');
+const nicknameHelper = document.getElementById('nickname-helper');
+
+const fileInput = document.getElementById('profile');
+
+const backIcon = document.getElementById('back-icon');
+
+const updateForm = document.getElementById('update-form');
+const email = document.getElementById('email');
+const updateBtn = document.getElementById('update-btn');
+const toastMessage = document.getElementById('toast-message');
+
 async function fetchUserData() {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
     insertFormAvatar(user.avatar);
+    insertUserData(user);
 }
+
+function insertUserData(user) {
+    email.innerHTML = user.email;
+    nickname.value = user.nickname;
+}
+
 fetchUserData();
 
 // user menu
-userNav = document.getElementById('user-nav');
-profileBtn = document.getElementById('profile-btn');
 profileBtn.addEventListener('click', () => {
     if (userNav.style.display == 'flex') {
         userNav.style.display = 'none';
@@ -18,8 +38,9 @@ profileBtn.addEventListener('click', () => {
 });
 
 // 뒤로 가기
-const backIcon = document.getElementById('back-icon');
 backIconClick(backIcon);
+
+activeButton('update-btn');
 
 // 회원탈퇴 modal
 const wdModalBtn = document.querySelector('#user-wd-btn');
@@ -34,16 +55,13 @@ wdModalOBtn.addEventListener('click', () => {
     closeModal('#wd-modal', '#overlay');
 });
 
-const nickname = document.getElementById('nickname');
-const nicknameHelper = document.getElementById('nickname-helper');
-nickname.addEventListener('change', (event) => {
+nickname.addEventListener('input', (event) => {
     disableButton('update-btn');
     let input = event.target.value;
     if (input !== '') activeButton('update-btn');
 });
 
 // 프로필 사진 변경
-const fileInput = document.getElementById('profile');
 fileInput.addEventListener('change', function (event) {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
@@ -65,8 +83,6 @@ fileInput.addEventListener('change', function (event) {
     }
 });
 
-const updateBtn = document.getElementById('update-btn');
-const toastMessage = document.getElementById('toast-message');
 updateBtn.addEventListener('click', async (event) => {
     event.preventDefault();
     let input = nickname.value;
@@ -82,15 +98,17 @@ updateBtn.addEventListener('click', async (event) => {
     if (await isExistNickname(input)) {
         return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
     }
+
+    if (updateForm.nickname.value.length) {
+        const formData = new FormData(updateForm);
+        // email추가
+        formData.append('email', email.innerHTML);
+        const response = await updateUser(formData);
+        console.log(response);
+    }
+    nicknameHelper.innerHTML = '';
     toastMessage.classList.add('active');
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);
-    return (nicknameHelper.innerHTML = '');
-});
-
-finishBtn = document.getElementById('finish-btn');
-finishBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    location.href = 'http://localhost:3000/post';
 });

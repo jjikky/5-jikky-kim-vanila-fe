@@ -38,7 +38,7 @@
         <section>
             <div id="update-text">회원정보수정</div>
             <div id="update-box">
-                <form>
+                <form id="update-form">
                     <div class="update-label">프로필 사진*</div>
 
                     <div class="image-box">
@@ -51,20 +51,20 @@
                     <div class="image-box">
                         <img id="preview" />
                     </div>
-                    <input type="file" id="profile" />
+                    <input type="file" name="avatar" id="profile" />
 
                     <div class="update-label">이메일*</div>
-                    <div class="email">kok5417@skuniv.ac.kr</div>
+                    <div class="email" id="email"></div>
 
                     <label for="nickname">
                         <div class="update-label">닉네임*</div>
-                        <input id="nickname" type="text" placeholder="닉네임을 입력하세요." value="지키" />
+                        <input id="nickname" name="nickname" type="text" placeholder="닉네임을 입력하세요." />
                         <div id="nickname-helper" class="helper-text"></div>
                     </label>
                     <button id="update-btn" type="submit">수정하기</button>
                     <div id="toast-message">수정 완료</div>
                     <div id="user-wd-btn" href="#">회원 탈퇴</div>
-                    <div id="finish"><button id="finish-btn">수정완료</button></div>
+                    <div id="toast-message">수정 완료</div>
                 </form>
 
                 <div id="overlay">
