@@ -68,18 +68,6 @@ email.addEventListener('input', () => {
     emailHelper.innerHTML = '*이메일을 입력해주세요.';
 });
 
-// NOTE : 서버에서 처리
-// async function isExistEmail(email) {
-//     const response = await fetch('http://localhost:3000/data/users.json');
-//     const userData = await response.json();
-
-//     let findUser = userData.find((user) => user.email === email);
-//     if (findUser === undefined) {
-//         return false;
-//     }
-//     return true;
-// }
-
 password.addEventListener('change', (event) => {
     let input = event.target.value;
     isComplete.password = 0;
@@ -148,9 +136,10 @@ function isButtonActive() {
     let sumIsComplete = Object.values(isComplete).reduce((a, b) => a + b);
     if (sumIsComplete == 5) {
         activeButton('register-button');
-        registerButton.addEventListener('click', () => {
+        registerButton.addEventListener('click', async () => {
             const formData = new FormData(registerForm);
-            register(formData);
+            const response = await register(formData);
+            console.log(response);
             location.href = 'http://localhost:3000/login';
         });
         return;
