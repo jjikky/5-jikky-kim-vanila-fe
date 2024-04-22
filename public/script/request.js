@@ -240,3 +240,19 @@ async function updateUser(formData) {
         console.log(error);
     }
 }
+
+async function deleteUser() {
+    try {
+        const token = isTokenExist();
+        const response = await fetch(`${SERVER_URL}/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}

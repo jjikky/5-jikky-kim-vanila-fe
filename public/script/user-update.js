@@ -50,8 +50,12 @@ wdModalBtn.addEventListener('click', () => openModal('#wd-modal', '#overlay'));
 const wdModalXBtn = document.querySelector('#wd-x');
 wdModalXBtn.addEventListener('click', () => closeModal('#wd-modal', '#overlay'));
 const wdModalOBtn = document.querySelector('#wd-o');
-wdModalOBtn.addEventListener('click', () => {
-    // TODO : api 서버 구현 후 탈퇴 요청
+wdModalOBtn.addEventListener('click', async () => {
+    const response = await deleteUser();
+    console.log(response);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    location.href = 'http://localhost:3000/login';
     closeModal('#wd-modal', '#overlay');
 });
 
