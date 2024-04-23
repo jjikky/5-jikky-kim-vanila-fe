@@ -1,72 +1,62 @@
 const userNav = document.getElementById('user-nav');
 const profileBtn = document.getElementById('profile-btn');
+const backIcon = document.getElementById('back-icon');
+const toastMessage = document.getElementById('toast-message');
 
 const nickname = document.getElementById('nickname');
 const nicknameHelper = document.getElementById('nickname-helper');
 
-const fileInput = document.getElementById('profile');
-
-const backIcon = document.getElementById('back-icon');
-
 const updateForm = document.getElementById('update-form');
+const fileInput = document.getElementById('profile');
 const email = document.getElementById('email');
 const updateBtn = document.getElementById('update-btn');
-const toastMessage = document.getElementById('toast-message');
 
-async function fetchUserData() {
+// 회원탈퇴 modal
+const wdModalBtn = document.querySelector('#user-wd-btn');
+const wdModalXBtn = document.querySelector('#wd-x');
+const wdModalOBtn = document.querySelector('#wd-o');
+wdModalBtn.style.cursor = 'pointer';
+
+const fetchUserData = async () => {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
     insertFormAvatar(user.avatar);
     insertUserData(user);
-}
+};
 
-function insertUserData(user) {
+const insertUserData = (user) => {
     email.innerHTML = user.email;
     nickname.value = user.nickname;
-}
-
-fetchUserData();
+};
 
 // user menu
-profileBtn.addEventListener('click', () => {
+
+const profileBtnClickHandler = () => {
     if (userNav.style.display == 'flex') {
         userNav.style.display = 'none';
     } else {
         userNav.style.display = 'flex';
     }
-});
+};
 
-// 뒤로 가기
-backIconClick(backIcon);
-
-activeButton('update-btn');
-
-// 회원탈퇴 modal
-const wdModalBtn = document.querySelector('#user-wd-btn');
-wdModalBtn.style.cursor = 'pointer';
-wdModalBtn.addEventListener('click', () => openModal('#wd-modal', '#overlay'));
-
-const wdModalXBtn = document.querySelector('#wd-x');
-wdModalXBtn.addEventListener('click', () => closeModal('#wd-modal', '#overlay'));
-const wdModalOBtn = document.querySelector('#wd-o');
-wdModalOBtn.addEventListener('click', async () => {
+const deleteUserHandler = async () => {
     const response = await deleteUser();
     console.log(response);
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');
     location.href = 'http://localhost:3000/login';
     closeModal('#wd-modal', '#overlay');
-});
+};
 
-nickname.addEventListener('input', (event) => {
+const nicknameInputHandler = (event) => {
     disableButton('update-btn');
     let input = event.target.value;
     if (input !== '') activeButton('update-btn');
-});
+};
 
 // 프로필 사진 변경
-fileInput.addEventListener('change', function (event) {
+const fileInputHandler = (event) => {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
         reader.onload = function (event) {
@@ -85,9 +75,9 @@ fileInput.addEventListener('change', function (event) {
         isComplete.profile = 0;
         isButtonActive();
     }
-});
+};
 
-updateBtn.addEventListener('click', async (event) => {
+const updateClickHandler = async (event) => {
     event.preventDefault();
     let input = nickname.value;
     if (input === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
@@ -109,10 +99,24 @@ updateBtn.addEventListener('click', async (event) => {
         formData.append('email', email.innerHTML);
         const response = await updateUser(formData);
         console.log(response);
+        // 헤더 아바타 재설정
+        await fetchUserData();
     }
     nicknameHelper.innerHTML = '';
     toastMessage.classList.add('active');
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);
-});
+};
+
+profileBtn.addEventListener('click', profileBtnClickHandler);
+wdModalBtn.addEventListener('click', () => openModal('#wd-modal', '#overlay'));
+wdModalXBtn.addEventListener('click', () => closeModal('#wd-modal', '#overlay'));
+wdModalOBtn.addEventListener('click', deleteUserHandler);
+nickname.addEventListener('input', nicknameInputHandler);
+fileInput.addEventListener('change', fileInputHandler);
+updateBtn.addEventListener('click', updateClickHandler);
+
+backIconClick(backIcon);
+fetchUserData();
+activeButton('update-btn');

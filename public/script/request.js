@@ -1,7 +1,7 @@
 const SERVER_URL = 'http://localhost:5000';
 
 // USER
-async function register(formData) {
+const register = async (formData) => {
     try {
         const response = await fetch(`${SERVER_URL}/users/register`, {
             method: 'POST',
@@ -12,9 +12,9 @@ async function register(formData) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function login(email, password) {
+const login = async (email, password) => {
     try {
         const response = await fetch(`${SERVER_URL}/users/login`, {
             headers: { 'Content-Type': 'application/json' },
@@ -25,9 +25,9 @@ async function login(email, password) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function isExistEmail(email) {
+const isExistEmail = async (email) => {
     try {
         const response = await fetch(`${SERVER_URL}/users/email/check?email=${email}`);
         const data = await response.json();
@@ -35,8 +35,9 @@ async function isExistEmail(email) {
     } catch (error) {
         console.log(error);
     }
-}
-async function isExistNickname(nickname) {
+};
+
+const isExistNickname = async (nickname) => {
     try {
         const response = await fetch(`${SERVER_URL}/users/nickname/check?nickname=${nickname}`);
         const data = await response.json();
@@ -44,7 +45,7 @@ async function isExistNickname(nickname) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 // POST
 async function getAllPost(page, limit) {
@@ -82,7 +83,7 @@ async function getSinglePost(post_id) {
     }
 }
 
-async function getSingleUser() {
+const getSingleUser = async () => {
     try {
         const user_id = localStorage.getItem('user_id');
         const response = await fetch(`${SERVER_URL}/users/${user_id}`);
@@ -91,7 +92,7 @@ async function getSingleUser() {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 async function createPost(formData) {
     try {
@@ -114,11 +115,11 @@ async function createPost(formData) {
 }
 
 // token 있는지 체크
-function isTokenExist() {
+const isTokenExist = () => {
     const token = localStorage.getItem('token');
     if (!token) return (location.href = 'http://localhost:3000/login');
     return token;
-}
+};
 
 async function updatePost(post_id, formData) {
     try {
@@ -205,7 +206,7 @@ async function deleteComment(post_id, comment_id) {
     }
 }
 
-async function changePassword(password) {
+const changePassword = async (password) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users/password/change`, {
@@ -222,9 +223,9 @@ async function changePassword(password) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function updateUser(formData) {
+const updateUser = async (formData) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users`, {
@@ -239,9 +240,9 @@ async function updateUser(formData) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function deleteUser() {
+const deleteUser = async () => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users`, {
@@ -255,4 +256,4 @@ async function deleteUser() {
     } catch (error) {
         console.log(error);
     }
-}
+};
