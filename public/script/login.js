@@ -39,7 +39,7 @@ async function clickLoginBtn(event) {
     const response = await login(email, password);
     if (response.message === 'login success') {
         const token = response.token;
-        const user_id = response.user.user_id;
+        const user_id = response.user_id;
         localStorage.setItem('token', token);
         localStorage.setItem('user_id', user_id);
         return (location.href = 'http://localhost:3000/post');
