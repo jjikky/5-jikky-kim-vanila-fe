@@ -39,22 +39,15 @@ const fileInputHandler = (event) => {
     } else {
         document.getElementById('preview').src = '';
     }
+
+    uploadInputHandler();
 };
 
-const titleInputHandler = (event) => {
-    let input = event.target.value;
-    if (input === '' || content.value === '') {
-        return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
+const uploadInputHandler = () => {
+    if (uploadForm.title.value.length && uploadForm.content.value.length && uploadForm.post_image.value.length) {
+        return (uploadHelper.innerHTML = '');
     }
-    uploadHelper.innerHTML = '';
-};
-
-const contentInputHandler = (event) => {
-    let input = event.target.value;
-    if (input === '' || title.value === '') {
-        return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
-    }
-    uploadHelper.innerHTML = '';
+    uploadHelper.innerHTML = '*제목, 내용, 이미지을 모두 작성해주세요';
 };
 
 const uploadBtnClickHandler = async (event) => {
@@ -67,7 +60,7 @@ const uploadBtnClickHandler = async (event) => {
         return (location.href = 'http://localhost:3000/post');
     }
     const helperText = document.getElementsByClassName('helper-text');
-    helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
+    helperText[0].innerHTML = '*제목, 내용, 이미지을 모두 작성해주세요';
 };
 
 inputs.forEach((input) => {
@@ -75,8 +68,8 @@ inputs.forEach((input) => {
 });
 
 fileInput.addEventListener('change', fileInputHandler);
-title.addEventListener('input', titleInputHandler);
-content.addEventListener('input', contentInputHandler);
+title.addEventListener('input', uploadInputHandler);
+content.addEventListener('input', uploadInputHandler);
 uploadBtn.addEventListener('click', uploadBtnClickHandler);
 
 fetchUser();
