@@ -30,16 +30,6 @@ const insertUserData = (user) => {
     nickname.value = user.nickname;
 };
 
-// user menu
-
-const profileBtnClickHandler = () => {
-    if (userNav.style.display == 'flex') {
-        userNav.style.display = 'none';
-    } else {
-        userNav.style.display = 'flex';
-    }
-};
-
 const deleteUserHandler = async () => {
     const response = await deleteUser();
     console.log(response);
@@ -109,7 +99,6 @@ const updateClickHandler = async (event) => {
     }, 1000);
 };
 
-profileBtn.addEventListener('click', profileBtnClickHandler);
 wdModalBtn.addEventListener('click', () => openModal('#wd-modal', '#overlay'));
 wdModalXBtn.addEventListener('click', () => closeModal('#wd-modal', '#overlay'));
 wdModalOBtn.addEventListener('click', deleteUserHandler);

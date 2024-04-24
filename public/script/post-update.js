@@ -91,7 +91,6 @@ inputs.forEach((input, i) => {
     input.addEventListener('input', () => checkInputs(inputs, 'update-btn'));
 });
 
-profileBtn.addEventListener('click', profileBtnClickHandler);
 fileInput.addEventListener('change', filleInputHandler);
 title.addEventListener('input', titleInputHandler);
 content.addEventListener('input', contentInputHandler);

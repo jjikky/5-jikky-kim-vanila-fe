@@ -196,6 +196,5 @@ const editCommentButtonClickHandler = async (comment) => {
 
 comment_textarea.addEventListener('input', commentInputHandler);
 comment_btn.addEventListener('click', commentButtonClickHandler);
-profileBtn.addEventListener('click', profileBtnClickHandler);
 fetchUser();
 insertData();

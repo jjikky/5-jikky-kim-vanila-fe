@@ -74,7 +74,6 @@ inputs.forEach((input) => {
     input.addEventListener('input', () => checkInputs(inputs, 'upload-btn'));
 });
 
-profileBtn.addEventListener('click', profileBtnClickHandler);
 fileInput.addEventListener('change', fileInputHandler);
 title.addEventListener('input', titleInputHandler);
 content.addEventListener('input', contentInputHandler);
