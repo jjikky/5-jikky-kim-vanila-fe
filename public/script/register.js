@@ -44,6 +44,8 @@ const fileInputHandler = async (event) => {
             fileInput.click();
         });
     } else {
+        document.getElementById('image-input').style.display = 'block';
+        document.getElementById('preview').style.display = 'none';
         document.getElementById('preview').src = '';
         isComplete.profile = 0;
         isButtonActive();
