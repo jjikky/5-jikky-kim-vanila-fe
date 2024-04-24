@@ -16,29 +16,14 @@ const inputs = uploadForm.querySelectorAll('input[name="title"], textarea[name="
 const preview = document.getElementById('preview');
 const fileInput = document.getElementById('img');
 
-async function fetchUser() {
+const fetchUser = async () => {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
-}
-
-fetchUser();
-inputs.forEach((input) => {
-    input.addEventListener('input', () => {
-        checkInputs(inputs, 'upload-btn');
-    });
-});
-
-profileBtn.addEventListener('click', () => {
-    if (userNav.style.display == 'flex') {
-        userNav.style.display = 'none';
-    } else {
-        userNav.style.display = 'flex';
-    }
-});
+};
 
 // 이미지 선택하면 profile layout에 보여주기
-fileInput.addEventListener('change', function (event) {
+const fileInputHandler = (event) => {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
         reader.onload = function (event) {
@@ -54,25 +39,25 @@ fileInput.addEventListener('change', function (event) {
     } else {
         document.getElementById('preview').src = '';
     }
-});
+};
 
-title.addEventListener('input', (event) => {
+const titleInputHandler = (event) => {
     let input = event.target.value;
     if (input === '' || content.value === '') {
         return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
     }
     uploadHelper.innerHTML = '';
-});
+};
 
-content.addEventListener('input', (event) => {
+const contentInputHandler = (event) => {
     let input = event.target.value;
     if (input === '' || title.value === '') {
         return (uploadHelper.innerHTML = '제목과 내용을 모두 입력해주세요.');
     }
     uploadHelper.innerHTML = '';
-});
+};
 
-uploadBtn.addEventListener('click', async (event) => {
+const uploadBtnClickHandler = async (event) => {
     event.preventDefault();
     if (uploadForm.title.value.length && uploadForm.content.value.length && uploadForm.post_image.value.length) {
         const formData = new FormData(uploadForm);
@@ -83,4 +68,16 @@ uploadBtn.addEventListener('click', async (event) => {
     }
     const helperText = document.getElementsByClassName('helper-text');
     helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
+};
+
+inputs.forEach((input) => {
+    input.addEventListener('input', () => checkInputs(inputs, 'upload-btn'));
 });
+
+profileBtn.addEventListener('click', profileBtnClickHandler);
+fileInput.addEventListener('change', fileInputHandler);
+title.addEventListener('input', titleInputHandler);
+content.addEventListener('input', contentInputHandler);
+uploadBtn.addEventListener('click', uploadBtnClickHandler);
+
+fetchUser();
