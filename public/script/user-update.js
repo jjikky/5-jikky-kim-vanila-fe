@@ -35,11 +35,13 @@ const deleteUserHandler = async () => {
     console.log(response);
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');
-    location.href = 'http://localhost:3000/login';
     closeModal('#wd-modal', '#overlay');
+    if (isTokenExpired(response.message)) return (location.href = 'http://localhost:3000/login');
+    location.href = 'http://localhost:3000/login';
 };
 
 const nicknameInputHandler = (event) => {
+    nicknameHelper.innerHTML = '';
     disableButton('update-btn');
     let input = event.target.value;
     if (input !== '') activeButton('update-btn');

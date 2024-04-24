@@ -49,7 +49,7 @@ const insertData = async () => {
         const deletePostHandler = async () => {
             await deletePost(post_id);
             closeModal('#del-modal', '#overlay1');
-            return (location.href = 'http://localhost:3000/post');
+            location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : '/post'}`;
         };
 
         postHeaderItem.classList.add('post-header-item');
@@ -152,10 +152,9 @@ const commentInputHandler = (event) => {
 const commentButtonClickHandler = async (event) => {
     event.preventDefault();
     let comment = comment_textarea.value;
-    console.log(post_id, comment);
-    const response = await crearteComment(post_id, comment);
+    const response = await createComment(post_id, comment);
     console.log(response);
-    location.reload();
+    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
 };
 
 // 댓글 삭제 확인 버튼 클릭 : 댓글 삭제
@@ -163,7 +162,8 @@ const deleteCommentHandler = async (comment) => {
     const response = await deleteComment(post_id, comment.comment_id);
     console.log(response);
     closeModal('#del-comment-modal', '#overlay2');
-    location.reload();
+    isTokenExpired(response.message);
+    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
 };
 
 // 댓글 삭제 버튼 클릭 : modal 출력
@@ -181,7 +181,8 @@ const editCommentHandler = async (comment, event) => {
     const response = await updateComment(post_id, comment.comment_id, content);
     console.log(response);
     closeModal('#del-comment-modal', '#overlay2');
-    location.reload();
+    isTokenExpired(response.message);
+    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
 };
 
 // 댓글 수정 버튼 클릭

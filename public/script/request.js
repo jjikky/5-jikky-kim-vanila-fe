@@ -48,7 +48,7 @@ const isExistNickname = async (nickname) => {
 };
 
 // POST
-async function getAllPost(page, limit) {
+const getAllPost = async (page, limit) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`, {
@@ -58,16 +58,14 @@ async function getAllPost(page, limit) {
             },
         });
         const data = await response.json();
-        if (data.message == 'Token Expired') {
-            alert('Token Expired');
-            return (location.href = 'http://localhost:3000/login');
-        }
+        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
         return data;
     } catch (error) {
         console.log(error);
     }
-}
-async function getSinglePost(post_id) {
+};
+
+const getSinglePost = async (post_id) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
@@ -77,11 +75,12 @@ async function getSinglePost(post_id) {
             },
         });
         const data = await response.json();
+        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 const getSingleUser = async () => {
     try {
@@ -94,7 +93,7 @@ const getSingleUser = async () => {
     }
 };
 
-async function createPost(formData) {
+const createPost = async (formData) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts`, {
@@ -104,15 +103,12 @@ async function createPost(formData) {
             },
             body: formData,
         });
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
         const data = await response.json();
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 // token 있는지 체크
 const isTokenExist = () => {
@@ -121,7 +117,16 @@ const isTokenExist = () => {
     return token;
 };
 
-async function updatePost(post_id, formData) {
+// Token 만료 체크
+const isTokenExpired = (message) => {
+    if (message == 'Token Expired') {
+        alert(`${message} : Please Login Again.`);
+        return true;
+    }
+    return false;
+};
+
+const updatePost = async (post_id, formData) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
@@ -132,13 +137,14 @@ async function updatePost(post_id, formData) {
             body: formData,
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function deletePost(post_id) {
+const deletePost = async (post_id) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
@@ -148,13 +154,14 @@ async function deletePost(post_id) {
             },
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function crearteComment(post_id, comment) {
+const createComment = async (post_id, comment) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment`, {
@@ -166,13 +173,14 @@ async function crearteComment(post_id, comment) {
             body: JSON.stringify({ comment }),
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function updateComment(post_id, comment_id, comment) {
+const updateComment = async (post_id, comment_id, comment) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment/${comment_id}`, {
@@ -184,13 +192,14 @@ async function updateComment(post_id, comment_id, comment) {
             body: JSON.stringify({ comment }),
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-async function deleteComment(post_id, comment_id) {
+const deleteComment = async (post_id, comment_id) => {
     try {
         const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment/${comment_id}`, {
@@ -200,11 +209,12 @@ async function deleteComment(post_id, comment_id) {
             method: 'DELETE',
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 const changePassword = async (password) => {
     try {
@@ -218,6 +228,7 @@ const changePassword = async (password) => {
             body: JSON.stringify({ password }),
         });
         const data = await response.json();
+        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
 
         return data;
     } catch (error) {
@@ -236,6 +247,7 @@ const updateUser = async (formData) => {
             body: formData,
         });
         const data = await response.json();
+        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
         return data;
     } catch (error) {
         console.log(error);
@@ -252,6 +264,7 @@ const deleteUser = async () => {
             method: 'DELETE',
         });
         const data = await response.json();
+        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);

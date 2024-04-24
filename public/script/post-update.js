@@ -81,7 +81,7 @@ const updateBtnClickHandler = async (event) => {
         const formData = new FormData(updateForm);
         const response = await updatePost(post_id, formData);
         console.log(response);
-        return (location.href = `http://localhost:3000/post/${post_id}`);
+        location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : `/post/${post_id}`}`;
     }
     const helperText = document.getElementsByClassName('helper-text');
     helperText[0].innerHTML = '*제목, 내용을 모두 작성해주세요';
