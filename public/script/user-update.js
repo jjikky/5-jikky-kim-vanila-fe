@@ -41,6 +41,7 @@ const deleteUserHandler = async () => {
 };
 
 const nicknameInputHandler = (event) => {
+    nicknameHelper.innerHTML = '';
     disableButton('update-btn');
     let input = event.target.value;
     if (input !== '') activeButton('update-btn');
