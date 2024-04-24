@@ -1,12 +1,31 @@
 const toastMessage = document.getElementById('toast-message');
 
+const goUploadBtn = document.getElementById('go-upload');
+
+// 무한스크롤 데이터 로딩
+const loading = {
+    start: () => {
+        // @로딩 시작
+        const loading = document.querySelector('#loading');
+        loading.style.display = 'block';
+    },
+    end: () => {
+        // @로딩 종료
+        const loading = document.querySelector('#loading');
+        loading.style.display = 'none';
+    },
+};
+
+const logoutBtn = document.getElementById('logout-btn');
+
 // 무한스크롤 변수
 let page = 1;
 let limit = 5;
 let isFetching = false;
 let hasMore = true;
 let timer = 0;
-window.addEventListener('scroll', () => {
+
+const windowScrollHandler = () => {
     if (isFetching || !hasMore) return;
 
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 10) {
@@ -20,21 +39,21 @@ window.addEventListener('scroll', () => {
             loading.end();
         }, 500);
     }
-});
+};
 
-async function fetchUserData() {
+const fetchUserData = async () => {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
-}
-fetchUserData();
+};
 
 // boadrList 생성하고 데이터 넣기
-async function insertData() {
+const insertData = async () => {
     isFetching = true;
 
     const response = await getAllPost(page, limit);
     const posts = response.posts;
+    const postList = document.getElementsByClassName('post-list')[0];
 
     isFetching = false;
 
@@ -51,65 +70,50 @@ async function insertData() {
     }
 
     // 더미데이터 이용, post list layout 동적 생성
-    const postList = document.getElementsByClassName('post-list')[0];
     for (let i = 0; i < posts.length; i++) {
         const a = document.createElement('a');
-        a.className = 'post';
-        postList.appendChild(a);
-
         const div = document.createElement('div');
-        div.className = 'post-title';
-        a.appendChild(div);
-
-        // post-mid
         const divMid = document.createElement('div');
-        divMid.className = 'post-mid';
-        a.appendChild(divMid);
-
         const divMidL = document.createElement('div');
-        divMidL.className = 'post-mid-l';
-        divMid.appendChild(divMidL);
-
         const divLike = document.createElement('div');
-        divLike.className = 'count-like';
-        divMidL.appendChild(divLike);
-
         const divComment = document.createElement('div');
-        divComment.className = 'count-comment';
-        divMidL.appendChild(divComment);
-
         const divView = document.createElement('div');
-        divView.className = 'count-view';
-        divMidL.appendChild(divView);
-
         const div_created_at = document.createElement('div');
-        div_created_at.className = 'created-at';
-        divMid.appendChild(div_created_at);
-
-        // line
         const divLine = document.createElement('div');
-        divLine.className = 'line';
-        a.appendChild(divLine);
-
-        // post-creator
         const divCreatorBox = document.createElement('div');
-        divCreatorBox.className = 'post-creator';
-        a.appendChild(divCreatorBox);
-
         const divAvatar = document.createElement('div');
-        divAvatar.className = 'avatar';
-        divCreatorBox.appendChild(divAvatar);
-
         const divCreator = document.createElement('div');
-        divCreator.className = 'creator';
-        divCreatorBox.appendChild(divCreator);
-
         const divCreatorImg = document.createElement('img');
+
+        a.className = 'post';
+        div.className = 'post-title';
+        divMid.className = 'post-mid';
+        divMidL.className = 'post-mid-l';
+        divLike.className = 'count-like';
+        divComment.className = 'count-comment';
+        divView.className = 'count-view';
+        div_created_at.className = 'created-at';
+        divCreatorBox.className = 'post-creator';
+        divLine.className = 'line';
+        divAvatar.className = 'avatar';
+        divCreator.className = 'creator';
         divCreatorImg.className = 'creator-img';
+
+        postList.appendChild(a);
+        a.appendChild(div);
+        a.appendChild(divMid);
+        divMid.appendChild(divMidL);
+        divMidL.appendChild(divLike);
+        divMidL.appendChild(divComment);
+        divMidL.appendChild(divView);
+        divMid.appendChild(div_created_at);
+        a.appendChild(divLine);
+        a.appendChild(divCreatorBox);
+        divCreatorBox.appendChild(divAvatar);
+        divCreatorBox.appendChild(divCreator);
         divAvatar.appendChild(divCreatorImg);
     }
 
-    // 데이터 넣기
     const postA = document.getElementsByClassName('post');
     const postTitles = document.getElementsByClassName('post-title');
     const postLikes = document.getElementsByClassName('count-like');
@@ -119,6 +123,7 @@ async function insertData() {
     const postCreator = document.getElementsByClassName('creator');
     const postCreatorImg = document.getElementsByClassName('creator-img');
 
+    // 데이터 넣기
     posts.forEach((post, index) => {
         let nowIndex = limit * (page - 1) + index;
         postA[nowIndex].href = `http://localhost:3000/post/${post.post_id}`;
@@ -133,31 +138,12 @@ async function insertData() {
     });
 
     page++;
-}
-insertData();
-// 게시물 작성 버튼 hover
-const goUploadBtn = document.getElementById('go-upload');
-goUploadBtn.addEventListener('mouseover', () => {
-    goUploadBtn.style.backgroundColor = '#7F6AEE';
-});
-goUploadBtn.addEventListener('mouseleave', () => {
-    goUploadBtn.style.backgroundColor = '#ACA0EB';
-});
-
-const loading = {
-    start: () => {
-        // @로딩 시작
-        const loading = document.querySelector('#loading');
-        loading.style.display = 'block';
-    },
-    end: () => {
-        // @로딩 종료
-        const loading = document.querySelector('#loading');
-        loading.style.display = 'none';
-    },
 };
 
-const logoutBtn = document.getElementById('logout-btn');
-logoutBtn.addEventListener('click', () => {
-    logout();
-});
+window.addEventListener('scroll', windowScrollHandler);
+goUploadBtn.addEventListener('mouseover', () => (goUploadBtn.style.backgroundColor = '#7F6AEE'));
+goUploadBtn.addEventListener('mouseleave', () => (goUploadBtn.style.backgroundColor = '#ACA0EB'));
+logoutBtn.addEventListener('click', () => logout());
+
+fetchUserData();
+insertData();
