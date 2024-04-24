@@ -3,18 +3,18 @@ const passwordHelper2 = document.getElementById('password-helper2');
 
 const password = document.getElementById('password');
 const passwordCheck = document.getElementById('password-check');
-
 const updateBtn = document.getElementById('update-password-btn');
-const toastMessage = document.getElementById('toast-message');
 
-async function fetchUserData() {
+const toastMessage = document.getElementById('toast-message');
+const backIcon = document.getElementById('back-icon');
+
+const fetchUserData = async () => {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
-}
-fetchUserData();
+};
 
-password.addEventListener('change', (event) => {
+const inputPasswordHandler = (event) => {
     let input = event.target.value;
     disableButton('update-password-btn');
     // 빈 값 확인
@@ -34,9 +34,9 @@ password.addEventListener('change', (event) => {
     }
     passwordHelper.innerHTML =
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
-});
+};
 
-passwordCheck.addEventListener('change', (event) => {
+const inputPasswordCheckHandler = (event) => {
     let input = event.target.value;
     disableButton('update-password-btn');
     if (input === '') return (passwordHelper2.innerHTML = '*비밀번호를 한번 더 입력해주세요.');
@@ -55,12 +55,9 @@ passwordCheck.addEventListener('change', (event) => {
 
     passwordHelper2.innerHTML =
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
-});
+};
 
-// 토스트 메세지
-updateBtn.addEventListener('click', clickChangePasswordBtn);
-
-async function clickChangePasswordBtn(event) {
+const clickChangePasswordHandler = async (event) => {
     event.preventDefault();
     let password = document.getElementById('password').value;
     let passwordCheck = document.getElementById('password-check').value;
@@ -82,8 +79,11 @@ async function clickChangePasswordBtn(event) {
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);
-}
+};
 
-// 뒤로 가기
-const backIcon = document.getElementById('back-icon');
+password.addEventListener('change', inputPasswordHandler);
+passwordCheck.addEventListener('change', inputPasswordCheckHandler);
+updateBtn.addEventListener('click', clickChangePasswordHandler);
+
+fetchUserData();
 backIconClick(backIcon);

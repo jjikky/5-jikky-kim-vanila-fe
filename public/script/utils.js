@@ -75,12 +75,12 @@ function logout() {
     window.location.href = 'http://localhost:3000/login';
 }
 
-async function insertHeaderAvatar(user_avatar) {
+function insertHeaderAvatar(user_avatar) {
     const profileBtn = document.getElementById('profile-btn');
     profileBtn.setAttribute('src', user_avatar);
 }
 
-async function insertFormAvatar(user_avatar) {
+function insertFormAvatar(user_avatar) {
     const avatarImg = document.getElementById('avatar');
     avatarImg.setAttribute('src', user_avatar);
 }

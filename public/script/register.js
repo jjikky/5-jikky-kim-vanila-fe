@@ -25,7 +25,7 @@ let isComplete = {
 };
 
 // 이미지 선택하면 profile layout에 보여주기
-fileInput.addEventListener('change', function (event) {
+const fileInputHandler = async (event) => {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
         reader.onload = function (event) {
@@ -48,9 +48,9 @@ fileInput.addEventListener('change', function (event) {
         isComplete.profile = 0;
         isButtonActive();
     }
-});
+};
 
-email.addEventListener('change', async (event) => {
+const emailInputHandler = async (event) => {
     let input = event.target.value;
     isComplete.email = 0;
     isButtonActive();
@@ -63,12 +63,9 @@ email.addEventListener('change', async (event) => {
         return (emailHelper.innerHTML = '');
     }
     emailHelper.innerHTML = '*올바른 이메일 주소 형식을 입력해주세요. (예:example@example.com)';
-});
-email.addEventListener('input', () => {
-    emailHelper.innerHTML = '*이메일을 입력해주세요.';
-});
+};
 
-password.addEventListener('change', (event) => {
+const passwordInputHandler = (event) => {
     let input = event.target.value;
     isComplete.password = 0;
     isButtonActive();
@@ -89,9 +86,9 @@ password.addEventListener('change', (event) => {
     }
     passwordHelper.innerHTML =
         '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
-});
+};
 
-passwordCheck.addEventListener('change', (event) => {
+const passwordCheckInputHandler = (event) => {
     isComplete.passwordCheck = 0;
     isButtonActive();
     // 빈 값 확인
@@ -106,9 +103,9 @@ passwordCheck.addEventListener('change', (event) => {
     passwordHelper.innerHTML = '';
     passwordHelper2.innerHTML = '';
     isButtonActive();
-});
+};
 
-nickname.addEventListener('change', async (event) => {
+const nicknameInputHandler = async (event) => {
     let input = event.target.value;
     isComplete.nickname = 0;
     isButtonActive();
@@ -128,11 +125,10 @@ nickname.addEventListener('change', async (event) => {
     isComplete.nickname = 1;
     isButtonActive();
     return (nicknameHelper.innerHTML = '');
-});
+};
 
 // 서식 완성되면 버튼 활성화
-function isButtonActive() {
-    // TODO : api 구현 후 회원가입 요청으로 변경
+const isButtonActive = () => {
     let sumIsComplete = Object.values(isComplete).reduce((a, b) => a + b);
     if (sumIsComplete == 5) {
         activeButton('register-button');
@@ -145,4 +141,11 @@ function isButtonActive() {
         return;
     }
     disableButton('register-button');
-}
+};
+
+fileInput.addEventListener('change', fileInputHandler);
+email.addEventListener('change', emailInputHandler);
+email.addEventListener('input', () => (emailHelper.innerHTML = '*이메일을 입력해주세요.'));
+password.addEventListener('change', passwordInputHandler);
+passwordCheck.addEventListener('change', passwordCheckInputHandler);
+nickname.addEventListener('change', nicknameInputHandler);
