@@ -104,9 +104,6 @@ async function createPost(formData) {
             },
             body: formData,
         });
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
         const data = await response.json();
         return data;
     } catch (error) {
