@@ -25,6 +25,12 @@ const fetchUserData = async () => {
     insertUserData(user);
 };
 
+const reFetchUserData = async (user) => {
+    insertHeaderAvatar(user.avatar);
+    insertFormAvatar(user.avatar);
+    insertUserData(user);
+};
+
 const insertUserData = (user) => {
     email.innerHTML = user.email;
     nickname.value = user.nickname;
@@ -44,7 +50,14 @@ const nicknameInputHandler = (event) => {
     nicknameHelper.innerHTML = '';
     disableButton('update-btn');
     let input = event.target.value;
-    if (input !== '') activeButton('update-btn');
+    if (input === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
+    if (validateNickname(input) == 'spaceError') {
+        return (nicknameHelper.innerHTML = '*띄워쓰기를 없애주세요.');
+        // 유효성 검사 - 글자수
+    } else if (validateNickname(input) == 'lengthError') {
+        return (nicknameHelper.innerHTML = '*닉네임은 최대 10자까지 작성 가능합니다.');
+    }
+    activeButton('update-btn');
 };
 
 // 프로필 사진 변경
@@ -85,6 +98,7 @@ const updateClickHandler = async (event) => {
         return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
     }
 
+    // 수정 요청
     if (updateForm.nickname.value.length) {
         const formData = new FormData(updateForm);
         // email추가
@@ -92,7 +106,7 @@ const updateClickHandler = async (event) => {
         const response = await updateUser(formData);
         console.log(response);
         // 헤더 아바타 재설정
-        await fetchUserData();
+        await reFetchUserData(response.user);
     }
     nicknameHelper.innerHTML = '';
     toastMessage.classList.add('active');

@@ -66,16 +66,23 @@ const clickChangePasswordHandler = async (event) => {
             ? '수정 완료'
             : '형식에 맞춰 다시<br> 입력해주세요.';
 
-    // 비밀번호 변경
-    const response = await changePassword(password);
-    console.log(response);
-    if (response.message === 'Same As The Original Password') {
-        toastMessage.innerHTML = '원래 비밀번호와 같습니다.';
+    if (validatePassword(password) && validatePassword(passwordCheck)) {
+        // 비밀번호 변경
+        const response = await changePassword(password);
+        console.log(response);
+        if (response.message === 'Same As The Original Password') {
+            toastMessage.innerHTML = '원래 비밀번호와 같습니다.';
+        }
     }
+    // 입력 값 비우기
+    document.getElementById('password').value = '';
+    document.getElementById('password-check').value = '';
+    passwordHelper.innerHTML = '*비밀번호를 입력해주세요.';
+    passwordHelper2.innerHTML = '*비밀번호를 입력해주세요.';
+    disableButton('update-password-btn');
 
     // toast 출력
     toastMessage.classList.add('active');
-
     setTimeout(function () {
         toastMessage.classList.remove('active');
     }, 1000);

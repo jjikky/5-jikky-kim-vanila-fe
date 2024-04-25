@@ -76,6 +76,10 @@ const getSinglePost = async (post_id) => {
         });
         const data = await response.json();
         if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
+        if (data.message == 'page not found') {
+            alert('잘못된 접근입니다. 해당 페이지는 존재 하지 않습니다.');
+            return (location.href = 'http://localhost:3000/post');
+        }
         return data;
     } catch (error) {
         console.log(error);
