@@ -55,6 +55,7 @@ const fileInputHandler = async (event) => {
 const emailInputHandler = async (event) => {
     let input = event.target.value;
     isComplete.email = 0;
+
     isButtonActive();
     if (validateEmail(input)) {
         if (await isExistEmail(input)) {
@@ -65,6 +66,7 @@ const emailInputHandler = async (event) => {
         return (emailHelper.innerHTML = '');
     }
     emailHelper.innerHTML = '*올바른 이메일 주소 형식을 입력해주세요. (예:example@example.com)';
+    if (input === '') emailHelper.innerHTML = '*이메일을 입력해주세요.';
 };
 
 const passwordInputHandler = (event) => {
@@ -153,8 +155,7 @@ const isButtonActive = () => {
 };
 
 fileInput.addEventListener('change', fileInputHandler);
-email.addEventListener('change', emailInputHandler);
-email.addEventListener('input', () => (emailHelper.innerHTML = '*이메일을 입력해주세요.'));
+email.addEventListener('input', debounce(emailInputHandler, 500));
 password.addEventListener('input', passwordInputHandler);
 passwordCheck.addEventListener('input', passwordCheckInputHandler);
-nickname.addEventListener('change', nicknameInputHandler);
+nickname.addEventListener('input', debounce(nicknameInputHandler, 500));
