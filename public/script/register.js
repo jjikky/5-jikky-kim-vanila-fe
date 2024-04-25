@@ -92,20 +92,26 @@ const passwordInputHandler = (event) => {
 };
 
 const passwordCheckInputHandler = (event) => {
+    let input = event.target.value;
     isComplete.passwordCheck = 0;
     isButtonActive();
     // 빈 값 확인
-    if (event.target.value === '') return (passwordHelper2.innerHTML = '*비밀번호을 한번 더 입력해주세요.');
-    if (event.target.value !== password.value) {
-        passwordHelper.innerHTML = '비밀번호가 다릅니다.';
-        passwordHelper2.innerHTML = '비밀번호가 다릅니다.';
-        return 0;
+    if (input === '') return (passwordHelper2.innerHTML = '*비밀번호을 한번 더 입력해주세요.');
+    if (validatePassword(input)) {
+        if (input !== password.value) {
+            passwordHelper.innerHTML = '비밀번호가 다릅니다.';
+            passwordHelper2.innerHTML = '비밀번호가 다릅니다.';
+            return 0;
+        }
+        isComplete.password = 1;
+        isComplete.passwordCheck = 1;
+        isButtonActive();
+        passwordHelper.innerHTML = '';
+        passwordHelper2.innerHTML = '';
+        return;
     }
-    isComplete.password = 1;
-    isComplete.passwordCheck = 1;
-    passwordHelper.innerHTML = '';
-    passwordHelper2.innerHTML = '';
-    isButtonActive();
+    passwordHelper2.innerHTML =
+        '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 <br>최소 1개 포함해야합니다.';
 };
 
 const nicknameInputHandler = async (event) => {
@@ -149,6 +155,6 @@ const isButtonActive = () => {
 fileInput.addEventListener('change', fileInputHandler);
 email.addEventListener('change', emailInputHandler);
 email.addEventListener('input', () => (emailHelper.innerHTML = '*이메일을 입력해주세요.'));
-password.addEventListener('change', passwordInputHandler);
-passwordCheck.addEventListener('change', passwordCheckInputHandler);
+password.addEventListener('input', passwordInputHandler);
+passwordCheck.addEventListener('input', passwordCheckInputHandler);
 nickname.addEventListener('change', nicknameInputHandler);
