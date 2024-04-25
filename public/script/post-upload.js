@@ -15,13 +15,13 @@ const inputs = uploadForm.querySelectorAll('input[name="title"], textarea[name="
 
 const preview = document.getElementById('preview');
 const fileInput = document.getElementById('img');
+const fileName = document.getElementById('file-name');
 
 const fetchUser = async () => {
     const response = await getSingleUser();
     user = response.user;
     insertHeaderAvatar(user.avatar);
 };
-
 // 이미지 선택하면 profile layout에 보여주기
 const fileInputHandler = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -30,6 +30,7 @@ const fileInputHandler = (event) => {
             document.getElementById('preview').src = event.target.result;
         };
         reader.readAsDataURL(event.target.files[0]);
+        fileName.innerHTML = event.target.files[0].name;
         document.getElementById('preview').style.display = 'block';
 
         // preview에 input click 연결
@@ -38,6 +39,7 @@ const fileInputHandler = (event) => {
         });
     } else {
         document.getElementById('preview').src = '';
+        fileName.innerHTML = '파일을 선택해주세요.';
     }
 
     uploadInputHandler();
