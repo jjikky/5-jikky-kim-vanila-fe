@@ -66,11 +66,13 @@ const clickChangePasswordHandler = async (event) => {
             ? '수정 완료'
             : '형식에 맞춰 다시<br> 입력해주세요.';
 
-    // 비밀번호 변경
-    const response = await changePassword(password);
-    console.log(response);
-    if (response.message === 'Same As The Original Password') {
-        toastMessage.innerHTML = '원래 비밀번호와 같습니다.';
+    if (validatePassword(password) && validatePassword(passwordCheck)) {
+        // 비밀번호 변경
+        const response = await changePassword(password);
+        console.log(response);
+        if (response.message === 'Same As The Original Password') {
+            toastMessage.innerHTML = '원래 비밀번호와 같습니다.';
+        }
     }
 
     // toast 출력
