@@ -25,6 +25,12 @@ const fetchUserData = async () => {
     insertUserData(user);
 };
 
+const reFetchUserData = async (user) => {
+    insertHeaderAvatar(user.avatar);
+    insertFormAvatar(user.avatar);
+    insertUserData(user);
+};
+
 const insertUserData = (user) => {
     email.innerHTML = user.email;
     nickname.value = user.nickname;
@@ -85,6 +91,7 @@ const updateClickHandler = async (event) => {
         return (nicknameHelper.innerHTML = '*중복된 닉네임 입니다.');
     }
 
+    // 수정 요청
     if (updateForm.nickname.value.length) {
         const formData = new FormData(updateForm);
         // email추가
@@ -92,7 +99,7 @@ const updateClickHandler = async (event) => {
         const response = await updateUser(formData);
         console.log(response);
         // 헤더 아바타 재설정
-        await fetchUserData();
+        await reFetchUserData(response.user);
     }
     nicknameHelper.innerHTML = '';
     toastMessage.classList.add('active');
