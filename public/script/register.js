@@ -84,6 +84,7 @@ const passwordInputHandler = (event) => {
         isComplete.password = 1;
         isComplete.passwordCheck = 1;
         isButtonActive();
+        passwordHelper2.innerHTML = '';
         return (passwordHelper.innerHTML = '');
     }
     passwordHelper.innerHTML =
