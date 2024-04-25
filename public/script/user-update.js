@@ -50,7 +50,14 @@ const nicknameInputHandler = (event) => {
     nicknameHelper.innerHTML = '';
     disableButton('update-btn');
     let input = event.target.value;
-    if (input !== '') activeButton('update-btn');
+    if (input === '') return (nicknameHelper.innerHTML = '*닉네임을 입력해주세요.');
+    if (validateNickname(input) == 'spaceError') {
+        return (nicknameHelper.innerHTML = '*띄워쓰기를 없애주세요.');
+        // 유효성 검사 - 글자수
+    } else if (validateNickname(input) == 'lengthError') {
+        return (nicknameHelper.innerHTML = '*닉네임은 최대 10자까지 작성 가능합니다.');
+    }
+    activeButton('update-btn');
 };
 
 // 프로필 사진 변경
