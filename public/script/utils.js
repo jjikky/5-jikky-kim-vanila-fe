@@ -3,7 +3,7 @@ const TITLE_MAX_LENGTH = 26;
 
 // home navigation
 const home = document.getElementById('header-text');
-home.addEventListener('click', () => (window.location.href = 'http://localhost:3000/post'));
+home.addEventListener('click', () => (location.href = `${CLIENT_URL}/post`));
 
 // 뒤로가기
 const backIconClick = (el) => {
@@ -63,12 +63,6 @@ const checkInputs = (inputs, buttonId) => {
     } else {
         disableButton(buttonId);
     }
-};
-
-const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_id');
-    window.location.href = 'http://localhost:3000/login';
 };
 
 const insertHeaderAvatar = (user_avatar) => {

@@ -1,6 +1,27 @@
 const SERVER_URL = 'http://localhost:5000';
+const CLIENT_URL = 'http://localhost:3000';
 
-// USER
+//  #############  AUTH  ###############
+const authHandler = (status) => {
+    if (status === 401) {
+        alert('Session Expired. Please Login Again');
+        location.href = `${CLIENT_URL}/login`;
+    }
+};
+
+const autoLogin = async () => {
+    try {
+        const response = await fetch(`${SERVER_URL}/users/login/auto`, {
+            credentials: 'include',
+        });
+        console.log(response);
+        return await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//  ############# USER  ###############
 const register = async (formData) => {
     try {
         const response = await fetch(`${SERVER_URL}/users/register`, {
@@ -20,8 +41,21 @@ const login = async (email, password) => {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
             body: JSON.stringify({ email, password }),
+            credentials: 'include',
         });
+        console.log(response);
         return await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const logout = async () => {
+    try {
+        const response = await fetch(`${SERVER_URL}/users/logout`, { credentials: 'include' });
+        const data = await response.json();
+        deleteCookie('user');
+        if (data.message == 'logout success') window.location.href = `${CLIENT_URL}/login`;
     } catch (error) {
         console.log(error);
     }
@@ -47,18 +81,16 @@ const isExistNickname = async (nickname) => {
     }
 };
 
-// POST
+//  ############# POST  ###############
 const getAllPost = async (page, limit) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts?page=${page}&limit=${limit}`, {
             method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
         });
+        authHandler(response.status);
         const data = await response.json();
-        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
+        console.log(data);
         return data;
     } catch (error) {
         console.log(error);
@@ -67,18 +99,15 @@ const getAllPost = async (page, limit) => {
 
 const getSinglePost = async (post_id) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
             method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
         });
+        authHandler(response.status);
         const data = await response.json();
-        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
         if (data.message == 'page not found') {
             alert('잘못된 접근입니다. 해당 페이지는 존재 하지 않습니다.');
-            return (location.href = 'http://localhost:3000/post');
+            return (location.href = `${CLIENT_URL}/post`);
         }
         return data;
     } catch (error) {
@@ -88,8 +117,7 @@ const getSinglePost = async (post_id) => {
 
 const getSingleUser = async () => {
     try {
-        const user_id = localStorage.getItem('user_id');
-        const response = await fetch(`${SERVER_URL}/users/${user_id}`);
+        const response = await fetch(`${SERVER_URL}/users/change`, { credentials: 'include' });
         const data = await response.json();
         return data;
     } catch (error) {
@@ -99,14 +127,12 @@ const getSingleUser = async () => {
 
 const createPost = async (formData) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts`, {
             method: 'POST',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
             body: formData,
         });
+        authHandler(response.status);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -114,34 +140,16 @@ const createPost = async (formData) => {
     }
 };
 
-// token 있는지 체크
-const isTokenExist = () => {
-    const token = localStorage.getItem('token');
-    if (!token) return (location.href = 'http://localhost:3000/login');
-    return token;
-};
-
-// Token 만료 체크
-const isTokenExpired = (message) => {
-    if (message == 'Token Expired') {
-        alert(`${message} : Please Login Again.`);
-        return true;
-    }
-    return false;
-};
-
 const updatePost = async (post_id, formData) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
             method: 'PATCH',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
             body: formData,
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
+
         return data;
     } catch (error) {
         console.log(error);
@@ -150,15 +158,12 @@ const updatePost = async (post_id, formData) => {
 
 const deletePost = async (post_id) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}`, {
             method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
@@ -167,17 +172,16 @@ const deletePost = async (post_id) => {
 
 const createComment = async (post_id, comment) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment`, {
             headers: {
-                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
             method: 'POST',
             body: JSON.stringify({ comment }),
+            credentials: 'include',
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
@@ -186,17 +190,16 @@ const createComment = async (post_id, comment) => {
 
 const updateComment = async (post_id, comment_id, comment) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment/${comment_id}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
             method: 'PATCH',
+            credentials: 'include',
             body: JSON.stringify({ comment }),
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
@@ -205,15 +208,12 @@ const updateComment = async (post_id, comment_id, comment) => {
 
 const deleteComment = async (post_id, comment_id) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/posts/${post_id}/comment/${comment_id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
             method: 'DELETE',
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);
@@ -222,18 +222,16 @@ const deleteComment = async (post_id, comment_id) => {
 
 const changePassword = async (password) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users/password/change`, {
             headers: {
-                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             method: 'PATCH',
             body: JSON.stringify({ password }),
         });
+        authHandler(response.status);
         const data = await response.json();
-        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
-
         return data;
     } catch (error) {
         console.log(error);
@@ -242,16 +240,13 @@ const changePassword = async (password) => {
 
 const updateUser = async (formData) => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
             method: 'PATCH',
             body: formData,
         });
+        authHandler(response.status);
         const data = await response.json();
-        if (isTokenExpired(data.message)) return (location.href = 'http://localhost:3000/login');
         return data;
     } catch (error) {
         console.log(error);
@@ -260,15 +255,12 @@ const updateUser = async (formData) => {
 
 const deleteUser = async () => {
     try {
-        const token = isTokenExist();
         const response = await fetch(`${SERVER_URL}/users`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
             method: 'DELETE',
         });
+        authHandler(response.status);
         const data = await response.json();
-        // NOTE : reload 떄문에 token expire 처리, 해당 페이지에서
         return data;
     } catch (error) {
         console.log(error);

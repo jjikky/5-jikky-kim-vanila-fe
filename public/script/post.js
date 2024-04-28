@@ -52,6 +52,7 @@ const insertData = async () => {
     isFetching = true;
 
     const response = await getAllPost(page, limit);
+    console.log(response);
     const posts = response.posts;
     const postList = document.getElementsByClassName('post-list')[0];
 
@@ -126,7 +127,7 @@ const insertData = async () => {
     // 데이터 넣기
     posts.forEach((post, index) => {
         let nowIndex = limit * (page - 1) + index;
-        postA[nowIndex].href = `http://localhost:3000/post/${post.post_id}`;
+        postA[nowIndex].href = `${CLIENT_URL}/post/${post.post_id}`;
         if (post.title.length > TITLE_MAX_LENGTH) post.title = post.title.substring(0, TITLE_MAX_LENGTH);
         postTitles[nowIndex].innerHTML = post.title;
         postLikes[nowIndex].innerHTML = `좋아요 ${formatCount(post.count.like)}`;

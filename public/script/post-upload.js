@@ -59,7 +59,7 @@ const uploadBtnClickHandler = async (event) => {
 
         const response = await createPost(formData);
         console.log(response);
-        return (location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : '/post'}`);
+        return (location.href = `${CLIENT_URL}/post`);
     }
     const helperText = document.getElementsByClassName('helper-text');
     helperText[0].innerHTML = '*제목, 내용, 이미지을 모두 작성해주세요';

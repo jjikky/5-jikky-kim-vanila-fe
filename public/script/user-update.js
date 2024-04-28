@@ -39,11 +39,8 @@ const insertUserData = (user) => {
 const deleteUserHandler = async () => {
     const response = await deleteUser();
     console.log(response);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_id');
     closeModal('#wd-modal', '#overlay');
-    if (isTokenExpired(response.message)) return (location.href = 'http://localhost:3000/login');
-    location.href = 'http://localhost:3000/login';
+    location.href = `${CLIENT_URL}/login`;
 };
 
 const nicknameInputHandler = (event) => {

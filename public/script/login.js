@@ -37,17 +37,21 @@ const clickLoginBtn = async (event) => {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     const response = await login(email, password);
+    console.log(response);
     if (response.message === 'login success') {
-        const token = response.token;
-        const user_id = response.user_id;
-        localStorage.setItem('token', token);
-        localStorage.setItem('user_id', user_id);
-        return (location.href = 'http://localhost:3000/post');
+        return (location.href = `${CLIENT_URL}/post`);
     }
     // 로그인 실패
     alert('아이디 또는 비밀번호가 잘못되었습니다.');
-    location.href = 'http://localhost:3000/login';
+    location.href = `${CLIENT_URL}/login`;
 };
+
+const sessionCheck = async () => {
+    const response = await autoLogin();
+    if (response.message == 'logined') return (location.href = `${CLIENT_URL}/post`);
+};
+
+sessionCheck();
 
 loginBtn.addEventListener('click', clickLoginBtn);
 email.addEventListener('input', inputEmail);
