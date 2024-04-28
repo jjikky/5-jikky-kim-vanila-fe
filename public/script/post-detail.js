@@ -1,6 +1,5 @@
 // ['','post','1']
 const post_id = window.location.pathname.split('/')[2];
-const user_id = localStorage.getItem('user_id') * 1;
 
 // 댓글 등록
 const comment_textarea = document.getElementById('comment');
@@ -20,6 +19,7 @@ const fetchUser = async () => {
 // 데이터 삽입
 const insertData = async () => {
     const response = await getSinglePost(post_id);
+    const user_id = response.user_id;
     const post = response.post;
 
     // 게시글 본문
@@ -45,11 +45,11 @@ const insertData = async () => {
         const updateButton = document.createElement('button');
         const deleteButton = document.createElement('button');
 
-        const clickUpdateBtn = () => (location.href = `http://localhost:3000/post/${post_id}/update`);
+        const clickUpdateBtn = () => (location.href = `${CLIENT_URL}/post/${post_id}/update`);
         const deletePostHandler = async () => {
             await deletePost(post_id);
             closeModal('#del-modal', '#overlay1');
-            location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : '/post'}`;
+            location.href = `${CLIENT_URL}/post`;
         };
 
         postHeaderItem.classList.add('post-header-item');
@@ -154,16 +154,17 @@ const commentButtonClickHandler = async (event) => {
     let comment = comment_textarea.value;
     const response = await createComment(post_id, comment);
     console.log(response);
-    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
+    location.href = CLIENT_URL + window.location.pathname;
 };
 
 // 댓글 삭제 확인 버튼 클릭 : 댓글 삭제
 const deleteCommentHandler = async (comment) => {
+    console.log(comment.comment_id);
     const response = await deleteComment(post_id, comment.comment_id);
+
     console.log(response);
     closeModal('#del-comment-modal', '#overlay2');
-    isTokenExpired(response.message);
-    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
+    location.href = CLIENT_URL + window.location.pathname;
 };
 
 // 댓글 삭제 버튼 클릭 : modal 출력
@@ -181,8 +182,7 @@ const editCommentHandler = async (comment, event) => {
     const response = await updateComment(post_id, comment.comment_id, content);
     console.log(response);
     closeModal('#del-comment-modal', '#overlay2');
-    isTokenExpired(response.message);
-    location.href = `http://localhost:3000${isTokenExpired(response.message) ? '/login' : window.location.pathname}`;
+    location.href = CLIENT_URL + window.location.pathname;
 };
 
 // 댓글 수정 버튼 클릭

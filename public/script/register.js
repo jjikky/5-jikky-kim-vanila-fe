@@ -147,7 +147,7 @@ const isButtonActive = () => {
             const formData = new FormData(registerForm);
             const response = await register(formData);
             console.log(response);
-            location.href = 'http://localhost:3000/login';
+            location.href = `${CLIENT_URL}/login`;
         });
         return;
     }
