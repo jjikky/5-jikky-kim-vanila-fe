@@ -1,5 +1,6 @@
 const userNav = document.getElementById('user-nav');
 const profileBtn = document.getElementById('profile-btn');
+const logoutBtn = document.getElementById('logout-btn');
 const backIcon = document.getElementById('back-icon');
 const toastMessage = document.getElementById('toast-message');
 
@@ -112,6 +113,7 @@ const updateClickHandler = async (event) => {
     }, 1000);
 };
 
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 wdModalBtn.addEventListener('click', () => openModal('#wd-modal', '#overlay'));
 wdModalXBtn.addEventListener('click', () => closeModal('#wd-modal', '#overlay'));
 wdModalOBtn.addEventListener('click', deleteUserHandler);
