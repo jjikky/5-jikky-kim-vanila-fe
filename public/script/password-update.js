@@ -1,6 +1,8 @@
 const passwordHelper = document.getElementById('password-helper');
 const passwordHelper2 = document.getElementById('password-helper2');
 
+const logoutBtn = document.getElementById('logout-btn');
+
 const password = document.getElementById('password');
 const passwordCheck = document.getElementById('password-check');
 const updateBtn = document.getElementById('update-password-btn');
@@ -88,6 +90,7 @@ const clickChangePasswordHandler = async (event) => {
     }, 1000);
 };
 
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 password.addEventListener('change', inputPasswordHandler);
 passwordCheck.addEventListener('change', inputPasswordCheckHandler);
 updateBtn.addEventListener('click', clickChangePasswordHandler);

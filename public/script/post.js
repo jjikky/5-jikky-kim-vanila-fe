@@ -144,7 +144,7 @@ const insertData = async () => {
 window.addEventListener('scroll', windowScrollHandler);
 goUploadBtn.addEventListener('mouseover', () => (goUploadBtn.style.backgroundColor = '#7F6AEE'));
 goUploadBtn.addEventListener('mouseleave', () => (goUploadBtn.style.backgroundColor = '#ACA0EB'));
-logoutBtn.addEventListener('click', () => logout());
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 
 fetchUserData();
 insertData();

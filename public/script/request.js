@@ -54,7 +54,6 @@ const logout = async () => {
     try {
         const response = await fetch(`${SERVER_URL}/users/logout`, { credentials: 'include' });
         const data = await response.json();
-        deleteCookie('user');
         if (data.message == 'logout success') window.location.href = `${CLIENT_URL}/login`;
     } catch (error) {
         console.log(error);

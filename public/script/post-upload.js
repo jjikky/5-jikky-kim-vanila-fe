@@ -1,6 +1,8 @@
 let userNav = document.getElementById('user-nav');
 let profileBtn = document.getElementById('profile-btn');
 
+const logoutBtn = document.getElementById('logout-btn');
+
 // TODO : 변수 중복 제거, inputs 구조분해할당해서 사용
 const title = document.getElementById('title');
 const content = document.getElementById('content');
@@ -69,6 +71,7 @@ inputs.forEach((input) => {
     input.addEventListener('input', () => checkInputs(inputs, 'upload-btn'));
 });
 
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 fileInput.addEventListener('change', fileInputHandler);
 title.addEventListener('input', uploadInputHandler);
 content.addEventListener('input', uploadInputHandler);

@@ -6,6 +6,8 @@ const profileBtn = document.getElementById('profile-btn');
 // 뒤로 가기
 const backIcon = document.getElementById('back-icon');
 
+const logoutBtn = document.getElementById('logout-btn');
+
 const updateForm = document.getElementById('update-form');
 const updateBtn = document.getElementById('update-btn');
 const title = document.getElementById('title');
@@ -91,6 +93,7 @@ inputs.forEach((input, i) => {
     input.addEventListener('input', () => checkInputs(inputs, 'update-btn'));
 });
 
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 fileInput.addEventListener('change', filleInputHandler);
 title.addEventListener('input', titleInputHandler);
 content.addEventListener('input', contentInputHandler);

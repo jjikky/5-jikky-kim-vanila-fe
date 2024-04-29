@@ -1,6 +1,8 @@
 // ['','post','1']
 const post_id = window.location.pathname.split('/')[2];
 
+const logoutBtn = document.getElementById('logout-btn');
+
 // 댓글 등록
 const comment_textarea = document.getElementById('comment');
 const comment_btn = document.getElementById('comment-btn');
@@ -195,6 +197,7 @@ const editCommentButtonClickHandler = async (comment) => {
     comment_btn.addEventListener('click', (event) => editCommentHandler(comment, event));
 };
 
+logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 comment_textarea.addEventListener('input', commentInputHandler);
 comment_btn.addEventListener('click', commentButtonClickHandler);
 fetchUser();
