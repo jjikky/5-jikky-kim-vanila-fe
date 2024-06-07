@@ -41,13 +41,13 @@ button {
 .post-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
 }
 
 /* 게시글 */
 .post {
     background-color: white;
-    border-radius: 0px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
 }
 .post-title {
     text-align: left;
@@ -89,6 +89,10 @@ button {
 a {
     text-decoration: none;
     color: black;
+}
+
+.post-img {
+    width: var(--main-width);
 }
 
 .creator-img {

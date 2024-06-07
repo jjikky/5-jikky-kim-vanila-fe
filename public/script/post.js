@@ -80,11 +80,11 @@ const insertData = async () => {
         const divComment = document.createElement('div');
         const divView = document.createElement('div');
         const div_created_at = document.createElement('div');
-        const divLine = document.createElement('div');
         const divCreatorBox = document.createElement('div');
         const divAvatar = document.createElement('div');
         const divCreator = document.createElement('div');
         const divCreatorImg = document.createElement('img');
+        const divPostImg = document.createElement('img');
 
         a.className = 'post';
         div.className = 'post-title';
@@ -95,12 +95,17 @@ const insertData = async () => {
         divView.className = 'count-view';
         div_created_at.className = 'created-at';
         divCreatorBox.className = 'post-creator';
-        divLine.className = 'line';
         divAvatar.className = 'avatar';
         divCreator.className = 'creator';
         divCreatorImg.className = 'creator-img';
+        divPostImg.className = 'post-img';
 
         postList.appendChild(a);
+        a.appendChild(divCreatorBox);
+        divCreatorBox.appendChild(divAvatar);
+        divCreatorBox.appendChild(divCreator);
+        divAvatar.appendChild(divCreatorImg);
+        a.appendChild(divPostImg);
         a.appendChild(div);
         a.appendChild(divMid);
         divMid.appendChild(divMidL);
@@ -108,11 +113,6 @@ const insertData = async () => {
         divMidL.appendChild(divComment);
         divMidL.appendChild(divView);
         divMid.appendChild(div_created_at);
-        a.appendChild(divLine);
-        a.appendChild(divCreatorBox);
-        divCreatorBox.appendChild(divAvatar);
-        divCreatorBox.appendChild(divCreator);
-        divAvatar.appendChild(divCreatorImg);
     }
 
     const postA = document.getElementsByClassName('post');
@@ -123,6 +123,7 @@ const insertData = async () => {
     const postCreatedAt = document.getElementsByClassName('created-at');
     const postCreator = document.getElementsByClassName('creator');
     const postCreatorImg = document.getElementsByClassName('creator-img');
+    const postPostImg = document.getElementsByClassName('post-img');
 
     // 데이터 넣기
     posts.forEach((post, index) => {
@@ -136,14 +137,15 @@ const insertData = async () => {
         postCreatedAt[nowIndex].innerHTML = post.created_at;
         postCreator[nowIndex].innerHTML = post.creator.nickname;
         postCreatorImg[nowIndex].setAttribute('src', post.creator.avatar);
+        postPostImg[nowIndex].setAttribute('src', post.post_image);
     });
 
     page++;
 };
 
 window.addEventListener('scroll', windowScrollHandler);
-goUploadBtn.addEventListener('mouseover', () => (goUploadBtn.style.backgroundColor = '#7F6AEE'));
-goUploadBtn.addEventListener('mouseleave', () => (goUploadBtn.style.backgroundColor = '#ACA0EB'));
+goUploadBtn.addEventListener('mouseover', () => (goUploadBtn.style.backgroundColor = '#5ddee2'));
+goUploadBtn.addEventListener('mouseleave', () => (goUploadBtn.style.backgroundColor = '#91eef1'));
 logoutBtn.addEventListener('click', () => debounce(logout()), 1000);
 
 fetchUserData();
