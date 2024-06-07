@@ -21,7 +21,7 @@
 
 ## GitHub
 
-[🔗FE : vanila JS](https://github.com/jjikky/5-jikky-kim-vanila-fe) [🔗BE : Express](https://github.com/jjikky/5-jikky-kim-express-be)
+[🔗FE : vanila JS](https://github.com/jjikky/5-jikky-kim-vanila-fe) [🔗BE : Express](https://github.com/jjikky/5-jikky-kim-express-be/tree/json-archive)
 
 ## 사용 기술
 
