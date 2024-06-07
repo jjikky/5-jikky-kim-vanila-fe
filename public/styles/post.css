@@ -119,8 +119,8 @@ a {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-top-color: #03114e;
+    border: 3px solid rgba(169, 218, 227, 0.1);
+    border-top-color: var(--color-active);
     animation: spin 0.6s infinite linear;
 }
 
