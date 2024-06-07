@@ -3,12 +3,12 @@
 기본적인 게시판의 형태를 띄고 있는 커뮤니티 프로젝트로 기술간의 장단점을 체감하기 위해 버전에 따라 다른 기술로 구현
 
 -   ver1 : `vanila` `express` `json`
-      - [🔗FE Github](https://github.com/jjikky/5-jikky-kim-vanila-fe)
-      - [🔗BE Github](https://github.com/jjikky/5-jikky-kim-express-be/tree/json-archive)
-    
+    -   [🔗FE Github](https://github.com/jjikky/5-jikky-kim-vanila-fe)
+    -   [🔗BE Github](https://github.com/jjikky/5-jikky-kim-express-be/tree/json-archive)
 -   ver2 : `react` `express` `mySQL`
-      - [🔗FE Github](https://github.com/jjikky/5-jikky-kim-react-fe) 
-      - [🔗BE Github](https://github.com/jjikky/5-jikky-kim-express-be)
+
+    -   [🔗FE Github](https://github.com/jjikky/5-jikky-kim-react-fe)
+    -   [🔗BE Github](https://github.com/jjikky/5-jikky-kim-express-be)
 
 -   ver3 : `react` `spring` `mySQL`
     -   개발 진행 중
@@ -19,8 +19,9 @@
 
 2024.04.05 ~ 2024.04.28 ( 16 영업일 )
 
-## GitHub 
-[🔗FE : vanila JS](https://github.com/jjikky/5-jikky-kim-vanila-fe) [🔗BE : Express](https://github.com/jjikky/5-jikky-kim-express-be)
+## GitHub
+
+[🔗FE : vanila JS](https://github.com/jjikky/5-jikky-kim-vanila-fe) [🔗BE : Express](https://github.com/jjikky/5-jikky-kim-express-be/tree/json-archive)
 
 ## 사용 기술
 
@@ -79,7 +80,6 @@ FE BE 모두 JWT방식은 jwt-archive 브랜치로 분기했습니다.
 
 -   인증이 필요한 라우터에 유저 검증 미들웨어를 앞에 배치해서 guard
 -   자동로그인 구현
-
 
 ## 구현 결과
 
